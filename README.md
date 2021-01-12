@@ -25,8 +25,23 @@ Currently, the latest version of this library supports Wyvern Protocol v2. v2.1 
 Before any development, install the required NPM dependencies:
 
 ```bash
-yarn
+nvm install v8.17.0
+nvm use v8.17.0
+yarn install
+yarn run build
 ```
+
+### Contract Deployment using Remix
+1. Go to https://remix.ethereum.org/
+2. Create new files on Remix
+    - WyvernProxyRegistry.sol
+    - WyvernTokenTransferProxy.sol
+    - WyvernExchange.sol
+3. Copy/Paste contents from this repo to newly created files respectively
+3. Select compiler version v0.4.23+commit.124ca40d , Enable 'Auto compile', Enable optimization 200
+4. Select the network ( Main Ethereum / Rinkeby ) on Metamask and Select 'Injected Web3' in Remix
+5. Provide constructor parameters and click Transact
+6. Call grantInitialAuthentication function on WyvernProxyRegistry and pass WyvernExchange address as parameter
 
 #### Contributing
 
