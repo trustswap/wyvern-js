@@ -42,6 +42,9 @@ yarn run build
 4. Select the network ( Main Ethereum / Rinkeby ) on Metamask and Select 'Injected Web3' in Remix
 5. Provide constructor parameters and click Transact
 6. Call grantInitialAuthentication function on WyvernProxyRegistry and pass WyvernExchange address as parameter
+7. Add contract address in src/wyvern-ethereum/config.json file
+8. Run 'yarn run build'
+9. Commit changed files
 
 #### Contributing
 
