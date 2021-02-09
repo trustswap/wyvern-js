@@ -40,11 +40,13 @@ yarn run build
 3. Copy/Paste contents from this repo to newly created files respectively
 3. Select compiler version v0.4.23+commit.124ca40d , Enable 'Auto compile', Enable optimization 200
 4. Select the network ( Main Ethereum / Rinkeby ) on Metamask and Select 'Injected Web3' in Remix
-5. Provide constructor parameters and click Transact
-6. Call grantInitialAuthentication function on WyvernProxyRegistry and pass WyvernExchange address as parameter
-7. Add contract address in src/wyvern-ethereum/config.json file
-8. Run 'yarn run build'
-9. Commit changed files
+5. Deploy WyvernProxyRegistry first and get it's contract address
+6. Deploy WyvernTokenTransferProxy and pass WyvernProxyRegistry contract address in constructor
+7. Deploy WyvernExchange and pass WyvernProxyRegistry, WyvernTokenTransferProxy, SwapToken Address and FeeRecipient address in constructor
+8. Call grantInitialAuthentication function on WyvernProxyRegistry and pass WyvernExchange address as parameter
+9.  Add contract address in src/wyvern-ethereum/config.json file in small case
+10. Run 'yarn run build'
+11. Commit changed files
 
 #### Contributing
 
