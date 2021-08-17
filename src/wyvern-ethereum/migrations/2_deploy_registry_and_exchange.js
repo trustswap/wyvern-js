@@ -17,7 +17,8 @@ module.exports = (deployer, network) => {
                                     WyvernProxyRegistry.address, 
                                     WyvernTokenTransferProxy.address, 
                                     (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0xF77EC971b04cb13Ba20fCdE023Be3E7617A3eB8E' : '0xCC4304A31d09258b0029eA7FE63d032f52e44EFe', 
-                                    (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0x71DFF38eDa9F7b90C45C5c009B131300E9bd7f6F' : 'MAINNET_ADDRESS'
+                                    (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0x71DFF38eDa9F7b90C45C5c009B131300E9bd7f6F' : 'PROTOCOL_FEE_MAINNET_ADDRESS',
+                                    (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0xf90Da19051f25f29aC2B94570B8880207539D51E' : 'DEV_WALLET_MAINNET_ADDRESS'
                                   )
               .then(() => {
                 setConfig('deployed.' + network + '.WyvernExchange', WyvernExchange.address)
