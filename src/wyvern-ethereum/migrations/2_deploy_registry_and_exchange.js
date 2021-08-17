@@ -3,7 +3,6 @@
 const WyvernExchange = artifacts.require('./WyvernExchange.sol')
 const WyvernProxyRegistry = artifacts.require('./WyvernProxyRegistry.sol')
 const WyvernTokenTransferProxy = artifacts.require('./WyvernTokenTransferProxy.sol')
-const TestToken = artifacts.require('TestToken')
 
 const { setConfig } = require('./config.js')
 
@@ -12,10 +11,14 @@ module.exports = (deployer, network) => {
     return deployer.deploy(WyvernProxyRegistry)
       .then(() => {
         setConfig('deployed.' + network + '.WyvernProxyRegistry', WyvernProxyRegistry.address)
-        return TestToken.deployed().then(tokenInstance => {
           return deployer.deploy(WyvernTokenTransferProxy, WyvernProxyRegistry.address).then(() => {
             setConfig('deployed.' + network + '.WyvernTokenTransferProxy', WyvernTokenTransferProxy.address)
-            return deployer.deploy(WyvernExchange, WyvernProxyRegistry.address, WyvernTokenTransferProxy.address, (network === 'development' || network === 'rinkeby' || network === 'coverage') ? tokenInstance.address : '0x056017c55ae7ae32d12aef7c679df83a85ca75ff', '0xa839d4b5a36265795eba6894651a8af3d0ae2e68')
+            return deployer.deploy(WyvernExchange, 
+                                    WyvernProxyRegistry.address, 
+                                    WyvernTokenTransferProxy.address, 
+                                    (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0xF77EC971b04cb13Ba20fCdE023Be3E7617A3eB8E' : '0xCC4304A31d09258b0029eA7FE63d032f52e44EFe', 
+                                    (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0x71DFF38eDa9F7b90C45C5c009B131300E9bd7f6F' : 'MAINNET_ADDRESS'
+                                  )
               .then(() => {
                 setConfig('deployed.' + network + '.WyvernExchange', WyvernExchange.address)
                 return WyvernProxyRegistry.deployed().then(proxyRegistry => {
@@ -25,7 +28,6 @@ module.exports = (deployer, network) => {
                 })
               })
           })
-        })
       })
   }
 }
