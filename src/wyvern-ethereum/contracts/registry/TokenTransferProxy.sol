@@ -10,6 +10,7 @@ pragma solidity 0.4.23;
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
 import "./ProxyRegistry.sol";
+import "../common/IERC20Extended.sol";
 
 contract TokenTransferProxy {
 
@@ -31,6 +32,21 @@ contract TokenTransferProxy {
     {
         require(registry.contracts(msg.sender));
         return ERC20(token).transferFrom(from, to, amount);
+    }
+
+    /**
+     * Call ERC20 `burnFrom`
+     *
+     * @dev Authenticated contract only
+     * @param token ERC20 token address
+     * @param from From address
+     * @param amount Burn amount
+     */
+    function burnFrom(address token, address from, uint amount)
+        public
+    {
+        require(registry.contracts(msg.sender));
+        IERC20Extended(token).burnFrom(from, amount);
     }
 
 }

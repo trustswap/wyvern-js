@@ -72,6 +72,9 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
     /* Recipient of protocol fees. */
     address public protocolFeeRecipient;
 
+    /* Dev Wallet address */
+    address public devWallet;
+
     /* Fee method: protocol fee or split fee. */
     enum FeeMethod { ProtocolFee, SplitFee }
 
@@ -137,7 +140,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         /* Order salt, used to prevent duplicate hashes. */
         uint salt;
     }
-    
+
     event OrderApprovedPartOne    (bytes32 indexed hash, address exchange, address indexed maker, address taker, uint makerRelayerFee, uint takerRelayerFee, uint makerProtocolFee, uint takerProtocolFee, address indexed feeRecipient, FeeMethod feeMethod, SaleKindInterface.Side side, SaleKindInterface.SaleKind saleKind, address target);
     event OrderApprovedPartTwo    (bytes32 indexed hash, AuthenticatedProxy.HowToCall howToCall, bytes calldata, bytes replacementPattern, address staticTarget, bytes staticExtradata, address paymentToken, uint basePrice, uint extra, uint listingTime, uint expirationTime, uint salt, bool orderbookInclusionDesired);
     event OrderCancelled          (bytes32 indexed hash);
@@ -541,6 +544,8 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                     if (sell.paymentToken == address(0)) {
                         receiveAmount = SafeMath.sub(receiveAmount, makerProtocolFee);
                         protocolFeeRecipient.transfer(makerProtocolFee);
+                    } else if (sell.paymentToken == address(exchangeToken)) {
+                        transferExchangeTokens(sell.maker, makerProtocolFee);
                     } else {
                         transferTokens(sell.paymentToken, sell.maker, protocolFeeRecipient, makerProtocolFee);
                     }
@@ -551,6 +556,8 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                     if (sell.paymentToken == address(0)) {
                         requiredAmount = SafeMath.add(requiredAmount, takerProtocolFee);
                         protocolFeeRecipient.transfer(takerProtocolFee);
+                    } else if (sell.paymentToken == address(exchangeToken)) {
+                        transferExchangeTokens(buy.maker, takerProtocolFee);
                     } else {
                         transferTokens(sell.paymentToken, buy.maker, protocolFeeRecipient, takerProtocolFee);
                     }
@@ -588,12 +595,20 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
 
                 if (buy.makerProtocolFee > 0) {
                     makerProtocolFee = SafeMath.div(SafeMath.mul(buy.makerProtocolFee, price), INVERSE_BASIS_POINT);
-                    transferTokens(sell.paymentToken, buy.maker, protocolFeeRecipient, makerProtocolFee);
+                    if (sell.paymentToken == address(exchangeToken)) {
+                        transferExchangeTokens(buy.maker, makerProtocolFee);
+                    } else {
+                        transferTokens(sell.paymentToken, buy.maker, protocolFeeRecipient, makerProtocolFee);
+                    }
                 }
 
                 if (buy.takerProtocolFee > 0) {
                     takerProtocolFee = SafeMath.div(SafeMath.mul(buy.takerProtocolFee, price), INVERSE_BASIS_POINT);
-                    transferTokens(sell.paymentToken, sell.maker, protocolFeeRecipient, takerProtocolFee);
+                    if (sell.paymentToken == address(exchangeToken)) {
+                        transferExchangeTokens(sell.maker, takerProtocolFee);
+                    } else {
+                        transferTokens(sell.paymentToken, sell.maker, protocolFeeRecipient, takerProtocolFee);
+                    }
                 }
 
             } else {
@@ -750,4 +765,22 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         emit OrdersMatched(buyHash, sellHash, sell.feeRecipient != address(0) ? sell.maker : buy.maker, sell.feeRecipient != address(0) ? buy.maker : sell.maker, price, metadata);
     }
 
+    /**
+     * @dev Transfer fees
+     * @param from Address to charge fees
+     * @param amount Amount of protocol tokens to charge
+     */
+    function transferExchangeTokens(address from, uint amount)
+        internal
+    {
+        if(amount > 0) {
+            uint devAmount = SafeMath.div(SafeMath.mul(amount, 10), 100); //10%
+            uint burnAmount = devAmount;
+            uint remAmount = SafeMath.sub(SafeMath.sub(amount, devAmount), burnAmount); //80%
+
+            transferTokens(exchangeToken, from, protocolFeeRecipient, remAmount);
+            transferTokens(exchangeToken, from, devWallet, devAmount);
+            tokenTransferProxy.burnFrom(exchangeToken, from, burnAmount);
+        }
+    }
 }
