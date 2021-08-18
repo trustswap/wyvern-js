@@ -42,7 +42,7 @@ Before running deployment script, following addresses are needed:
 ```bash
 cd src/wyvern-ethereum
 truffle compile
-truffle migrate --network <rinkeby/mainnet>
+truffle migrate --network <rinkeby/main>
 ```
 
 After truffle migration is finished, it will update the src/wyvern-ethereum/config.json. 

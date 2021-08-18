@@ -44,6 +44,11 @@ export declare class WyvernExchangeContract extends BaseContract {
     calculateCurrentPrice_: {
         callAsync(addrs_0: string[], uints_1: BigNumber[], feeMethod_2: number | BigNumber, side_3: number | BigNumber, saleKind_4: number | BigNumber, howToCall_5: number | BigNumber, calldata_6: string, replacementPattern_7: string, staticExtradata_8: string, txData?: TxData): Promise<BigNumber>;
     };
+    changeDevWalletAddress: {
+        sendTransactionAsync(newDevWalletAddress_0: string, txData?: TxData): Promise<string>;
+        estimateGasAsync(newDevWalletAddress_0: string, txData?: TxData): Promise<number>;
+        getABIEncodedTransactionData(newDevWalletAddress_0: string): string;
+    };
     changeProtocolFeeRecipient: {
         sendTransactionAsync(newProtocolFeeRecipient_0: string, txData?: TxData): Promise<string>;
         estimateGasAsync(newProtocolFeeRecipient_0: string, txData?: TxData): Promise<number>;
@@ -95,6 +100,9 @@ export declare class WyvernExchangeContract extends BaseContract {
     owner: {
         callAsync(txData?: TxData): Promise<string>;
     };
+    devWallet: {
+        callAsync(txData?: TxData): Promise<string>;
+    };
     exchangeToken: {
         callAsync(txData?: TxData): Promise<string>;
     };
@@ -121,9 +129,9 @@ export declare class WyvernExchangeContract extends BaseContract {
         callAsync(index_0: string, txData?: TxData): Promise<boolean>;
     };
     transferOwnership: {
-        sendTransactionAsync(newOwner_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(newOwner_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(newOwner_0: string): string;
+        sendTransactionAsync(_newOwner_0: string, txData?: TxData): Promise<string>;
+        estimateGasAsync(_newOwner_0: string, txData?: TxData): Promise<number>;
+        getABIEncodedTransactionData(_newOwner_0: string): string;
     };
     constructor(web3ContractInstance: Web3.ContractInstance, defaults: Partial<TxData>);
 }

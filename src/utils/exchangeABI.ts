@@ -230,6 +230,20 @@ export const exchangeABI = [
         'constant': false,
         'inputs': [
             {
+                'name': 'newDevWalletAddress',
+                'type': 'address',
+            },
+        ],
+        'name': 'changeDevWalletAddress',
+        'outputs': [],
+        'payable': false,
+        'stateMutability': 'nonpayable',
+        'type': 'function',
+    },
+    {
+        'constant': false,
+        'inputs': [
+            {
                 'name': 'newProtocolFeeRecipient',
                 'type': 'address',
             },
@@ -677,6 +691,20 @@ export const exchangeABI = [
     {
         'constant': true,
         'inputs': [],
+        'name': 'devWallet',
+        'outputs': [
+            {
+                'name': '',
+                'type': 'address',
+            },
+        ],
+        'payable': false,
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'constant': true,
+        'inputs': [],
         'name': 'exchangeToken',
         'outputs': [
             {
@@ -939,7 +967,7 @@ export const exchangeABI = [
         'constant': false,
         'inputs': [
             {
-                'name': 'newOwner',
+                'name': '_newOwner',
                 'type': 'address',
             },
         ],
@@ -965,6 +993,10 @@ export const exchangeABI = [
             },
             {
                 'name': 'protocolFeeAddress',
+                'type': 'address',
+            },
+            {
+                'name': 'devWalletAddress',
                 'type': 'address',
             },
         ],

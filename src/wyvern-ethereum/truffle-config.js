@@ -27,16 +27,15 @@ module.exports = {
       //gasPrice: 40000000000,
       skipDryRun: true
     },
-    mainnet: {
+    main: {
       provider: () => new HDWalletProvider(process.env.PK, "https://mainnet.infura.io/v3/" + process.env.INFURA_API_KEY),
       port: 8545,
       network_id: "1",
       gas: 6700000,
-      gasPrice: 54000000000,
-      confirmations: 2,
-      skipDryRun: true
+      gasPrice: 40000000000,
+      confirmations: 2
     },
-    mainnet_fork: {
+    main_fork: {
       host: "localhost",
       port: 8545,
       gas: 6700000,

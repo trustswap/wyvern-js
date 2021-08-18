@@ -57,9 +57,9 @@ export declare class WyvernProxyRegistryContract extends BaseContract {
         callAsync(txData?: TxData): Promise<BigNumber>;
     };
     transferOwnership: {
-        sendTransactionAsync(newOwner_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(newOwner_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(newOwner_0: string): string;
+        sendTransactionAsync(_newOwner_0: string, txData?: TxData): Promise<string>;
+        estimateGasAsync(_newOwner_0: string, txData?: TxData): Promise<number>;
+        getABIEncodedTransactionData(_newOwner_0: string): string;
     };
     grantInitialAuthentication: {
         sendTransactionAsync(authAddress_0: string, txData?: TxData): Promise<string>;

@@ -195,7 +195,7 @@ export const proxyRegistryABI = [
         'constant': false,
         'inputs': [
             {
-                'name': 'newOwner',
+                'name': '_newOwner',
                 'type': 'address',
             },
         ],
