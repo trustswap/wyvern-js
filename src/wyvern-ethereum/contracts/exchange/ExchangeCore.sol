@@ -783,4 +783,15 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
             tokenTransferProxy.burnFrom(exchangeToken, from, burnAmount);
         }
     }
+
+    /**
+     * @dev Change the dev wallet (owner only)
+     * @param newDevWalletAddress New dev wallet address
+     */
+    function changeDevWalletAddress(address newDevWalletAddress)
+        public
+        onlyOwner
+    {
+        devWallet = newDevWalletAddress;
+    }
 }

@@ -10,9 +10,9 @@ module.exports = (deployer, network) => {
   if (network === 'development' || network === 'rinkeby' || network === 'coverage' || network === 'main') {
     return deployer.deploy(WyvernProxyRegistry)
       .then(() => {
-        setConfig('deployed.' + network + '.WyvernProxyRegistry', WyvernProxyRegistry.address)
+        setConfig('deployed.' + network + '.WyvernProxyRegistry', WyvernProxyRegistry.address.toLowerCase())
           return deployer.deploy(WyvernTokenTransferProxy, WyvernProxyRegistry.address).then(() => {
-            setConfig('deployed.' + network + '.WyvernTokenTransferProxy', WyvernTokenTransferProxy.address)
+            setConfig('deployed.' + network + '.WyvernTokenTransferProxy', WyvernTokenTransferProxy.address.toLowerCase())
             return deployer.deploy(WyvernExchange, 
                                     WyvernProxyRegistry.address, 
                                     WyvernTokenTransferProxy.address, 
@@ -21,7 +21,7 @@ module.exports = (deployer, network) => {
                                     (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0xf90Da19051f25f29aC2B94570B8880207539D51E' : '0x934fe588c9b6956162d7bccaea37c4924c85752f'
                                   )
               .then(() => {
-                setConfig('deployed.' + network + '.WyvernExchange', WyvernExchange.address)
+                setConfig('deployed.' + network + '.WyvernExchange', WyvernExchange.address.toLowerCase())
                 return WyvernProxyRegistry.deployed().then(proxyRegistry => {
                   return WyvernExchange.deployed().then(exchange => {
                     return proxyRegistry.grantInitialAuthentication(exchange.address)

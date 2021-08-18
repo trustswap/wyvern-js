@@ -31,6 +31,24 @@ yarn install
 yarn run build
 ```
 
+## Wyvern Contract Deployment
+
+Before running deployment script, following addresses are needed:
+1) SWAP ERC-20 Token Address
+2) Fee Wallet Address where 80% of collected fees go
+3) Dev Wallet Address where 10% of collected fees go
+
+
+```bash
+cd src/wyvern-ethereum
+truffle compile
+truffle migrate --network <rinkeby/mainnet>
+```
+
+After truffle migration is finished, it will update the src/wyvern-ethereum/config.json. 
+
+Now, build using `yarn run build` and push compiled files.
+
 #### Contributing
 
 Contributions welcome! Please use GitHub issues for suggestions/concerns - if you prefer to express your intentions in code, feel free to submit a pull request.

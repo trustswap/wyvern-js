@@ -5,6 +5,6 @@ const { setConfig } = require('./config.js')
 
 module.exports = (deployer, network) => {
   return deployer.deploy(Migrations).then(() => {
-    setConfig('deployed.' + network + '.Migrations', Migrations.address)
+    setConfig('deployed.' + network + '.Migrations', Migrations.address.toLowerCase())
   })
 }
