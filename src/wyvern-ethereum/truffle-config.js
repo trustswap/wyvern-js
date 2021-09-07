@@ -42,7 +42,21 @@ module.exports = {
       gasPrice: 54000000000,
       network_id: "*",
       skipDryRun: true
-    }
+    },
+    mumbai: {
+      provider: () => new HDWalletProvider(process.env.PK, "https://rpc-mumbai.maticvigil.com"),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
+    matic: {
+      provider: () => new HDWalletProvider(process.env.PK, "https://polygon-mainnet.infura.io/v3/" + process.env.INFURA_API_KEY),
+      network_id: 137,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: false
+    },
   },
 
   // Set default mocha options here, use special reporters etc.
