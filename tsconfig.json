@@ -17,6 +17,7 @@
         "experimentalDecorators": true,
         "noImplicitReturns": true,
         "pretty": true,
-        "strict": true
+        "strict": true,
+        "suppressImplicitAnyIndexErrors": true,
     }
 }
