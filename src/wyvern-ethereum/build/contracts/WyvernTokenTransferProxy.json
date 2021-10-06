@@ -463,10 +463,16 @@
       "links": {},
       "address": "0xa09a3b96302c720cabe330e174e82f4352128cdf",
       "transactionHash": "0xe1ae25a059b51c3105313830434505cf195ebee2566040b72dad03c7bd46bbbd"
+    },
+    "137": {
+      "events": {},
+      "links": {},
+      "address": "0xa09a3b96302c720cabe330e174e82f4352128cdf",
+      "transactionHash": "0xfb38be249a0708e623fdce40d676775c97d321f39f57f234afb1549ecf93e0bf"
     }
   },
   "schemaVersion": "3.2.0",
-  "updatedAt": "2021-08-18T09:52:32.356Z",
+  "updatedAt": "2021-10-06T05:43:30.686Z",
   "devdoc": {
     "methods": {
       "burnFrom(address,address,uint256)": {

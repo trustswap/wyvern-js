@@ -51,7 +51,7 @@ module.exports = {
       skipDryRun: true
     },
     matic: {
-      provider: () => new HDWalletProvider(process.env.PK, "https://polygon-mainnet.infura.io/v3/" + process.env.INFURA_API_KEY),
+      provider: () => new HDWalletProvider(process.env.PK, "https://rpc-mainnet.maticvigil.com"),
       network_id: 137,
       confirmations: 2,
       timeoutBlocks: 200,

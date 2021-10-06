@@ -1410,10 +1410,16 @@
       "links": {},
       "address": "0x405ef38d44acff35b293410fef9d8de1369bece4",
       "transactionHash": "0xada0b04e0a7e5c2b029c2c48d18f944929ba8992fd17bb46f82dfdb87b0e927e"
+    },
+    "137": {
+      "events": {},
+      "links": {},
+      "address": "0x405ef38d44acff35b293410fef9d8de1369bece4",
+      "transactionHash": "0x9899e349ff594f3a166c8327fcfbca63ba56b21a369335f6f0853fa1b2fe11d9"
     }
   },
   "schemaVersion": "3.2.0",
-  "updatedAt": "2021-08-18T09:52:32.352Z",
+  "updatedAt": "2021-10-06T05:43:30.679Z",
   "devdoc": {
     "author": "Project Wyvern Developers",
     "methods": {

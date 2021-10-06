@@ -54,6 +54,12 @@
       "WyvernProxyRegistry": "0xb97d7118209eb9e34ae355bdeda8f53ed118f199",
       "WyvernTokenTransferProxy": "0x2a02a607c399204680537f59ad9a8701b640315d",
       "WyvernExchange": "0x31b49e94b0f5337d16b1f758991006838767294b"
+    },
+    "matic": {
+      "Migrations": "0xce088fbfb8babe2da7d34484b99c486fdb6280e3",
+      "WyvernProxyRegistry": "0x405ef38d44acff35b293410fef9d8de1369bece4",
+      "WyvernTokenTransferProxy": "0xa09a3b96302c720cabe330e174e82f4352128cdf",
+      "WyvernExchange": "0x097ffeea86b38fa9ebad4bc2af902e3ba4fffee4"
     }
   }
 }
