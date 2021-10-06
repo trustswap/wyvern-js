@@ -61,6 +61,12 @@ export declare const constants: {
             'WyvernTokenTransferProxy': string;
             'WyvernExchange': string;
         };
+        'matic': {
+            'Migrations': string;
+            'WyvernProxyRegistry': string;
+            'WyvernTokenTransferProxy': string;
+            'WyvernExchange': string;
+        };
     };
     ATOMICIZER_ABI: {
         'constant': boolean;

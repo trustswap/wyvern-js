@@ -54,4 +54,10 @@ export declare const deployed: {
         'WyvernTokenTransferProxy': string;
         'WyvernExchange': string;
     };
+    'matic': {
+        'Migrations': string;
+        'WyvernProxyRegistry': string;
+        'WyvernTokenTransferProxy': string;
+        'WyvernExchange': string;
+    };
 };
