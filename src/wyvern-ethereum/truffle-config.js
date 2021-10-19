@@ -57,6 +57,13 @@ module.exports = {
       timeoutBlocks: 200,
       skipDryRun: false
     },
+    pulsechain: {
+      provider: () => new HDWalletProvider(process.env.PK, "https://rpc.testnet.pulsechain.com"),
+      network_id: 940,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
   },
 
   // Set default mocha options here, use special reporters etc.

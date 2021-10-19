@@ -17,6 +17,7 @@ export declare enum Network {
     Rinkeby = "rinkeby",
     Matic = "matic",
     Mumbai = "mumbai",
+    TPulse="pulsechain"
 }
 export declare enum SaleKind {
     FixedPrice = 0,

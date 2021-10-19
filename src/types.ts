@@ -20,6 +20,7 @@ export enum Network {
     Rinkeby = 'rinkeby',
     Matic = 'matic',
     Mumbai = 'mumbai',
+    TPulse = "pulsechain",
 }
 
 export enum SaleKind {
