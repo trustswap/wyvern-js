@@ -139,6 +139,8 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         uint expirationTime;
         /* Order salt, used to prevent duplicate hashes. */
         uint salt;
+        /* Order data */
+        bytes data;
     }
 
     event OrderApprovedPartOne    (bytes32 indexed hash, address exchange, address indexed maker, address taker, uint makerRelayerFee, uint takerRelayerFee, uint makerProtocolFee, uint takerProtocolFee, address indexed feeRecipient, FeeMethod feeMethod, SaleKindInterface.Side side, SaleKindInterface.SaleKind saleKind, address target);
@@ -497,6 +499,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
 
         /* If paying using a token (not Ether), transfer tokens. This is done prior to fee payments to that a seller will have tokens before being charged fees. */
         if (price > 0 && sell.paymentToken != address(0)) {
+            //TODO RONAK PAYOUTS HERE
             transferTokens(sell.paymentToken, buy.maker, sell.maker, price);
         }
 
@@ -518,26 +521,6 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 require(sell.takerProtocolFee <= buy.takerProtocolFee);
 
                 /* Maker fees are deducted from the token amount that the maker receives. Taker fees are extra tokens that must be paid by the taker. */
-
-                if (sell.makerRelayerFee > 0) {
-                    uint makerRelayerFee = SafeMath.div(SafeMath.mul(sell.makerRelayerFee, price), INVERSE_BASIS_POINT);
-                    if (sell.paymentToken == address(0)) {
-                        receiveAmount = SafeMath.sub(receiveAmount, makerRelayerFee);
-                        sell.feeRecipient.transfer(makerRelayerFee);
-                    } else {
-                        transferTokens(sell.paymentToken, sell.maker, sell.feeRecipient, makerRelayerFee);
-                    }
-                }
-
-                if (sell.takerRelayerFee > 0) {
-                    uint takerRelayerFee = SafeMath.div(SafeMath.mul(sell.takerRelayerFee, price), INVERSE_BASIS_POINT);
-                    if (sell.paymentToken == address(0)) {
-                        requiredAmount = SafeMath.add(requiredAmount, takerRelayerFee);
-                        sell.feeRecipient.transfer(takerRelayerFee);
-                    } else {
-                        transferTokens(sell.paymentToken, buy.maker, sell.feeRecipient, takerRelayerFee);
-                    }
-                }
 
                 if (sell.makerProtocolFee > 0) {
                     uint makerProtocolFee = SafeMath.div(SafeMath.mul(sell.makerProtocolFee, price), INVERSE_BASIS_POINT);
@@ -582,16 +565,6 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
 
                 /* Assert taker fee is less than or equal to maximum fee specified by seller. */
                 require(buy.takerProtocolFee <= sell.takerProtocolFee);
-
-                if (buy.makerRelayerFee > 0) {
-                    makerRelayerFee = SafeMath.div(SafeMath.mul(buy.makerRelayerFee, price), INVERSE_BASIS_POINT);
-                    transferTokens(sell.paymentToken, buy.maker, buy.feeRecipient, makerRelayerFee);
-                }
-
-                if (buy.takerRelayerFee > 0) {
-                    takerRelayerFee = SafeMath.div(SafeMath.mul(buy.takerRelayerFee, price), INVERSE_BASIS_POINT);
-                    transferTokens(sell.paymentToken, sell.maker, buy.feeRecipient, takerRelayerFee);
-                }
 
                 if (buy.makerProtocolFee > 0) {
                     makerProtocolFee = SafeMath.div(SafeMath.mul(buy.makerProtocolFee, price), INVERSE_BASIS_POINT);
