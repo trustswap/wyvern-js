@@ -6,15 +6,17 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
 
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
+pragma solidity ^0.8.0;
+
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
 /**
   * @title DelayedReleaseToken
   * @author Project Wyvern Developers
   */
-contract DelayedReleaseToken is StandardToken {
+contract DelayedReleaseToken is ERC20 {
 
     /* Temporary administrator address, only used for the initial token release, must be initialized by token constructor. */
     address temporaryAdmin;
@@ -35,8 +37,7 @@ contract DelayedReleaseToken is StandardToken {
     function releaseTokens(address destination) public {
         require((msg.sender == temporaryAdmin) && (!hasBeenReleased));
         hasBeenReleased = true;
-        balances[destination] = numberOfDelayedTokens;
-        emit Transfer(address(0), destination, numberOfDelayedTokens); 
+        _mint(destination, numberOfDelayedTokens); 
         emit TokensReleased(destination, numberOfDelayedTokens);
     }
 

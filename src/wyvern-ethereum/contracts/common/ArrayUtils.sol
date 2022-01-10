@@ -5,9 +5,11 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
 
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+pragma solidity ^0.8.0;
+
+import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
 
 /**
  * @title ArrayUtils
@@ -127,7 +129,7 @@ library ArrayUtils {
      * @param source Byte array to write
      * @return End memory index
      */
-    function unsafeWriteBytes(uint index, bytes source)
+    function unsafeWriteBytes(uint index, bytes memory source)
         internal
         pure
         returns (uint)

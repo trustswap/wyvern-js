@@ -4,7 +4,9 @@
  
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
 
 import "./ExchangeCore.sol";
 
@@ -17,10 +19,10 @@ contract Exchange is ExchangeCore {
     /**
      * @dev Call guardedArrayReplace - library function exposed for testing.
      */
-    function guardedArrayReplace(bytes array, bytes desired, bytes mask)
+    function guardedArrayReplace(bytes memory array, bytes memory desired, bytes memory mask)
         public
         pure
-        returns (bytes)
+        returns (bytes memory)
     {
         ArrayUtils.guardedArrayReplace(array, desired, mask);
         return array;
@@ -32,10 +34,10 @@ contract Exchange is ExchangeCore {
      * @param arrToCopy Array to copy
      * @return byte array
      */
-    function testCopy(bytes arrToCopy)
+    function testCopy(bytes memory arrToCopy)
         public
         pure
-        returns (bytes)
+        returns (bytes memory)
     {
         bytes memory arr = new bytes(arrToCopy.length);
         uint index;
@@ -55,7 +57,7 @@ contract Exchange is ExchangeCore {
     function testCopyAddress(address addr)
         public
         pure
-        returns (bytes)
+        returns (bytes memory)
     {
         bytes memory arr = new bytes(0x14);
         uint index;
@@ -81,21 +83,21 @@ contract Exchange is ExchangeCore {
      * @dev Call hashOrder - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function hashOrder_(
-        address[7] addrs,
-        uint[9] uints,
+        address[7] memory addrs,
+        uint[9] memory uints,
         FeeMethod feeMethod,
         SaleKindInterface.Side side,
         SaleKindInterface.SaleKind saleKind,
         AuthenticatedProxy.HowToCall howToCall,
-        bytes calldata,
-        bytes replacementPattern,
-        bytes staticExtradata)
+        bytes memory calldatas,
+        bytes memory replacementPattern,
+        bytes memory staticExtradata)
         public
         pure
         returns (bytes32)
     {
         return hashOrder(
-          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldata, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8])
+          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldatas, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8])
         );
     }
 
@@ -103,21 +105,21 @@ contract Exchange is ExchangeCore {
      * @dev Call hashToSign - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function hashToSign_(
-        address[7] addrs,
-        uint[9] uints,
+        address[7] memory addrs,
+        uint[9] memory uints,
         FeeMethod feeMethod,
         SaleKindInterface.Side side,
         SaleKindInterface.SaleKind saleKind,
         AuthenticatedProxy.HowToCall howToCall,
-        bytes calldata,
-        bytes replacementPattern,
-        bytes staticExtradata)
+        bytes memory calldatas,
+        bytes memory replacementPattern,
+        bytes memory staticExtradata)
         public
         pure
         returns (bytes32)
     { 
         return hashToSign(
-          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldata, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8])
+          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldatas, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8])
         );
     }
 
@@ -125,20 +127,20 @@ contract Exchange is ExchangeCore {
      * @dev Call validateOrderParameters - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function validateOrderParameters_ (
-        address[7] addrs,
-        uint[9] uints,
+        address[7] memory addrs,
+        uint[9] memory uints,
         FeeMethod feeMethod,
         SaleKindInterface.Side side,
         SaleKindInterface.SaleKind saleKind,
         AuthenticatedProxy.HowToCall howToCall,
-        bytes calldata,
-        bytes replacementPattern,
-        bytes staticExtradata)
+        bytes memory calldatas,
+        bytes memory replacementPattern,
+        bytes memory staticExtradata)
         view
         public
         returns (bool)
     {
-        Order memory order = Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldata, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]);
+        Order memory order = Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldatas, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]);
         return validateOrderParameters(
           order
         );
@@ -148,15 +150,15 @@ contract Exchange is ExchangeCore {
      * @dev Call validateOrder - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function validateOrder_ (
-        address[7] addrs,
-        uint[9] uints,
+        address[7] memory addrs,
+        uint[9] memory uints,
         FeeMethod feeMethod,
         SaleKindInterface.Side side,
         SaleKindInterface.SaleKind saleKind,
         AuthenticatedProxy.HowToCall howToCall,
-        bytes calldata,
-        bytes replacementPattern,
-        bytes staticExtradata,
+        bytes memory calldatas,
+        bytes memory replacementPattern,
+        bytes memory staticExtradata,
         uint8 v,
         bytes32 r,
         bytes32 s)
@@ -164,7 +166,7 @@ contract Exchange is ExchangeCore {
         public
         returns (bool)
     {
-        Order memory order = Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldata, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]);
+        Order memory order = Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldatas, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]);
         return validateOrder(
           hashToSign(order),
           order,
@@ -176,19 +178,19 @@ contract Exchange is ExchangeCore {
      * @dev Call approveOrder - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function approveOrder_ (
-        address[7] addrs,
-        uint[9] uints,
+        address[7] memory addrs,
+        uint[9] memory uints,
         FeeMethod feeMethod,
         SaleKindInterface.Side side,
         SaleKindInterface.SaleKind saleKind,
         AuthenticatedProxy.HowToCall howToCall,
-        bytes calldata,
-        bytes replacementPattern,
-        bytes staticExtradata,
+        bytes memory calldatas,
+        bytes memory replacementPattern,
+        bytes memory staticExtradata,
         bool orderbookInclusionDesired) 
         public
     {
-        Order memory order = Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldata, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]);
+        Order memory order = Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldatas, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]);
         return approveOrder(order, orderbookInclusionDesired);
     }
 
@@ -196,15 +198,15 @@ contract Exchange is ExchangeCore {
      * @dev Call cancelOrder - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function cancelOrder_(
-        address[7] addrs,
-        uint[9] uints,
+        address[7] memory addrs,
+        uint[9] memory uints,
         FeeMethod feeMethod,
         SaleKindInterface.Side side,
         SaleKindInterface.SaleKind saleKind,
         AuthenticatedProxy.HowToCall howToCall,
-        bytes calldata,
-        bytes replacementPattern,
-        bytes staticExtradata,
+        bytes memory calldatas,
+        bytes memory replacementPattern,
+        bytes memory staticExtradata,
         uint8 v,
         bytes32 r,
         bytes32 s)
@@ -212,7 +214,7 @@ contract Exchange is ExchangeCore {
     {
 
         return cancelOrder(
-          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldata, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]),
+          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldatas, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8]),
           Sig(v, r, s)
         );
     }
@@ -221,21 +223,21 @@ contract Exchange is ExchangeCore {
      * @dev Call calculateCurrentPrice - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function calculateCurrentPrice_(
-        address[7] addrs,
-        uint[9] uints,
+        address[7] memory addrs,
+        uint[9] memory uints,
         FeeMethod feeMethod,
         SaleKindInterface.Side side,
         SaleKindInterface.SaleKind saleKind,
         AuthenticatedProxy.HowToCall howToCall,
-        bytes calldata,
-        bytes replacementPattern,
-        bytes staticExtradata)
+        bytes memory calldatas,
+        bytes memory replacementPattern,
+        bytes memory staticExtradata)
         public
         view
         returns (uint)
     {
         return calculateCurrentPrice(
-          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldata, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8])
+          Order(addrs[0], addrs[1], addrs[2], uints[0], uints[1], uints[2], uints[3], addrs[3], feeMethod, side, saleKind, addrs[4], howToCall, calldatas, replacementPattern, addrs[5], staticExtradata, ERC20(addrs[6]), uints[4], uints[5], uints[6], uints[7], uints[8])
         );
     }
 
@@ -243,15 +245,15 @@ contract Exchange is ExchangeCore {
      * @dev Call ordersCanMatch - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function ordersCanMatch_(
-        address[14] addrs,
-        uint[18] uints,
-        uint8[8] feeMethodsSidesKindsHowToCalls,
-        bytes calldataBuy,
-        bytes calldataSell,
-        bytes replacementPatternBuy,
-        bytes replacementPatternSell,
-        bytes staticExtradataBuy,
-        bytes staticExtradataSell)
+        address[14] memory addrs,
+        uint[18] memory uints,
+        uint8[8] memory feeMethodsSidesKindsHowToCalls,
+        bytes memory calldataBuy,
+        bytes memory calldataSell,
+        bytes memory replacementPatternBuy,
+        bytes memory replacementPatternSell,
+        bytes memory staticExtradataBuy,
+        bytes memory staticExtradataSell)
         public
         view
         returns (bool)
@@ -265,14 +267,14 @@ contract Exchange is ExchangeCore {
     }
 
     /**
-     * @dev Return whether or not two orders' calldata specifications can match
-     * @param buyCalldata Buy-side order calldata
-     * @param buyReplacementPattern Buy-side order calldata replacement mask
-     * @param sellCalldata Sell-side order calldata
-     * @param sellReplacementPattern Sell-side order calldata replacement mask
-     * @return Whether the orders' calldata can be matched
+     * @dev Return whether or not two orders' calldatas specifications can match
+     * @param buyCalldata Buy-side order calldatas
+     * @param buyReplacementPattern Buy-side order calldatas replacement mask
+     * @param sellCalldata Sell-side order calldatas
+     * @param sellReplacementPattern Sell-side order calldatas replacement mask
+     * @return Whether the orders' calldatas can be matched
      */
-    function orderCalldataCanMatch(bytes buyCalldata, bytes buyReplacementPattern, bytes sellCalldata, bytes sellReplacementPattern)
+    function orderCalldataCanMatch(bytes memory buyCalldata, bytes memory buyReplacementPattern, bytes memory sellCalldata, bytes memory sellReplacementPattern)
         public
         pure
         returns (bool)
@@ -290,15 +292,15 @@ contract Exchange is ExchangeCore {
      * @dev Call calculateMatchPrice - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function calculateMatchPrice_(
-        address[14] addrs,
-        uint[18] uints,
-        uint8[8] feeMethodsSidesKindsHowToCalls,
-        bytes calldataBuy,
-        bytes calldataSell,
-        bytes replacementPatternBuy,
-        bytes replacementPatternSell,
-        bytes staticExtradataBuy,
-        bytes staticExtradataSell)
+        address[14] memory addrs,
+        uint[18] memory uints,
+        uint8[8] memory feeMethodsSidesKindsHowToCalls,
+        bytes memory calldataBuy,
+        bytes memory calldataSell,
+        bytes memory replacementPatternBuy,
+        bytes memory replacementPatternSell,
+        bytes memory staticExtradataBuy,
+        bytes memory staticExtradataSell)
         public
         view
         returns (uint)
@@ -315,17 +317,17 @@ contract Exchange is ExchangeCore {
      * @dev Call atomicMatch - Solidity ABI encoding limitation workaround, hopefully temporary.
      */
     function atomicMatch_(
-        address[14] addrs,
-        uint[18] uints,
-        uint8[8] feeMethodsSidesKindsHowToCalls,
-        bytes calldataBuy,
-        bytes calldataSell,
-        bytes replacementPatternBuy,
-        bytes replacementPatternSell,
-        bytes staticExtradataBuy,
-        bytes staticExtradataSell,
-        uint8[2] vs,
-        bytes32[5] rssMetadata)
+        address[14] memory addrs,
+        uint[18] memory uints,
+        uint8[8] memory feeMethodsSidesKindsHowToCalls,
+        bytes memory calldataBuy,
+        bytes memory calldataSell,
+        bytes memory replacementPatternBuy,
+        bytes memory replacementPatternSell,
+        bytes memory staticExtradataBuy,
+        bytes memory staticExtradataSell,
+        uint8[2] memory vs,
+        bytes32[5] memory rssMetadata)
         public
         payable
     {

@@ -4,7 +4,9 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
@@ -23,7 +25,7 @@ contract TokenRecipient {
      * @param token Address of token
      * @param extraData Additional data to log
      */
-    function receiveApproval(address from, uint256 value, address token, bytes extraData) public {
+    function receiveApproval(address from, uint256 value, address token, bytes memory extraData) public {
         ERC20 t = ERC20(token);
         require(t.transferFrom(from, this, value));
         emit ReceivedTokens(from, value, token, extraData);
@@ -32,7 +34,7 @@ contract TokenRecipient {
     /**
      * @dev Receive Ether and generate a log event
      */
-    function () payable public {
+    receive () payable public {
         emit ReceivedEther(msg.sender, msg.value);
     }
 }

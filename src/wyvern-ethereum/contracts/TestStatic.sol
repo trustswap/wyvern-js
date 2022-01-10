@@ -4,7 +4,9 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
 
 /**
   * @title TestStatic
@@ -32,11 +34,11 @@ contract TestStatic {
         require(false);
     }
 
-    function requireMinimumLength(bytes calldata)
+    function requireMinimumLength(bytes memory data)
         public
         pure
     {
-        require(calldata.length > 2);
+        require(data.length > 2);
     }
 
 }

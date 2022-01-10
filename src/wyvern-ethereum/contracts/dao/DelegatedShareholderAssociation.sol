@@ -42,10 +42,12 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
 import "../common/TokenRecipient.sol";
 import "../common/TokenLocker.sol";
 
@@ -229,8 +231,8 @@ contract DelegatedShareholderAssociation is TokenRecipient {
     function newProposal(
         address beneficiary,
         uint weiAmount,
-        bytes jobMetadataHash,
-        bytes transactionBytecode
+        bytes memory jobMetadataHash,
+        bytes memory transactionBytecode
     )
         public
         onlyBoardMembers
@@ -267,7 +269,7 @@ contract DelegatedShareholderAssociation is TokenRecipient {
         uint proposalNumber,
         address beneficiary,
         uint weiAmount,
-        bytes transactionBytecode
+        bytes memory transactionBytecode
     )
         public
         view
@@ -346,7 +348,7 @@ contract DelegatedShareholderAssociation is TokenRecipient {
      * @param proposalNumber proposal number
      * @param transactionBytecode optional: if the transaction contained a bytecode, you need to send it
      */
-    function executeProposal(uint proposalNumber, bytes transactionBytecode)
+    function executeProposal(uint proposalNumber, bytes memory transactionBytecode)
         public
         notSelf
     {

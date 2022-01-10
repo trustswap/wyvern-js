@@ -14,26 +14,28 @@
   Solidity presently possesses neither a first-class functional typesystem nor runtime reflection (ABI encoding in Solidity), so we must be a bit clever in implementation and work at a lower level of abstraction than would be ideal.
 
   We elect to utilize the following structure for the initial version of the protocol:
-  - Buy-side and sell-side orders each provide calldata (bytes) - for a sell-side order, the state transition for sale, for a buy-side order, the state transition to be bought.
-    Along with the calldata, orders provide `replacementPattern`: a bytemask indicating which bytes of the calldata can be changed (e.g. NFT destination address).
+  - Buy-side and sell-side orders each provide calldatas (bytes) - for a sell-side order, the state transition for sale, for a buy-side order, the state transition to be bought.
+    Along with the calldatas, orders provide `replacementPattern`: a bytemask indicating which bytes of the calldatas can be changed (e.g. NFT destination address).
     When a buy-side and sell-side order are matched, the desired calldatas are unified, masked with the bytemasks, and checked for agreement.
     This alone is enough to implement common simple state transitions, such as "transfer my CryptoKitty to any address" or "buy any of this kind of nonfungible token".
-  - Orders (of either side) can optionally specify a static (no state modification) callback function, which receives configurable data along with the actual calldata as a parameter.
+  - Orders (of either side) can optionally specify a static (no state modification) callback function, which receives configurable data along with the actual calldatas as a parameter.
     Although it requires some encoding acrobatics, this allows for arbitrary transaction validation functions.
     For example, a buy-sider order could express the intent to buy any CryptoKitty with a particular set of characteristics (checked in the static call),
     or a sell-side order could express the intent to sell any of three ENS names, but not two others.
-    Use of the EVM's STATICCALL opcode, added in Ethereum Metropolis, allows the static calldata to be safely specified separately and thus this kind of matching to happen correctly
+    Use of the EVM's STATICCALL opcode, added in Ethereum Metropolis, allows the static calldatas to be safely specified separately and thus this kind of matching to happen correctly
     - that is to say, wherever the two (transaction => bool) functions intersect.
 
   Future protocol versions may improve upon this structure in capability or usability according to protocol user feedback demand, with upgrades enacted by the Wyvern DAO.
  
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
 import "../registry/ProxyRegistry.sol";
 import "../registry/TokenTransferProxy.sol";
@@ -120,7 +122,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         /* HowToCall. */
         AuthenticatedProxy.HowToCall howToCall;
         /* Calldata. */
-        bytes calldata;
+        bytes calldatas;
         /* Calldata replacement pattern, or an empty byte array for no replacement. */
         bytes replacementPattern;
         /* Static call target, zero-address for no static call. */
@@ -142,7 +144,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
     }
 
     event OrderApprovedPartOne    (bytes32 indexed hash, address exchange, address indexed maker, address taker, uint makerRelayerFee, uint takerRelayerFee, uint makerProtocolFee, uint takerProtocolFee, address indexed feeRecipient, FeeMethod feeMethod, SaleKindInterface.Side side, SaleKindInterface.SaleKind saleKind, address target);
-    event OrderApprovedPartTwo    (bytes32 indexed hash, AuthenticatedProxy.HowToCall howToCall, bytes calldata, bytes replacementPattern, address staticTarget, bytes staticExtradata, address paymentToken, uint basePrice, uint extra, uint listingTime, uint expirationTime, uint salt, bool orderbookInclusionDesired);
+    event OrderApprovedPartTwo    (bytes32 indexed hash, AuthenticatedProxy.HowToCall howToCall, bytes calldatas, bytes replacementPattern, address staticTarget, bytes staticExtradata, address paymentToken, uint basePrice, uint extra, uint listingTime, uint expirationTime, uint salt, bool orderbookInclusionDesired);
     event OrderCancelled          (bytes32 indexed hash);
     event OrdersMatched           (bytes32 buyHash, bytes32 sellHash, address indexed maker, address indexed taker, uint price, bytes32 indexed metadata);
 
@@ -209,24 +211,24 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
     /**
      * @dev Execute a STATICCALL (introduced with Ethereum Metropolis, non-state-modifying external call)
      * @param target Contract to call
-     * @param calldata Calldata (appended to extradata)
+     * @param calldatas Calldata (appended to extradata)
      * @param extradata Base data for STATICCALL (probably function selector and argument encoding)
      * @return The result of the call (success or failure)
      */
-    function staticCall(address target, bytes memory calldata, bytes memory extradata)
+    function staticCall(address target, bytes memory calldatas, bytes memory extradata)
         public
         view
         returns (bool result)
     {
-        bytes memory combined = new bytes(calldata.length + extradata.length);
+        bytes memory combined = new bytes(calldatas.length + extradata.length);
         uint index;
         assembly {
             index := add(combined, 0x20)
         }
         index = ArrayUtils.unsafeWriteBytes(index, extradata);
-        ArrayUtils.unsafeWriteBytes(index, calldata);
+        ArrayUtils.unsafeWriteBytes(index, calldatas);
         assembly {
-            result := staticcall(gas, target, add(combined, 0x20), mload(combined), mload(0x40), 0)
+            result := staticcall(gas(), target, add(combined, 0x20), mload(combined), mload(0x40), 0)
         }
         return result;
     }
@@ -242,7 +244,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         pure
         returns (uint)
     {
-        return ((0x14 * 7) + (0x20 * 9) + 4 + order.calldata.length + order.replacementPattern.length + order.staticExtradata.length);
+        return ((0x14 * 7) + (0x20 * 9) + 4 + order.calldatas.length + order.replacementPattern.length + order.staticExtradata.length);
     }
 
     /**
@@ -275,7 +277,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         index = ArrayUtils.unsafeWriteUint8(index, uint8(order.saleKind));
         index = ArrayUtils.unsafeWriteAddress(index, order.target);
         index = ArrayUtils.unsafeWriteUint8(index, uint8(order.howToCall));
-        index = ArrayUtils.unsafeWriteBytes(index, order.calldata);
+        index = ArrayUtils.unsafeWriteBytes(index, order.calldatas);
         index = ArrayUtils.unsafeWriteBytes(index, order.replacementPattern);
         index = ArrayUtils.unsafeWriteAddress(index, order.staticTarget);
         index = ArrayUtils.unsafeWriteBytes(index, order.staticExtradata);
@@ -412,7 +414,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
             emit OrderApprovedPartOne(hash, order.exchange, order.maker, order.taker, order.makerRelayerFee, order.takerRelayerFee, order.makerProtocolFee, order.takerProtocolFee, order.feeRecipient, order.feeMethod, order.side, order.saleKind, order.target);
         }
         {   
-            emit OrderApprovedPartTwo(hash, order.howToCall, order.calldata, order.replacementPattern, order.staticTarget, order.staticExtradata, order.paymentToken, order.basePrice, order.extra, order.listingTime, order.expirationTime, order.salt, orderbookInclusionDesired);
+            emit OrderApprovedPartTwo(hash, order.howToCall, order.calldatas, order.replacementPattern, order.staticTarget, order.staticExtradata, order.paymentToken, order.basePrice, order.extra, order.listingTime, order.expirationTime, order.salt, orderbookInclusionDesired);
         }
     }
 
@@ -584,17 +586,17 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 require(buy.takerProtocolFee <= sell.takerProtocolFee);
 
                 if (buy.makerRelayerFee > 0) {
-                    makerRelayerFee = SafeMath.div(SafeMath.mul(buy.makerRelayerFee, price), INVERSE_BASIS_POINT);
+                    uint256 makerRelayerFee = SafeMath.div(SafeMath.mul(buy.makerRelayerFee, price), INVERSE_BASIS_POINT);
                     transferTokens(sell.paymentToken, buy.maker, buy.feeRecipient, makerRelayerFee);
                 }
 
                 if (buy.takerRelayerFee > 0) {
-                    takerRelayerFee = SafeMath.div(SafeMath.mul(buy.takerRelayerFee, price), INVERSE_BASIS_POINT);
+                    uint256 takerRelayerFee = SafeMath.div(SafeMath.mul(buy.takerRelayerFee, price), INVERSE_BASIS_POINT);
                     transferTokens(sell.paymentToken, sell.maker, buy.feeRecipient, takerRelayerFee);
                 }
 
                 if (buy.makerProtocolFee > 0) {
-                    makerProtocolFee = SafeMath.div(SafeMath.mul(buy.makerProtocolFee, price), INVERSE_BASIS_POINT);
+                    uint256 makerProtocolFee = SafeMath.div(SafeMath.mul(buy.makerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(buy.maker, makerProtocolFee);
                     } else {
@@ -603,7 +605,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 }
 
                 if (buy.takerProtocolFee > 0) {
-                    takerProtocolFee = SafeMath.div(SafeMath.mul(buy.takerProtocolFee, price), INVERSE_BASIS_POINT);
+                    uint256 takerProtocolFee = SafeMath.div(SafeMath.mul(buy.takerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(sell.maker, takerProtocolFee);
                     } else {
@@ -637,7 +639,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
     }
 
     /**
-     * @dev Return whether or not two orders can be matched with each other by basic parameters (does not check order signatures / calldata or perform static calls)
+     * @dev Return whether or not two orders can be matched with each other by basic parameters (does not check order signatures / calldatas or perform static calls)
      * @param buy Buy-side order
      * @param sell Sell-side order
      * @return Whether or not the two orders can be matched
@@ -710,14 +712,14 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         }
         require(size > 0);
       
-        /* Must match calldata after replacement, if specified. */ 
+        /* Must match calldatas after replacement, if specified. */ 
         if (buy.replacementPattern.length > 0) {
-          ArrayUtils.guardedArrayReplace(buy.calldata, sell.calldata, buy.replacementPattern);
+          ArrayUtils.guardedArrayReplace(buy.calldatas, sell.calldatas, buy.replacementPattern);
         }
         if (sell.replacementPattern.length > 0) {
-          ArrayUtils.guardedArrayReplace(sell.calldata, buy.calldata, sell.replacementPattern);
+          ArrayUtils.guardedArrayReplace(sell.calldatas, buy.calldatas, sell.replacementPattern);
         }
-        require(ArrayUtils.arrayEq(buy.calldata, sell.calldata));
+        require(ArrayUtils.arrayEq(buy.calldatas, sell.calldatas));
 
         /* Retrieve delegateProxy contract. */
         OwnableDelegateProxy delegateProxy = registry.proxies(sell.maker);
@@ -747,18 +749,18 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         uint price = executeFundsTransfer(buy, sell);
 
         /* Execute specified call through proxy. */
-        require(proxy.proxy(sell.target, sell.howToCall, sell.calldata));
+        require(proxy.proxy(sell.target, sell.howToCall, sell.calldatas));
 
         /* Static calls are intentionally done after the effectful call so they can check resulting state. */
 
         /* Handle buy-side static call if specified. */
         if (buy.staticTarget != address(0)) {
-            require(staticCall(buy.staticTarget, sell.calldata, buy.staticExtradata));
+            require(staticCall(buy.staticTarget, sell.calldatas, buy.staticExtradata));
         }
 
         /* Handle sell-side static call if specified. */
         if (sell.staticTarget != address(0)) {
-            require(staticCall(sell.staticTarget, sell.calldata, sell.staticExtradata));
+            require(staticCall(sell.staticTarget, sell.calldatas, sell.staticExtradata));
         }
 
         /* Log match event. */

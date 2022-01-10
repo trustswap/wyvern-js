@@ -4,15 +4,17 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
 
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
+pragma solidity ^0.8.0;
+
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
 /**
   * @title TestToken
   * @author Project Wyvern Developers
   */
-contract TestToken is StandardToken {
+contract TestToken is ERC20 {
 
     uint constant public decimals     = 18;
     string constant public name       = "Test Token";
@@ -24,8 +26,8 @@ contract TestToken is StandardToken {
       * @dev Initialize the test token
       */
     constructor () public {
-        balances[msg.sender] = MINT_AMOUNT;
-        totalSupply_ = MINT_AMOUNT;
+        super.ERC20(name, symbol);
+        _mint(msg.sender, MINT_AMOUNT);
     }
 
 }

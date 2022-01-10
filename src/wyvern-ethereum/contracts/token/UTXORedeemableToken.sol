@@ -16,17 +16,19 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
 
-import "openzeppelin-solidity/contracts/token/ERC20/StandardToken.sol";
-import "openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "openzeppelin-solidity/contracts/MerkleProof.sol";
+pragma solidity ^0.8.0;
+
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
+import "openzeppelin-solidity/contracts/utils/cryptography/MerkleProof.sol";
 
 /**
   * @title UTXORedeemableToken
   * @author Project Wyvern Developers
   */
-contract UTXORedeemableToken is StandardToken {
+contract UTXORedeemableToken is ERC20 {
 
     /* Root hash of the UTXO Merkle tree, must be initialized by token constructor. */
     bytes32 public rootUTXOMerkleTreeHash;
@@ -52,7 +54,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param pos Starting position from which to copy
      * @return Extracted length 32 byte array
      */
-    function extract(bytes data, uint pos) private pure returns (bytes32 result) { 
+    function extract(bytes memory data, uint pos) private pure returns (bytes32 result) { 
         for (uint i = 0; i < 32; i++) {
             result ^= (bytes32(0xff00000000000000000000000000000000000000000000000000000000000000) & data[i + pos]) >> (i * 8);
         }
@@ -81,7 +83,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param s s parameter of ECDSA signature
      * @return Whether or not the signature was valid
      */
-    function ecdsaVerify (address addr, bytes pubKey, uint8 v, bytes32 r, bytes32 s) public pure returns (bool) {
+    function ecdsaVerify (address addr, bytes memory pubKey, uint8 v, bytes32 r, bytes32 s) public pure returns (bool) {
         return validateSignature(sha256(addr), v, r, s, pubKeyToEthereumAddress(pubKey));
     }
 
@@ -90,7 +92,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param pubKey Uncompressed ECDSA public key to convert
      * @return Ethereum address generated from the ECDSA public key
      */
-    function pubKeyToEthereumAddress (bytes pubKey) public pure returns (address) {
+    function pubKeyToEthereumAddress (bytes memory pubKey) public pure returns (address) {
         return address(uint(keccak256(pubKey)) & 0x000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
     }
 
@@ -100,7 +102,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param isCompressed Whether or not the Bitcoin address was generated from a compressed key
      * @return Raw Bitcoin address (no base58-check encoding)
      */
-    function pubKeyToBitcoinAddress(bytes pubKey, bool isCompressed) public pure returns (bytes20) {
+    function pubKeyToBitcoinAddress(bytes memory pubKey, bool isCompressed) public pure returns (bytes20) {
         /* Helpful references:
            - https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses 
            - https://github.com/cryptocoinjs/ecurve/blob/master/lib/point.js
@@ -128,7 +130,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param merkleLeafHash Hash asserted to be present in the Merkle tree
      * @return Whether or not the proof is valid
      */
-    function verifyProof(bytes32[] proof, bytes32 merkleLeafHash) public view returns (bool) {
+    function verifyProof(bytes32[] memory proof, bytes32 merkleLeafHash) public view returns (bool) {
         return MerkleProof.verifyProof(proof, rootUTXOMerkleTreeHash, merkleLeafHash);
     }
 
@@ -141,7 +143,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param proof Merkle tree proof
      * @return Whether or not the UTXO can be redeemed
      */
-    function canRedeemUTXO(bytes32 txid, bytes20 originalAddress, uint8 outputIndex, uint satoshis, bytes32[] proof) public view returns (bool) {
+    function canRedeemUTXO(bytes32 txid, bytes20 originalAddress, uint8 outputIndex, uint satoshis, bytes32[] memory proof) public view returns (bool) {
         /* Calculate the hash of the Merkle leaf associated with this UTXO. */
         bytes32 merkleLeafHash = keccak256(txid, originalAddress, outputIndex, satoshis);
     
@@ -155,7 +157,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param proof Merkle tree proof
      * @return Whether or not the UTXO with the specified hash can be redeemed
      */
-    function canRedeemUTXOHash(bytes32 merkleLeafHash, bytes32[] proof) public view returns (bool) {
+    function canRedeemUTXOHash(bytes32 merkleLeafHash, bytes32[] memory proof) public view returns (bool) {
         /* Check that the UTXO has not yet been redeemed and that it exists in the Merkle tree. */
         return((redeemedUTXOs[merkleLeafHash] == false) && verifyProof(proof, merkleLeafHash));
     }
@@ -173,7 +175,7 @@ contract UTXORedeemableToken is StandardToken {
      * @param s s parameter of ECDSA signature
      * @return The number of tokens redeemed, if successful
      */
-    function redeemUTXO (bytes32 txid, uint8 outputIndex, uint satoshis, bytes32[] proof, bytes pubKey, bool isCompressed, uint8 v, bytes32 r, bytes32 s) public returns (uint tokensRedeemed) {
+    function redeemUTXO (bytes32 txid, uint8 outputIndex, uint satoshis, bytes32[] memory proof, bytes memory pubKey, bool isCompressed, uint8 v, bytes32 r, bytes32 s) public returns (uint tokensRedeemed) {
 
         /* Calculate original Bitcoin-style address associated with the provided public key. */
         bytes20 originalAddress = pubKeyToBitcoinAddress(pubKey, isCompressed);
@@ -200,10 +202,10 @@ contract UTXORedeemableToken is StandardToken {
         require(totalRedeemed <= maximumRedeemable);
 
         /* Credit the redeemer. */ 
-        balances[msg.sender] = SafeMath.add(balances[msg.sender], tokensRedeemed);
+        _mint(msg.sender, tokensRedeemed);
 
-        /* Mark the transfer event. */
-        emit Transfer(address(0), msg.sender, tokensRedeemed);
+        // /* Mark the transfer event. */
+        // emit Transfer(address(0), msg.sender, tokensRedeemed);
 
         /* Mark the UTXO redemption event. */
         emit UTXORedeemed(txid, outputIndex, satoshis, proof, pubKey, v, r, s, msg.sender, tokensRedeemed);

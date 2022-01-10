@@ -7,9 +7,11 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+pragma solidity ^0.8.0;
+
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
 import "../common/TokenRecipient.sol";
 
@@ -24,15 +26,15 @@ contract DelegateProxy is TokenRecipient, Ownable {
      *
      * @dev Owner only
      * @param dest Address to which the call will be sent
-     * @param calldata Calldata to send
+     * @param data Calldata to send
      * @return Result of the delegatecall (success or failure)
      */
-    function delegateProxy(address dest, bytes calldata)
+    function delegateProxy(address dest, bytes calldata data)
         public
         onlyOwner
         returns (bool result)
     {
-        return dest.delegatecall(calldata);
+        return dest.delegatecall(data);
     }
 
     /**
@@ -40,12 +42,12 @@ contract DelegateProxy is TokenRecipient, Ownable {
      *
      * @dev Same functionality as `delegateProxy`, just asserts the return value
      * @param dest Address to which the call will be sent
-     * @param calldata Calldata to send
+     * @param data Calldata to send
      */
-    function delegateProxyAssert(address dest, bytes calldata)
+    function delegateProxyAssert(address dest, bytes calldata data)
         public
     {
-        require(delegateProxy(dest, calldata));
+        require(delegateProxy(dest, data));
     }
 
 }

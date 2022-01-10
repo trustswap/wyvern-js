@@ -4,7 +4,9 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
 
 import "./ProxyRegistry.sol";
 import "../common/TokenRecipient.sol";
@@ -69,18 +71,18 @@ contract AuthenticatedProxy is TokenRecipient, OwnedUpgradeabilityStorage {
      * @dev Can be called by the user, or by a contract authorized by the registry as long as the user has not revoked access
      * @param dest Address to which the call will be sent
      * @param howToCall Which kind of call to make
-     * @param calldata Calldata to send
+     * @param calldatas Calldata to send
      * @return Result of the call (success or failure)
      */
-    function proxy(address dest, HowToCall howToCall, bytes calldata)
+    function proxy(address dest, HowToCall howToCall, bytes calldata calldatas)
         public
         returns (bool result)
     {
         require(msg.sender == user || (!revoked && registry.contracts(msg.sender)));
         if (howToCall == HowToCall.Call) {
-            result = dest.call(calldata);
+            result = dest.call(calldatas);
         } else if (howToCall == HowToCall.DelegateCall) {
-            result = dest.delegatecall(calldata);
+            result = dest.delegatecall(calldatas);
         }
         return result;
     }
@@ -91,12 +93,12 @@ contract AuthenticatedProxy is TokenRecipient, OwnedUpgradeabilityStorage {
      * @dev Same functionality as `proxy`, just asserts the return value
      * @param dest Address to which the call will be sent
      * @param howToCall What kind of call to make
-     * @param calldata Calldata to send
+     * @param calldatas Calldata to send
      */
-    function proxyAssert(address dest, HowToCall howToCall, bytes calldata)
+    function proxyAssert(address dest, HowToCall howToCall, bytes calldata calldatas)
         public
     {
-        require(proxy(dest, howToCall, calldata));
+        require(proxy(dest, howToCall, calldatas));
     }
 
 }

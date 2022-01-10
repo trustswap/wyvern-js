@@ -6,9 +6,11 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+pragma solidity ^0.8.0;
+
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
 import "./OwnableDelegateProxy.sol";
 

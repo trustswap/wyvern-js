@@ -4,9 +4,11 @@
 
 */
 
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
 
-import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
+pragma solidity ^0.8.0;
+
+import "openzeppelin-solidity/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
 import "./token/UTXORedeemableToken.sol";
 import "./token/DelayedReleaseToken.sol";
@@ -15,7 +17,7 @@ import "./token/DelayedReleaseToken.sol";
   * @title WyvernToken
   * @author Project Wyvern Developers
   */
-contract WyvernToken is DelayedReleaseToken, UTXORedeemableToken, BurnableToken {
+contract WyvernToken is DelayedReleaseToken, UTXORedeemableToken, ERC20Burnable {
 
     uint constant public decimals     = 18;
     string constant public name       = "Project Wyvern Token";
@@ -36,6 +38,9 @@ contract WyvernToken is DelayedReleaseToken, UTXORedeemableToken, BurnableToken 
       * @param totalUtxoAmount Total satoshis of the UTXO set
       */
     constructor (bytes32 merkleRoot, uint totalUtxoAmount) public {
+
+        ERC20(name, symbol);
+
         /* Total number of tokens that can be redeemed from UTXOs. */
         uint utxoTokens = SATS_TO_TOKENS * totalUtxoAmount;
 
@@ -45,7 +50,7 @@ contract WyvernToken is DelayedReleaseToken, UTXORedeemableToken, BurnableToken 
 
         /* Configure UTXORedeemableToken. */
         rootUTXOMerkleTreeHash = merkleRoot;
-        totalSupply_ = MINT_AMOUNT;
+        _mint(msg.sender, MINT_AMOUNT);
         maximumRedeemable = utxoTokens;
         multiplier = SATS_TO_TOKENS;
     }

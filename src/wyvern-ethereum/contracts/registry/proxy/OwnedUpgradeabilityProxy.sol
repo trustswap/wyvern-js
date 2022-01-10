@@ -1,4 +1,6 @@
-pragma solidity 0.4.23;
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
 
 import './Proxy.sol';
 import './OwnedUpgradeabilityStorage.sol';
@@ -72,7 +74,7 @@ contract OwnedUpgradeabilityProxy is Proxy, OwnedUpgradeabilityStorage {
    * @param data represents the msg.data to bet sent in the low level call. This parameter may include the function
    * signature of the implementation to be called with the needed payload
    */
-  function upgradeToAndCall(address implementation, bytes data) payable public onlyProxyOwner {
+  function upgradeToAndCall(address implementation, bytes calldata data) payable public onlyProxyOwner {
     upgradeTo(implementation);
     require(address(this).delegatecall(data));
   }
