@@ -46,7 +46,7 @@ contract ProxyRegistry is Ownable {
         onlyOwner
     {
         require(!contracts[addr] && pending[addr] == 0);
-        pending[addr] = now;
+        pending[addr] = block.timestamp;
     }
 
     /**
@@ -59,7 +59,7 @@ contract ProxyRegistry is Ownable {
         public
         onlyOwner
     {
-        require(!contracts[addr] && pending[addr] != 0 && ((pending[addr] + DELAY_PERIOD) < now));
+        require(!contracts[addr] && pending[addr] != 0 && ((pending[addr] + DELAY_PERIOD) < block.timestamp));
         pending[addr] = 0;
         contracts[addr] = true;
     }
@@ -81,13 +81,13 @@ contract ProxyRegistry is Ownable {
      * Register a proxy contract with this registry
      *
      * @dev Must be called by the user which the proxy is for, creates a new AuthenticatedProxy
-     * @return New AuthenticatedProxy contract
+     * @return proxy New AuthenticatedProxy contract
      */
     function registerProxy()
         public
         returns (OwnableDelegateProxy proxy)
     {
-        require(proxies[msg.sender] == address(0));
+        require(proxies[msg.sender] == OwnableDelegateProxy(payable(address(0))), "User already has a proxy");
         proxy = new OwnableDelegateProxy(msg.sender, delegateProxyImplementation, abi.encodeWithSignature("initialize(address,address)", msg.sender, address(this)));
         proxies[msg.sender] = proxy;
         return proxy;

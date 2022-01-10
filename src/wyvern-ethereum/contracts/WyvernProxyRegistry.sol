@@ -23,9 +23,9 @@ contract WyvernProxyRegistry is ProxyRegistry {
     bool public initialAddressSet = false;
 
     constructor ()
-        public
     {
-        delegateProxyImplementation = new AuthenticatedProxy();
+        AuthenticatedProxy impl = new AuthenticatedProxy();
+        delegateProxyImplementation = address(impl);
     }
 
     /** 

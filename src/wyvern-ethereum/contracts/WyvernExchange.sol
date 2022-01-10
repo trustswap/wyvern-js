@@ -27,13 +27,12 @@ contract WyvernExchange is Exchange {
      * @param registryAddress Address of the registry instance which this Exchange instance will use
      * @param tokenAddress Address of the token used for protocol fees
      */
-    constructor (ProxyRegistry registryAddress, TokenTransferProxy tokenTransferProxyAddress, ERC20 tokenAddress, address protocolFeeAddress, address devWalletAddress) public {
+    constructor (ProxyRegistry registryAddress, TokenTransferProxy tokenTransferProxyAddress, ERC20 tokenAddress, address protocolFeeAddress, address devWalletAddress) {
         registry = registryAddress;
         tokenTransferProxy = tokenTransferProxyAddress;
         exchangeToken = tokenAddress;
         protocolFeeRecipient = protocolFeeAddress;
         devWallet = devWalletAddress;
-        owner = msg.sender;
     }
 
 }

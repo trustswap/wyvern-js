@@ -20,16 +20,17 @@ library WyvernAtomicizer {
     function atomicize (address[] calldata addrs, uint[] calldata values, uint[] calldata calldataLengths, bytes calldata calldatas)
         public
     {
-        require(addrs.length == values.length && addrs.length == calldataLengths.length);
+        require(addrs.length == values.length && addrs.length == calldataLengths.length, "Addresses, calldata lengths, and values must match in quantity");
 
         uint j = 0;
         for (uint i = 0; i < addrs.length; i++) {
-            bytes memory data = new bytes(calldataLengths[i]);
+            bytes memory cd = new bytes(calldataLengths[i]);
             for (uint k = 0; k < calldataLengths[i]; k++) {
-                data[k] = calldatas[j];
+                cd[k] = calldatas[j];
                 j++;
             }
-            require(addrs[i].call.value(values[i])(data));
+            (bool success,) = addrs[i].call{value: values[i]}(cd);
+            require(success, "Atomicizer subcall failed");
         }
     }
 

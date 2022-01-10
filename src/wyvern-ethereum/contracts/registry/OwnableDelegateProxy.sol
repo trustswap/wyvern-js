@@ -14,12 +14,12 @@ import "./proxy/OwnedUpgradeabilityProxy.sol";
 
 contract OwnableDelegateProxy is OwnedUpgradeabilityProxy {
 
-    constructor(address owner, address initialImplementation, bytes memory calldatas)
-        public
+    constructor(address owner, address initialImplementation, bytes memory data)
     {
         setUpgradeabilityOwner(owner);
         _upgradeTo(initialImplementation);
-        require(initialImplementation.delegatecall(calldatas));
+        (bool success,) = initialImplementation.delegatecall(data);
+        require(success, "OwnableDelegateProxy failed implementation");
     }
 
 }

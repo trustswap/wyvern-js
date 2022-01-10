@@ -205,7 +205,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
     function chargeProtocolFee(address from, address to, uint amount)
         internal
     {
-        transferTokens(exchangeToken, from, to, amount);
+        transferTokens(address(exchangeToken), from, to, amount);
     }
 
     /**
@@ -213,7 +213,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
      * @param target Contract to call
      * @param calldatas Calldata (appended to extradata)
      * @param extradata Base data for STATICCALL (probably function selector and argument encoding)
-     * @return The result of the call (success or failure)
+     * @return result The result of the call (success or failure)
      */
     function staticCall(address target, bytes memory calldatas, bytes memory extradata)
         public
@@ -250,7 +250,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
     /**
      * @dev Hash an order, returning the canonical order hash, without the message prefix
      * @param order Order to hash
-     * @return Hash of order
+     * @return hash Hash of order
      */
     function hashOrder(Order memory order)
         internal
@@ -303,7 +303,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         pure
         returns (bytes32)
     {
-        return keccak256("\x19Ethereum Signed Message:\n32", hashOrder(order));
+        return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", hashOrder(order)));
     }
 
     /**
@@ -525,7 +525,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                     uint makerRelayerFee = SafeMath.div(SafeMath.mul(sell.makerRelayerFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
                         receiveAmount = SafeMath.sub(receiveAmount, makerRelayerFee);
-                        sell.feeRecipient.transfer(makerRelayerFee);
+                        payable(sell.feeRecipient).transfer(makerRelayerFee);
                     } else {
                         transferTokens(sell.paymentToken, sell.maker, sell.feeRecipient, makerRelayerFee);
                     }
@@ -535,7 +535,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                     uint takerRelayerFee = SafeMath.div(SafeMath.mul(sell.takerRelayerFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
                         requiredAmount = SafeMath.add(requiredAmount, takerRelayerFee);
-                        sell.feeRecipient.transfer(takerRelayerFee);
+                        payable(sell.feeRecipient).transfer(takerRelayerFee);
                     } else {
                         transferTokens(sell.paymentToken, buy.maker, sell.feeRecipient, takerRelayerFee);
                     }
@@ -545,7 +545,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                     uint makerProtocolFee = SafeMath.div(SafeMath.mul(sell.makerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
                         receiveAmount = SafeMath.sub(receiveAmount, makerProtocolFee);
-                        protocolFeeRecipient.transfer(makerProtocolFee);
+                        payable(protocolFeeRecipient).transfer(makerProtocolFee);
                     } else if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(sell.maker, makerProtocolFee);
                     } else {
@@ -557,7 +557,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                     uint takerProtocolFee = SafeMath.div(SafeMath.mul(sell.takerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
                         requiredAmount = SafeMath.add(requiredAmount, takerProtocolFee);
-                        protocolFeeRecipient.transfer(takerProtocolFee);
+                        payable(protocolFeeRecipient).transfer(takerProtocolFee);
                     } else if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(buy.maker, takerProtocolFee);
                     } else {
@@ -625,11 +625,11 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         if (sell.paymentToken == address(0)) {
             /* Special-case Ether, order must be matched by buyer. */
             require(msg.value >= requiredAmount);
-            sell.maker.transfer(receiveAmount);
+            payable(sell.maker).transfer(receiveAmount);
             /* Allow overshoot for variable-price auctions, refund difference. */
             uint diff = SafeMath.sub(msg.value, requiredAmount);
             if (diff > 0) {
-                buy.maker.transfer(diff);
+                payable(buy.maker).transfer(diff);
             }
         }
 
@@ -725,13 +725,13 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         OwnableDelegateProxy delegateProxy = registry.proxies(sell.maker);
 
         /* Proxy must exist. */
-        require(delegateProxy != address(0));
+        require(delegateProxy != OwnableDelegateProxy(payable(address(0))));
 
         /* Assert implementation. */
         require(delegateProxy.implementation() == registry.delegateProxyImplementation());
 
         /* Access the passthrough AuthenticatedProxy. */
-        AuthenticatedProxy proxy = AuthenticatedProxy(delegateProxy);
+        AuthenticatedProxy proxy = AuthenticatedProxy(payable(address(delegateProxy)));
 
         /* EFFECTS */
 
@@ -780,9 +780,9 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
             uint burnAmount = devAmount;
             uint remAmount = SafeMath.sub(SafeMath.sub(amount, devAmount), burnAmount); //80%
 
-            transferTokens(exchangeToken, from, protocolFeeRecipient, remAmount);
-            transferTokens(exchangeToken, from, devWallet, devAmount);
-            tokenTransferProxy.burnFrom(exchangeToken, from, burnAmount);
+            transferTokens(address(exchangeToken), from, protocolFeeRecipient, remAmount);
+            transferTokens(address(exchangeToken), from, devWallet, devAmount);
+            tokenTransferProxy.burnFrom(address(exchangeToken), from, burnAmount);
         }
     }
 

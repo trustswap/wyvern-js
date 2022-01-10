@@ -27,14 +27,14 @@ contract TokenRecipient {
      */
     function receiveApproval(address from, uint256 value, address token, bytes memory extraData) public {
         ERC20 t = ERC20(token);
-        require(t.transferFrom(from, this, value));
+        require(t.transferFrom(from, address(this), value));
         emit ReceivedTokens(from, value, token, extraData);
     }
 
     /**
      * @dev Receive Ether and generate a log event
      */
-    receive () payable public {
+    receive () external payable {
         emit ReceivedEther(msg.sender, msg.value);
     }
 }

@@ -25,7 +25,7 @@ library ArrayUtils {
      * @param array The original array
      * @param desired The target array
      * @param mask The mask specifying which bits can be changed
-     * @return The updated byte array (the parameter will be modified inplace)
+     * Returns The updated byte array (the parameter will be modified inplace)
      */
     function guardedArrayReplace(bytes memory array, bytes memory desired, bytes memory mask)
         internal
@@ -164,7 +164,7 @@ library ArrayUtils {
         pure
         returns (uint)
     {
-        uint conv = uint(source) << 0x60;
+        uint conv = uint(uint160(source)) << 0x60;
         assembly {
             mstore(index, conv)
             index := add(index, 0x14)
