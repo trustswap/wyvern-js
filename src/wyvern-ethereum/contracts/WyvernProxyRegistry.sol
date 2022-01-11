@@ -6,7 +6,7 @@
 
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity 0.8.7;
 
 import "./registry/ProxyRegistry.sol";
 import "./registry/AuthenticatedProxy.sol";
