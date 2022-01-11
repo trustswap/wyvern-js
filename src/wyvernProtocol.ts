@@ -28,10 +28,8 @@ import { signatureUtils } from './utils/signature_utils';
 import { utils } from './utils/utils';
 
 import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
-import { WyvernDAOContract } from './abi_gen/wyvern_d_a_o';
 import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
 import { WyvernProxyRegistryContract } from './abi_gen/wyvern_proxy_registry';
-import { WyvernTokenContract } from './abi_gen/wyvern_token';
 
 export class WyvernProtocol {
 
@@ -42,10 +40,6 @@ export class WyvernProtocol {
     public wyvernExchange: WyvernExchangeContract;
 
     public wyvernProxyRegistry: WyvernProxyRegistryContract;
-
-    public wyvernDAO: WyvernDAOContract;
-
-    public wyvernToken: WyvernTokenContract;
 
     public wyvernAtomicizer: WyvernAtomicizerContract;
 
@@ -59,14 +53,6 @@ export class WyvernProtocol {
 
     public static getProxyRegistryContractAddress(network: Network): string {
         return constants.DEPLOYED[network].WyvernProxyRegistry;
-    }
-
-    public static getTokenContractAddress(network: Network): string {
-        return constants.DEPLOYED[network].WyvernToken;
-    }
-
-    public static getDAOContractAddress(network: Network): string {
-        return constants.DEPLOYED[network].WyvernDAO;
     }
 
     public static getAtomicizerContractAddress(network: Network): string {
@@ -328,18 +314,6 @@ export class WyvernProtocol {
         const proxyRegistryContractAddress = config.wyvernProxyRegistryContractAddress || WyvernProtocol.getProxyRegistryContractAddress(config.network);
         this.wyvernProxyRegistry = new WyvernProxyRegistryContract(
             this._web3Wrapper.getContractInstance((constants.PROXY_REGISTRY_ABI as any), proxyRegistryContractAddress),
-            {},
-        );
-
-        const daoContractAddress = config.wyvernDAOContractAddress || WyvernProtocol.getDAOContractAddress(config.network);
-        this.wyvernDAO = new WyvernDAOContract(
-            this._web3Wrapper.getContractInstance((constants.DAO_ABI as any), daoContractAddress),
-            {},
-        );
-
-        const tokenContractAddress = config.wyvernTokenContractAddress || WyvernProtocol.getTokenContractAddress(config.network);
-        this.wyvernToken = new WyvernTokenContract(
-            this._web3Wrapper.getContractInstance((constants.TOKEN_ABI as any), tokenContractAddress),
             {},
         );
 
