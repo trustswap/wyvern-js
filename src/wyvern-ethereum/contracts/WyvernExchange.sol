@@ -8,6 +8,8 @@
 
 pragma solidity 0.8.7;
 
+import "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./exchange/Exchange.sol";
 
 /**
@@ -22,17 +24,49 @@ contract WyvernExchange is Exchange {
 
     string public constant codename = "Lambton Worm";
 
-    /**
-     * @dev Initialize a WyvernExchange instance
-     * @param registryAddress Address of the registry instance which this Exchange instance will use
-     * @param tokenAddress Address of the token used for protocol fees
-     */
-    constructor (ProxyRegistry registryAddress, TokenTransferProxy tokenTransferProxyAddress, ERC20 tokenAddress, address protocolFeeAddress, address devWalletAddress) {
-        registry = registryAddress;
-        tokenTransferProxy = tokenTransferProxyAddress;
-        exchangeToken = tokenAddress;
-        protocolFeeRecipient = protocolFeeAddress;
-        devWallet = devWalletAddress;
+    function initialize(
+      ProxyRegistry registryAddress, 
+      TokenTransferProxy tokenTransferProxyAddress, 
+      ERC20Upgradeable tokenAddress, 
+      address protocolFeeAddress, 
+      address devWalletAddress
+    )
+      external
+      virtual
+      initializer
+    {
+        __Exchange_init();
+        __WyvernExchange_init(registryAddress, tokenTransferProxyAddress, tokenAddress, protocolFeeAddress, devWalletAddress);
+    }
+
+    function __WyvernExchange_init(
+      ProxyRegistry registryAddress, 
+      TokenTransferProxy tokenTransferProxyAddress, 
+      ERC20Upgradeable tokenAddress, 
+      address protocolFeeAddress, 
+      address devWalletAddress
+    )
+      internal
+      onlyInitializing
+    {
+        __WyvernExchange_init_unchained(registryAddress, tokenTransferProxyAddress, tokenAddress, protocolFeeAddress, devWalletAddress);
+    }
+
+    function __WyvernExchange_init_unchained(
+      ProxyRegistry registryAddress, 
+      TokenTransferProxy tokenTransferProxyAddress, 
+      ERC20Upgradeable tokenAddress, 
+      address protocolFeeAddress, 
+      address devWalletAddress
+    )
+      internal
+      onlyInitializing
+    {
+      registry = registryAddress;
+      tokenTransferProxy = tokenTransferProxyAddress;
+      exchangeToken = tokenAddress;
+      protocolFeeRecipient = protocolFeeAddress;
+      devWallet = devWalletAddress;
     }
 
 }

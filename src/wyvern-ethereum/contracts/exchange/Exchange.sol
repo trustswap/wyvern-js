@@ -8,6 +8,7 @@
 
 pragma solidity 0.8.7;
 
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./ExchangeCore.sol";
 
 /**
@@ -16,6 +17,20 @@ import "./ExchangeCore.sol";
  */
 contract Exchange is ExchangeCore {
 
+    function __Exchange_init(
+    )
+      internal
+      onlyInitializing
+    {
+        __ExchangeCore_init();
+        __Exchange_init_unchained();
+    }
+
+    function __Exchange_init_unchained()
+        internal
+        onlyInitializing
+    {
+    }
     /**
      * @dev Call guardedArrayReplace - library function exposed for testing.
      */

@@ -33,25 +33,26 @@
 
 pragma solidity 0.8.7;
 
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
-import "openzeppelin-solidity/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
 
 import "../registry/ProxyRegistry.sol";
 import "../registry/TokenTransferProxy.sol";
 import "../registry/AuthenticatedProxy.sol";
 import "../common/ArrayUtils.sol";
-import "../common/ReentrancyGuarded.sol";
 import "./SaleKindInterface.sol";
 
 /**
  * @title ExchangeCore
  * @author Project Wyvern Developers
  */
-contract ExchangeCore is ReentrancyGuarded, Ownable {
+contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgradeable {
 
     /* The token used to pay exchange fees. */
-    ERC20 public exchangeToken;
+    ERC20Upgradeable public exchangeToken;
 
     /* User registry. */
     ProxyRegistry public registry;
@@ -147,6 +148,16 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
     event OrderApprovedPartTwo    (bytes32 indexed hash, AuthenticatedProxy.HowToCall howToCall, bytes calldatas, bytes replacementPattern, address staticTarget, bytes staticExtradata, address paymentToken, uint basePrice, uint extra, uint listingTime, uint expirationTime, uint salt, bool orderbookInclusionDesired);
     event OrderCancelled          (bytes32 indexed hash);
     event OrdersMatched           (bytes32 buyHash, bytes32 sellHash, address indexed maker, address indexed taker, uint price, bytes32 indexed metadata);
+
+    function __ExchangeCore_init() internal onlyInitializing {
+        __Context_init_unchained();
+        __Ownable_init_unchained();
+        __ReentrancyGuard_init_unchained();
+        __ExchangeCore_init_unchained();
+    }
+
+    function __ExchangeCore_init_unchained() internal onlyInitializing {
+    }
 
     /**
      * @dev Change the minimum maker fee paid to the protocol (owner only)
@@ -522,9 +533,9 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 /* Maker fees are deducted from the token amount that the maker receives. Taker fees are extra tokens that must be paid by the taker. */
 
                 if (sell.makerRelayerFee > 0) {
-                    uint makerRelayerFee = SafeMath.div(SafeMath.mul(sell.makerRelayerFee, price), INVERSE_BASIS_POINT);
+                    uint makerRelayerFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(sell.makerRelayerFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
-                        receiveAmount = SafeMath.sub(receiveAmount, makerRelayerFee);
+                        receiveAmount = SafeMathUpgradeable.sub(receiveAmount, makerRelayerFee);
                         payable(sell.feeRecipient).transfer(makerRelayerFee);
                     } else {
                         transferTokens(sell.paymentToken, sell.maker, sell.feeRecipient, makerRelayerFee);
@@ -532,9 +543,9 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 }
 
                 if (sell.takerRelayerFee > 0) {
-                    uint takerRelayerFee = SafeMath.div(SafeMath.mul(sell.takerRelayerFee, price), INVERSE_BASIS_POINT);
+                    uint takerRelayerFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(sell.takerRelayerFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
-                        requiredAmount = SafeMath.add(requiredAmount, takerRelayerFee);
+                        requiredAmount = SafeMathUpgradeable.add(requiredAmount, takerRelayerFee);
                         payable(sell.feeRecipient).transfer(takerRelayerFee);
                     } else {
                         transferTokens(sell.paymentToken, buy.maker, sell.feeRecipient, takerRelayerFee);
@@ -542,9 +553,9 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 }
 
                 if (sell.makerProtocolFee > 0) {
-                    uint makerProtocolFee = SafeMath.div(SafeMath.mul(sell.makerProtocolFee, price), INVERSE_BASIS_POINT);
+                    uint makerProtocolFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(sell.makerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
-                        receiveAmount = SafeMath.sub(receiveAmount, makerProtocolFee);
+                        receiveAmount = SafeMathUpgradeable.sub(receiveAmount, makerProtocolFee);
                         payable(protocolFeeRecipient).transfer(makerProtocolFee);
                     } else if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(sell.maker, makerProtocolFee);
@@ -554,9 +565,9 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 }
 
                 if (sell.takerProtocolFee > 0) {
-                    uint takerProtocolFee = SafeMath.div(SafeMath.mul(sell.takerProtocolFee, price), INVERSE_BASIS_POINT);
+                    uint takerProtocolFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(sell.takerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(0)) {
-                        requiredAmount = SafeMath.add(requiredAmount, takerProtocolFee);
+                        requiredAmount = SafeMathUpgradeable.add(requiredAmount, takerProtocolFee);
                         payable(protocolFeeRecipient).transfer(takerProtocolFee);
                     } else if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(buy.maker, takerProtocolFee);
@@ -586,17 +597,17 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 require(buy.takerProtocolFee <= sell.takerProtocolFee);
 
                 if (buy.makerRelayerFee > 0) {
-                    uint256 makerRelayerFee = SafeMath.div(SafeMath.mul(buy.makerRelayerFee, price), INVERSE_BASIS_POINT);
+                    uint256 makerRelayerFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(buy.makerRelayerFee, price), INVERSE_BASIS_POINT);
                     transferTokens(sell.paymentToken, buy.maker, buy.feeRecipient, makerRelayerFee);
                 }
 
                 if (buy.takerRelayerFee > 0) {
-                    uint256 takerRelayerFee = SafeMath.div(SafeMath.mul(buy.takerRelayerFee, price), INVERSE_BASIS_POINT);
+                    uint256 takerRelayerFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(buy.takerRelayerFee, price), INVERSE_BASIS_POINT);
                     transferTokens(sell.paymentToken, sell.maker, buy.feeRecipient, takerRelayerFee);
                 }
 
                 if (buy.makerProtocolFee > 0) {
-                    uint256 makerProtocolFee = SafeMath.div(SafeMath.mul(buy.makerProtocolFee, price), INVERSE_BASIS_POINT);
+                    uint256 makerProtocolFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(buy.makerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(buy.maker, makerProtocolFee);
                     } else {
@@ -605,7 +616,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
                 }
 
                 if (buy.takerProtocolFee > 0) {
-                    uint256 takerProtocolFee = SafeMath.div(SafeMath.mul(buy.takerProtocolFee, price), INVERSE_BASIS_POINT);
+                    uint256 takerProtocolFee = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(buy.takerProtocolFee, price), INVERSE_BASIS_POINT);
                     if (sell.paymentToken == address(exchangeToken)) {
                         transferExchangeTokens(sell.maker, takerProtocolFee);
                     } else {
@@ -627,7 +638,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
             require(msg.value >= requiredAmount);
             payable(sell.maker).transfer(receiveAmount);
             /* Allow overshoot for variable-price auctions, refund difference. */
-            uint diff = SafeMath.sub(msg.value, requiredAmount);
+            uint diff = SafeMathUpgradeable.sub(msg.value, requiredAmount);
             if (diff > 0) {
                 payable(buy.maker).transfer(diff);
             }
@@ -681,7 +692,7 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
      */
     function atomicMatch(Order memory buy, Sig memory buySig, Order memory sell, Sig memory sellSig, bytes32 metadata)
         internal
-        reentrancyGuard
+        nonReentrant
     {
         /* CHECKS */
       
@@ -776,9 +787,9 @@ contract ExchangeCore is ReentrancyGuarded, Ownable {
         internal
     {
         if(amount > 0) {
-            uint devAmount = SafeMath.div(SafeMath.mul(amount, 10), 100); //10%
+            uint devAmount = SafeMathUpgradeable.div(SafeMathUpgradeable.mul(amount, 10), 100); //10%
             uint burnAmount = devAmount;
-            uint remAmount = SafeMath.sub(SafeMath.sub(amount, devAmount), burnAmount); //80%
+            uint remAmount = SafeMathUpgradeable.sub(SafeMathUpgradeable.sub(amount, devAmount), burnAmount); //80%
 
             transferTokens(address(exchangeToken), from, protocolFeeRecipient, remAmount);
             transferTokens(address(exchangeToken), from, devWallet, devAmount);
