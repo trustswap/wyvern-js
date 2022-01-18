@@ -1,213 +1,6 @@
 export const proxyRegistryABI = [
     {
-        'constant': true,
         'inputs': [],
-        'name': 'name',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'string',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': true,
-        'inputs': [],
-        'name': 'initialAddressSet',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'bool',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': false,
-        'inputs': [
-            {
-                'name': 'addr',
-                'type': 'address',
-            },
-        ],
-        'name': 'endGrantAuthentication',
-        'outputs': [],
-        'payable': false,
-        'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
-    {
-        'constant': false,
-        'inputs': [
-            {
-                'name': 'addr',
-                'type': 'address',
-            },
-        ],
-        'name': 'revokeAuthentication',
-        'outputs': [],
-        'payable': false,
-        'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
-    {
-        'constant': true,
-        'inputs': [
-            {
-                'name': '',
-                'type': 'address',
-            },
-        ],
-        'name': 'pending',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'uint256',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': true,
-        'inputs': [
-            {
-                'name': '',
-                'type': 'address',
-            },
-        ],
-        'name': 'contracts',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'bool',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': false,
-        'inputs': [],
-        'name': 'renounceOwnership',
-        'outputs': [],
-        'payable': false,
-        'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
-    {
-        'constant': true,
-        'inputs': [],
-        'name': 'owner',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'address',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': true,
-        'inputs': [],
-        'name': 'delegateProxyImplementation',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'address',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': true,
-        'inputs': [
-            {
-                'name': '',
-                'type': 'address',
-            },
-        ],
-        'name': 'proxies',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'address',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': false,
-        'inputs': [
-            {
-                'name': 'addr',
-                'type': 'address',
-            },
-        ],
-        'name': 'startGrantAuthentication',
-        'outputs': [],
-        'payable': false,
-        'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
-    {
-        'constant': false,
-        'inputs': [],
-        'name': 'registerProxy',
-        'outputs': [
-            {
-                'name': 'proxy',
-                'type': 'address',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
-    {
-        'constant': true,
-        'inputs': [],
-        'name': 'DELAY_PERIOD',
-        'outputs': [
-            {
-                'name': '',
-                'type': 'uint256',
-            },
-        ],
-        'payable': false,
-        'stateMutability': 'view',
-        'type': 'function',
-    },
-    {
-        'constant': false,
-        'inputs': [
-            {
-                'name': '_newOwner',
-                'type': 'address',
-            },
-        ],
-        'name': 'transferOwnership',
-        'outputs': [],
-        'payable': false,
-        'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
-    {
-        'inputs': [],
-        'payable': false,
         'stateMutability': 'nonpayable',
         'type': 'constructor',
     },
@@ -216,23 +9,13 @@ export const proxyRegistryABI = [
         'inputs': [
             {
                 'indexed': true,
-                'name': 'previousOwner',
-                'type': 'address',
-            },
-        ],
-        'name': 'OwnershipRenounced',
-        'type': 'event',
-    },
-    {
-        'anonymous': false,
-        'inputs': [
-            {
-                'indexed': true,
+                'internalType': 'address',
                 'name': 'previousOwner',
                 'type': 'address',
             },
             {
                 'indexed': true,
+                'internalType': 'address',
                 'name': 'newOwner',
                 'type': 'address',
             },
@@ -241,16 +24,209 @@ export const proxyRegistryABI = [
         'type': 'event',
     },
     {
-        'constant': false,
+        'inputs': [],
+        'name': 'DELAY_PERIOD',
+        'outputs': [
+            {
+                'internalType': 'uint256',
+                'name': '',
+                'type': 'uint256',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
         'inputs': [
             {
+                'internalType': 'address',
+                'name': '',
+                'type': 'address',
+            },
+        ],
+        'name': 'contracts',
+        'outputs': [
+            {
+                'internalType': 'bool',
+                'name': '',
+                'type': 'bool',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'inputs': [],
+        'name': 'delegateProxyImplementation',
+        'outputs': [
+            {
+                'internalType': 'address',
+                'name': '',
+                'type': 'address',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'inputs': [
+            {
+                'internalType': 'address',
+                'name': 'addr',
+                'type': 'address',
+            },
+        ],
+        'name': 'endGrantAuthentication',
+        'outputs': [],
+        'stateMutability': 'nonpayable',
+        'type': 'function',
+    },
+    {
+        'inputs': [],
+        'name': 'initialAddressSet',
+        'outputs': [
+            {
+                'internalType': 'bool',
+                'name': '',
+                'type': 'bool',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'inputs': [],
+        'name': 'name',
+        'outputs': [
+            {
+                'internalType': 'string',
+                'name': '',
+                'type': 'string',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'inputs': [],
+        'name': 'owner',
+        'outputs': [
+            {
+                'internalType': 'address',
+                'name': '',
+                'type': 'address',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'inputs': [
+            {
+                'internalType': 'address',
+                'name': '',
+                'type': 'address',
+            },
+        ],
+        'name': 'pending',
+        'outputs': [
+            {
+                'internalType': 'uint256',
+                'name': '',
+                'type': 'uint256',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'inputs': [
+            {
+                'internalType': 'address',
+                'name': '',
+                'type': 'address',
+            },
+        ],
+        'name': 'proxies',
+        'outputs': [
+            {
+                'internalType': 'contract OwnableDelegateProxy',
+                'name': '',
+                'type': 'address',
+            },
+        ],
+        'stateMutability': 'view',
+        'type': 'function',
+    },
+    {
+        'inputs': [],
+        'name': 'registerProxy',
+        'outputs': [
+            {
+                'internalType': 'contract OwnableDelegateProxy',
+                'name': 'proxy',
+                'type': 'address',
+            },
+        ],
+        'stateMutability': 'nonpayable',
+        'type': 'function',
+    },
+    {
+        'inputs': [],
+        'name': 'renounceOwnership',
+        'outputs': [],
+        'stateMutability': 'nonpayable',
+        'type': 'function',
+    },
+    {
+        'inputs': [
+            {
+                'internalType': 'address',
+                'name': 'addr',
+                'type': 'address',
+            },
+        ],
+        'name': 'revokeAuthentication',
+        'outputs': [],
+        'stateMutability': 'nonpayable',
+        'type': 'function',
+    },
+    {
+        'inputs': [
+            {
+                'internalType': 'address',
+                'name': 'addr',
+                'type': 'address',
+            },
+        ],
+        'name': 'startGrantAuthentication',
+        'outputs': [],
+        'stateMutability': 'nonpayable',
+        'type': 'function',
+    },
+    {
+        'inputs': [
+            {
+                'internalType': 'address',
+                'name': 'newOwner',
+                'type': 'address',
+            },
+        ],
+        'name': 'transferOwnership',
+        'outputs': [],
+        'stateMutability': 'nonpayable',
+        'type': 'function',
+    },
+    {
+        'inputs': [
+            {
+                'internalType': 'address',
                 'name': 'authAddress',
                 'type': 'address',
             },
         ],
         'name': 'grantInitialAuthentication',
         'outputs': [],
-        'payable': false,
         'stateMutability': 'nonpayable',
         'type': 'function',
     },
