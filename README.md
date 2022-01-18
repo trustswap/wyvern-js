@@ -25,8 +25,8 @@ Currently, the latest version of this library supports Wyvern Protocol v2. v2.1 
 Before any development, install the required NPM dependencies:
 
 ```bash
-nvm install v10.21.0
-nvm use v10.21.0
+nvm install v10.24.1
+nvm use v10.24.1
 yarn install
 yarn run build
 ```
