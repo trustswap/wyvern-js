@@ -2,7 +2,7 @@ export const proxyRegistryABI = [
     {
         'inputs': [],
         'stateMutability': 'nonpayable',
-        'type': 'constructor',
+        'type': 'constructor'
     },
     {
         'anonymous': false,
@@ -11,17 +11,17 @@ export const proxyRegistryABI = [
                 'indexed': true,
                 'internalType': 'address',
                 'name': 'previousOwner',
-                'type': 'address',
+                'type': 'address'
             },
             {
                 'indexed': true,
                 'internalType': 'address',
                 'name': 'newOwner',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'OwnershipTransferred',
-        'type': 'event',
+        'type': 'event'
     },
     {
         'inputs': [],
@@ -30,30 +30,30 @@ export const proxyRegistryABI = [
             {
                 'internalType': 'uint256',
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'contracts',
         'outputs': [
             {
                 'internalType': 'bool',
                 'name': '',
-                'type': 'bool',
-            },
+                'type': 'bool'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [],
@@ -62,24 +62,24 @@ export const proxyRegistryABI = [
             {
                 'internalType': 'address',
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': 'addr',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'endGrantAuthentication',
         'outputs': [],
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [],
@@ -88,11 +88,11 @@ export const proxyRegistryABI = [
             {
                 'internalType': 'bool',
                 'name': '',
-                'type': 'bool',
-            },
+                'type': 'bool'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [],
@@ -101,11 +101,11 @@ export const proxyRegistryABI = [
             {
                 'internalType': 'string',
                 'name': '',
-                'type': 'string',
-            },
+                'type': 'string'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [],
@@ -114,49 +114,49 @@ export const proxyRegistryABI = [
             {
                 'internalType': 'address',
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'pending',
         'outputs': [
             {
                 'internalType': 'uint256',
                 'name': '',
-                'type': 'uint256',
-            },
+                'type': 'uint256'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'proxies',
         'outputs': [
             {
                 'internalType': 'contract OwnableDelegateProxy',
                 'name': '',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'stateMutability': 'view',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [],
@@ -165,70 +165,70 @@ export const proxyRegistryABI = [
             {
                 'internalType': 'contract OwnableDelegateProxy',
                 'name': 'proxy',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [],
         'name': 'renounceOwnership',
         'outputs': [],
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': 'addr',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'revokeAuthentication',
         'outputs': [],
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': 'addr',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'startGrantAuthentication',
         'outputs': [],
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': 'newOwner',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'transferOwnership',
         'outputs': [],
         'stateMutability': 'nonpayable',
-        'type': 'function',
+        'type': 'function'
     },
     {
         'inputs': [
             {
                 'internalType': 'address',
                 'name': 'authAddress',
-                'type': 'address',
-            },
+                'type': 'address'
+            }
         ],
         'name': 'grantInitialAuthentication',
         'outputs': [],
         'stateMutability': 'nonpayable',
-        'type': 'function',
-    },
+        'type': 'function'
+    }
 ];
 // tslint:disable:max-file-line-count
