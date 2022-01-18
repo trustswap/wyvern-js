@@ -8,7 +8,7 @@ public {{this.name}} = {
         txData: TxData = {},
     {{/this.payable}}
     ): Promise<string> {
-        const self = this as {{contractName}}Contract;
+        const self = this;
         const txDataWithDefaults = await self.applyDefaultsToTxDataAsync(
             txData,
             self.{{this.name}}.estimateGasAsync.bind(
@@ -28,7 +28,7 @@ public {{this.name}} = {
     {{> typed_params inputs=inputs}}
         txData: TxData = {},
     ): Promise<number> {
-        const self = this as {{contractName}}Contract;
+        const self = this;
         const txDataWithDefaults = await self.applyDefaultsToTxDataAsync(
             txData,
         );
@@ -43,7 +43,7 @@ public {{this.name}} = {
     getABIEncodedTransactionData(
     {{> typed_params inputs=inputs}}
     ): string {
-        const self = this as {{contractName}}Contract;
+        const self = this;
         const abiEncodedTransactionData = self.web3ContractInstance.{{this.name}}.getData(
             {{> params inputs=inputs}}
         );

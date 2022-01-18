@@ -264,7 +264,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @return hash Hash of order
      */
     function hashOrder(Order memory order)
-        internal
+        public
         pure
         returns (bytes32 hash)
     {
@@ -310,7 +310,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @return Hash of message prefix and order hash per Ethereum format
      */
     function hashToSign(Order memory order)
-        internal
+        public
         pure
         returns (bytes32)
     {
@@ -337,7 +337,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @param order Order to validate
      */
     function validateOrderParameters(Order memory order)
-        internal
+        public
         view
         returns (bool)
     {
@@ -366,7 +366,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @param sig ECDSA signature
      */
     function validateOrder(bytes32 hash, Order memory order, Sig memory sig) 
-        internal
+        public
         view
         returns (bool)
     {
@@ -402,7 +402,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @param orderbookInclusionDesired Whether orderbook providers should include the order in their orderbooks
      */
     function approveOrder(Order memory order, bool orderbookInclusionDesired)
-        internal
+        public
     {
         /* CHECKS */
 
@@ -435,7 +435,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @param sig ECDSA signature
      */
     function cancelOrder(Order memory order, Sig memory sig) 
-        internal
+        public
     {
         /* CHECKS */
 
@@ -460,7 +460,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @return The current price of the order
      */
     function calculateCurrentPrice (Order memory order)
-        internal  
+        public  
         view
         returns (uint)
     {
@@ -475,7 +475,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      */
     function calculateMatchPrice(Order memory buy, Order memory sell)
         view
-        internal
+        public
         returns (uint)
     {
         /* Calculate sell price. */
@@ -656,7 +656,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @return Whether or not the two orders can be matched
      */
     function ordersCanMatch(Order memory buy, Order memory sell)
-        internal
+        public
         view
         returns (bool)
     {
@@ -691,7 +691,7 @@ contract ExchangeCore is Initializable, ReentrancyGuardUpgradeable, OwnableUpgra
      * @param sellSig Sell-side order signature
      */
     function atomicMatch(Order memory buy, Sig memory buySig, Order memory sell, Sig memory sellSig, bytes32 metadata)
-        internal
+        public
         nonReentrant
     {
         /* CHECKS */

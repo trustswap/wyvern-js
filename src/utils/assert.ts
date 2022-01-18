@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 import { ECSignature } from '../types';
 import { signatureUtils } from '../utils/signature_utils';
 
-export const assert = {
+export const assert : any = {
     ...sharedAssert,
     isValidSignature(orderHash: string, ecSignature: ECSignature, signerAddress: string) {
         const isValidSignature = signatureUtils.isValidSignature(orderHash, ecSignature, signerAddress);

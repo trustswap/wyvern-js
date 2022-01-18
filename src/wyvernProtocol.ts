@@ -20,7 +20,6 @@ import {
 } from './types';
 
 import { schemas } from './schemas';
-import { AbiDecoder } from './utils/abi_decoder';
 import { assert } from './utils/assert';
 import { constants } from './utils/constants';
 import { decorators } from './utils/decorators';
@@ -44,8 +43,6 @@ export class WyvernProtocol {
     public wyvernAtomicizer: WyvernAtomicizerContract;
 
     private _web3Wrapper: Web3Wrapper;
-
-    private _abiDecoder: AbiDecoder;
 
     public static getExchangeContractAddress(network: Network): string {
         return constants.DEPLOYED[network].WyvernExchange;
@@ -398,48 +395,4 @@ export class WyvernProtocol {
         throw new Error(WyvernProtocolError.InvalidSignature);
     }
 
-    /**
-     * Waits for a transaction to be mined and returns the transaction receipt.
-     * @param   txHash            Transaction hash
-     * @param   pollingIntervalMs How often (in ms) should we check if the transaction is mined.
-     * @param   timeoutMs         How long (in ms) to poll for transaction mined until aborting.
-     * @return  Transaction receipt with decoded log args.
-     */
-    public async awaitTransactionMinedAsync(
-        txHash: string,
-        pollingIntervalMs = 1000,
-        timeoutMs?: number,
-    ): Promise<TransactionReceiptWithDecodedLogs> {
-        let timeoutExceeded = false;
-        if (timeoutMs) {
-            setTimeout(() => (timeoutExceeded = true), timeoutMs);
-        }
-
-        const txReceiptPromise = new Promise(
-            (resolve: (receipt: TransactionReceiptWithDecodedLogs) => void, reject) => {
-                const intervalId = intervalUtils.setAsyncExcludingInterval(async () => {
-                    if (timeoutExceeded) {
-                        intervalUtils.clearAsyncExcludingInterval(intervalId);
-                        return reject(WyvernProtocolError.TransactionMiningTimeout);
-                    }
-
-                    const transactionReceipt = await this._web3Wrapper.getTransactionReceiptAsync(txHash);
-                    if (!_.isNull(transactionReceipt)) {
-                        intervalUtils.clearAsyncExcludingInterval(intervalId);
-                        const logsWithDecodedArgs = _.map(
-                            transactionReceipt.logs,
-                            this._abiDecoder.tryToDecodeLogOrNoop.bind(this._abiDecoder),
-                        );
-                        const transactionReceiptWithDecodedLogArgs: TransactionReceiptWithDecodedLogs = {
-                            ...transactionReceipt,
-                            logs: logsWithDecodedArgs,
-                        };
-                        resolve(transactionReceiptWithDecodedLogArgs);
-                    }
-                }, pollingIntervalMs, () => ({}));
-            },
-        );
-
-        return txReceiptPromise;
-    }
 }
