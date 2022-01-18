@@ -2,5 +2,5 @@
 
 yarn const_gen
 yarn abi_gen
-yarn lint
+# yarn lint
 yarn run tsc
