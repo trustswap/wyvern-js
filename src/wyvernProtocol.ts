@@ -1,10 +1,14 @@
 import { SchemaValidator } from '@0xproject/json-schemas';
-import { BigNumber, intervalUtils } from '@0xproject/utils';
+import { BigNumber } from '@0xproject/utils';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import * as ethABI from 'ethereumjs-abi';
 import * as ethUtil from 'ethereumjs-util';
 import * as _ from 'lodash';
 
+import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
+import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
+import { WyvernProxyRegistryContract } from './abi_gen/wyvern_proxy_registry';
+import { schemas } from './schemas';
 import {
   AtomicizedReplacementEncoder,
   ECSignature,
@@ -13,22 +17,15 @@ import {
   Order,
   ReplacementEncoder,
   SignedOrder,
-  TransactionReceiptWithDecodedLogs,
   Web3Provider,
   WyvernProtocolConfig,
   WyvernProtocolError,
 } from './types';
-
-import { schemas } from './schemas';
 import { assert } from './utils/assert';
 import { constants } from './utils/constants';
 import { decorators } from './utils/decorators';
 import { signatureUtils } from './utils/signature_utils';
 import { utils } from './utils/utils';
-
-import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
-import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
-import { WyvernProxyRegistryContract } from './abi_gen/wyvern_proxy_registry';
 
 export class WyvernProtocol {
 

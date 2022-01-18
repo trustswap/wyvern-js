@@ -8,16 +8,15 @@ public {{this.name}} = {
         txData: TxData = {},
     {{/this.payable}}
     ): Promise<string> {
-        const self = this;
-        const txDataWithDefaults = await self.applyDefaultsToTxDataAsync(
+        const txDataWithDefaults = await this.applyDefaultsToTxDataAsync(
             txData,
-            self.{{this.name}}.estimateGasAsync.bind(
-                self,
+            this.{{this.name}}.estimateGasAsync.bind(
+                this,
                 {{> params inputs=inputs}}
             ),
         );
         const txHash = await promisify<string>(
-            self.web3ContractInstance.{{this.name}}, self.web3ContractInstance,
+            this.web3ContractInstance.{{this.name}}, this.web3ContractInstance,
         )(
             {{> params inputs=inputs}}
             txDataWithDefaults,
@@ -28,12 +27,11 @@ public {{this.name}} = {
     {{> typed_params inputs=inputs}}
         txData: TxData = {},
     ): Promise<number> {
-        const self = this;
-        const txDataWithDefaults = await self.applyDefaultsToTxDataAsync(
+        const txDataWithDefaults = await this.applyDefaultsToTxDataAsync(
             txData,
         );
         const gas = await promisify<number>(
-            self.web3ContractInstance.{{this.name}}.estimateGas, self.web3ContractInstance,
+            this.web3ContractInstance.{{this.name}}.estimateGas, this.web3ContractInstance,
         )(
             {{> params inputs=inputs}}
             txDataWithDefaults,
@@ -43,8 +41,7 @@ public {{this.name}} = {
     getABIEncodedTransactionData(
     {{> typed_params inputs=inputs}}
     ): string {
-        const self = this;
-        const abiEncodedTransactionData = self.web3ContractInstance.{{this.name}}.getData(
+        const abiEncodedTransactionData = this.web3ContractInstance.{{this.name}}.getData(
             {{> params inputs=inputs}}
         );
         return abiEncodedTransactionData;
