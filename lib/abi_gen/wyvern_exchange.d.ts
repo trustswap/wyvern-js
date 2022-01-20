@@ -499,7 +499,7 @@ export declare class WyvernExchangeContract extends BaseContract {
         callAsync(array_0: string, desired_1: string, mask_2: string, txData?: TxData): Promise<string>;
     };
     hashOrder: {
-        sendTransactionAsync(order_0: {
+        callAsync(order_0: {
             exchange: string;
             maker: string;
             taker: string;
@@ -526,60 +526,6 @@ export declare class WyvernExchangeContract extends BaseContract {
             dataType: string;
             data: string;
         }, txData?: TxData): Promise<string>;
-        estimateGasAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }): string;
     };
     hashToSign: {
         sendTransactionAsync(order_0: {

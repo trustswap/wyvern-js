@@ -140,6 +140,7 @@ export const proxyRegistryABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'address',

@@ -47,9 +47,7 @@ export declare class WyvernProxyRegistryContract extends BaseContract {
         getABIEncodedTransactionData(index_0_0: string): string;
     };
     proxies: {
-        sendTransactionAsync(index_0_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(index_0_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(index_0_0: string): string;
+        callAsync(index_0_0: string, txData?: TxData): Promise<string>;
     };
     registerProxy: {
         sendTransactionAsync(txData?: TxData): Promise<string>;
