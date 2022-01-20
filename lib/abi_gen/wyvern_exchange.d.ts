@@ -8,9 +8,7 @@ import * as Web3 from 'web3';
 import { BaseContract } from './base_contract';
 export declare class WyvernExchangeContract extends BaseContract {
     INVERSE_BASIS_POINT: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<BigNumber>;
     };
     approveOrder: {
         sendTransactionAsync(order_0: {
@@ -96,9 +94,7 @@ export declare class WyvernExchangeContract extends BaseContract {
         }, orderbookInclusionDesired_1: boolean): string;
     };
     approvedOrders: {
-        sendTransactionAsync(index_0_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(index_0_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(index_0_0: string): string;
+        callAsync(index_0_0: string, txData?: TxData): Promise<boolean>;
     };
     atomicMatch: {
         sendTransactionAsync(buy_0: {
@@ -286,7 +282,7 @@ export declare class WyvernExchangeContract extends BaseContract {
         }, metadata_4: string): string;
     };
     calculateCurrentPrice: {
-        sendTransactionAsync(order_0: {
+        callAsync(order_0: {
             exchange: string;
             maker: string;
             taker: string;
@@ -312,69 +308,13 @@ export declare class WyvernExchangeContract extends BaseContract {
             salt: BigNumber;
             dataType: string;
             data: string;
-        }, txData?: TxData): Promise<string>;
-        estimateGasAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }): string;
+        }, txData?: TxData): Promise<BigNumber>;
     };
     calculateFinalPrice: {
-        sendTransactionAsync(side_0: number | BigNumber, saleKind_1: number | BigNumber, basePrice_2: BigNumber, extra_3: BigNumber, listingTime_4: BigNumber, expirationTime_5: BigNumber, txData?: TxData): Promise<string>;
-        estimateGasAsync(side_0: number | BigNumber, saleKind_1: number | BigNumber, basePrice_2: BigNumber, extra_3: BigNumber, listingTime_4: BigNumber, expirationTime_5: BigNumber, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(side_0: number | BigNumber, saleKind_1: number | BigNumber, basePrice_2: BigNumber, extra_3: BigNumber, listingTime_4: BigNumber, expirationTime_5: BigNumber): string;
+        callAsync(side_0: number | BigNumber, saleKind_1: number | BigNumber, basePrice_2: BigNumber, extra_3: BigNumber, listingTime_4: BigNumber, expirationTime_5: BigNumber, txData?: TxData): Promise<BigNumber>;
     };
     calculateMatchPrice: {
-        sendTransactionAsync(buy_0: {
+        callAsync(buy_0: {
             exchange: string;
             maker: string;
             taker: string;
@@ -426,113 +366,7 @@ export declare class WyvernExchangeContract extends BaseContract {
             salt: BigNumber;
             dataType: string;
             data: string;
-        }, txData?: TxData): Promise<string>;
-        estimateGasAsync(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sell_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sell_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }): string;
+        }, txData?: TxData): Promise<BigNumber>;
     };
     cancelOrder: {
         sendTransactionAsync(order_0: {
@@ -630,9 +464,7 @@ export declare class WyvernExchangeContract extends BaseContract {
         }): string;
     };
     cancelledOrFinalized: {
-        sendTransactionAsync(index_0_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(index_0_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(index_0_0: string): string;
+        callAsync(index_0_0: string, txData?: TxData): Promise<boolean>;
     };
     changeDevWalletAddress: {
         sendTransactionAsync(newDevWalletAddress_0: string, txData?: TxData): Promise<string>;
@@ -655,24 +487,16 @@ export declare class WyvernExchangeContract extends BaseContract {
         getABIEncodedTransactionData(newProtocolFeeRecipient_0: string): string;
     };
     codename: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     devWallet: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     exchangeToken: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     guardedArrayReplace: {
-        sendTransactionAsync(array_0: string, desired_1: string, mask_2: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(array_0: string, desired_1: string, mask_2: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(array_0: string, desired_1: string, mask_2: string): string;
+        callAsync(array_0: string, desired_1: string, mask_2: string, txData?: TxData): Promise<string>;
     };
     hashOrder: {
         sendTransactionAsync(order_0: {
@@ -846,27 +670,19 @@ export declare class WyvernExchangeContract extends BaseContract {
         getABIEncodedTransactionData(registryAddress_0: string, tokenTransferProxyAddress_1: string, tokenAddress_2: string, protocolFeeAddress_3: string, devWalletAddress_4: string): string;
     };
     minimumMakerProtocolFee: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<BigNumber>;
     };
     minimumTakerProtocolFee: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<BigNumber>;
     };
     name: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     orderCalldataCanMatch: {
-        sendTransactionAsync(buyCalldata_0: string, buyReplacementPattern_1: string, sellCalldata_2: string, sellReplacementPattern_3: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(buyCalldata_0: string, buyReplacementPattern_1: string, sellCalldata_2: string, sellReplacementPattern_3: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(buyCalldata_0: string, buyReplacementPattern_1: string, sellCalldata_2: string, sellReplacementPattern_3: string): string;
+        callAsync(buyCalldata_0: string, buyReplacementPattern_1: string, sellCalldata_2: string, sellReplacementPattern_3: string, txData?: TxData): Promise<boolean>;
     };
     ordersCanMatch: {
-        sendTransactionAsync(buy_0: {
+        callAsync(buy_0: {
             exchange: string;
             maker: string;
             taker: string;
@@ -918,128 +734,16 @@ export declare class WyvernExchangeContract extends BaseContract {
             salt: BigNumber;
             dataType: string;
             data: string;
-        }, txData?: TxData): Promise<string>;
-        estimateGasAsync(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sell_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sell_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }): string;
+        }, txData?: TxData): Promise<boolean>;
     };
     owner: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     protocolFeeRecipient: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     registry: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     renounceOwnership: {
         sendTransactionAsync(txData?: TxData): Promise<string>;
@@ -1047,24 +751,16 @@ export declare class WyvernExchangeContract extends BaseContract {
         getABIEncodedTransactionData(): string;
     };
     staticCall: {
-        sendTransactionAsync(target_0: string, calldatas_1: string, extradata_2: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(target_0: string, calldatas_1: string, extradata_2: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(target_0: string, calldatas_1: string, extradata_2: string): string;
+        callAsync(target_0: string, calldatas_1: string, extradata_2: string, txData?: TxData): Promise<boolean>;
     };
     testCopy: {
-        sendTransactionAsync(arrToCopy_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(arrToCopy_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(arrToCopy_0: string): string;
+        callAsync(arrToCopy_0: string, txData?: TxData): Promise<string>;
     };
     testCopyAddress: {
-        sendTransactionAsync(addr_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(addr_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(addr_0: string): string;
+        callAsync(addr_0: string, txData?: TxData): Promise<string>;
     };
     tokenTransferProxy: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     transferOwnership: {
         sendTransactionAsync(newOwner_0: string, txData?: TxData): Promise<string>;
@@ -1072,7 +768,7 @@ export declare class WyvernExchangeContract extends BaseContract {
         getABIEncodedTransactionData(newOwner_0: string): string;
     };
     validateOrder: {
-        sendTransactionAsync(hash_0: string, order_1: {
+        callAsync(hash_0: string, order_1: {
             exchange: string;
             maker: string;
             taker: string;
@@ -1102,72 +798,10 @@ export declare class WyvernExchangeContract extends BaseContract {
             v: number | BigNumber;
             r: string;
             s: string;
-        }, txData?: TxData): Promise<string>;
-        estimateGasAsync(hash_0: string, order_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sig_2: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(hash_0: string, order_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sig_2: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }): string;
+        }, txData?: TxData): Promise<boolean>;
     };
     validateOrderParameters: {
-        sendTransactionAsync(order_0: {
+        callAsync(order_0: {
             exchange: string;
             maker: string;
             taker: string;
@@ -1193,66 +827,10 @@ export declare class WyvernExchangeContract extends BaseContract {
             salt: BigNumber;
             dataType: string;
             data: string;
-        }, txData?: TxData): Promise<string>;
-        estimateGasAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }): string;
+        }, txData?: TxData): Promise<boolean>;
     };
     version: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
+        callAsync(txData?: TxData): Promise<string>;
     };
     constructor(web3ContractInstance: Web3.ContractInstance, defaults: Partial<TxData>);
 }

@@ -249,6 +249,7 @@
       "type": "event"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "INVERSE_BASIS_POINT",
       "outputs": [
@@ -407,6 +408,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "bytes32",
@@ -747,6 +749,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "components": [
@@ -893,6 +896,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "enum SaleKindInterface.Side",
@@ -937,6 +941,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "components": [
@@ -1377,6 +1382,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "bytes32",
@@ -1448,6 +1454,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "codename",
       "outputs": [
@@ -1461,6 +1468,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "devWallet",
       "outputs": [
@@ -1474,6 +1482,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "exchangeToken",
       "outputs": [
@@ -1487,6 +1496,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "bytes",
@@ -1841,6 +1851,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "minimumMakerProtocolFee",
       "outputs": [
@@ -1854,6 +1865,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "minimumTakerProtocolFee",
       "outputs": [
@@ -1867,6 +1879,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "name",
       "outputs": [
@@ -1880,6 +1893,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "bytes",
@@ -1914,6 +1928,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "components": [
@@ -2192,6 +2207,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "owner",
       "outputs": [
@@ -2205,6 +2221,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "protocolFeeRecipient",
       "outputs": [
@@ -2218,6 +2235,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "registry",
       "outputs": [
@@ -2238,6 +2256,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "address",
@@ -2267,6 +2286,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "bytes",
@@ -2286,6 +2306,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "address",
@@ -2305,6 +2326,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "tokenTransferProxy",
       "outputs": [
@@ -2331,6 +2353,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "internalType": "bytes32",
@@ -2504,6 +2527,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [
         {
           "components": [
@@ -2650,6 +2674,7 @@
       "type": "function"
     },
     {
+      "constant": true,
       "inputs": [],
       "name": "version",
       "outputs": [

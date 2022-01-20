@@ -245,6 +245,7 @@ export const exchangeABI = [
         'type': 'event'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'INVERSE_BASIS_POINT',
         'outputs': [
@@ -403,6 +404,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'bytes32',
@@ -743,6 +745,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'components': [
@@ -889,6 +892,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'enum SaleKindInterface.Side',
@@ -933,6 +937,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'components': [
@@ -1373,6 +1378,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'bytes32',
@@ -1444,6 +1450,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'codename',
         'outputs': [
@@ -1457,6 +1464,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'devWallet',
         'outputs': [
@@ -1470,6 +1478,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'exchangeToken',
         'outputs': [
@@ -1483,6 +1492,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'bytes',
@@ -1837,6 +1847,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'minimumMakerProtocolFee',
         'outputs': [
@@ -1850,6 +1861,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'minimumTakerProtocolFee',
         'outputs': [
@@ -1863,6 +1875,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'name',
         'outputs': [
@@ -1876,6 +1889,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'bytes',
@@ -1910,6 +1924,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'components': [
@@ -2188,6 +2203,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'owner',
         'outputs': [
@@ -2201,6 +2217,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'protocolFeeRecipient',
         'outputs': [
@@ -2214,6 +2231,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'registry',
         'outputs': [
@@ -2234,6 +2252,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'address',
@@ -2263,6 +2282,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'bytes',
@@ -2282,6 +2302,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'address',
@@ -2301,6 +2322,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'tokenTransferProxy',
         'outputs': [
@@ -2327,6 +2349,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'internalType': 'bytes32',
@@ -2500,6 +2523,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'components': [
@@ -2646,6 +2670,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [],
         'name': 'version',
         'outputs': [
