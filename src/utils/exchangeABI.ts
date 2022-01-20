@@ -375,6 +375,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -529,6 +539,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -673,6 +693,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -830,6 +860,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -1010,6 +1050,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -1132,6 +1182,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -1268,6 +1328,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -1559,6 +1629,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -1695,6 +1775,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -1937,6 +2027,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -2059,6 +2159,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -2339,6 +2449,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',
@@ -2497,6 +2617,16 @@ export const exchangeABI = [
                         'internalType': 'uint256',
                         'name': 'salt',
                         'type': 'uint256'
+                    },
+                    {
+                        'internalType': 'bytes4',
+                        'name': 'dataType',
+                        'type': 'bytes4'
+                    },
+                    {
+                        'internalType': 'bytes',
+                        'name': 'data',
+                        'type': 'bytes'
                     }
                 ],
                 'internalType': 'struct ExchangeCore.Order',

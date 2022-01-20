@@ -1,32 +1,38 @@
 export declare const exchangeABI: ({
-    'constant': boolean;
-    'inputs': {
-        'name': string;
-        'type': string;
+    anonymous: boolean;
+    inputs: {
+        indexed: boolean;
+        internalType: string;
+        name: string;
+        type: string;
     }[];
-    'name': string;
-    'outputs': {
-        'name': string;
-        'type': string;
-    }[];
-    'payable': boolean;
-    'stateMutability': string;
-    'type': string;
+    name: string;
+    type: string;
+    outputs?: undefined;
+    stateMutability?: undefined;
 } | {
-    'inputs': {
-        'name': string;
-        'type': string;
+    inputs: ({
+        internalType: string;
+        name: string;
+        type: string;
+        components?: undefined;
+    } | {
+        components: {
+            internalType: string;
+            name: string;
+            type: string;
+        }[];
+        internalType: string;
+        name: string;
+        type: string;
+    })[];
+    name: string;
+    outputs: {
+        internalType: string;
+        name: string;
+        type: string;
     }[];
-    'payable': boolean;
-    'stateMutability': string;
-    'type': string;
-} | {
-    'anonymous': boolean;
-    'inputs': {
-        'indexed': boolean;
-        'name': string;
-        'type': string;
-    }[];
-    'name': string;
-    'type': string;
+    stateMutability: string;
+    type: string;
+    anonymous?: undefined;
 })[];

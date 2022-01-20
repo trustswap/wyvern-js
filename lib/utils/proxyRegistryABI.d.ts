@@ -1,29 +1,35 @@
 export declare const proxyRegistryABI: ({
-    'constant': boolean;
-    'inputs': {
-        'name': string;
-        'type': string;
-    }[];
-    'name': string;
-    'outputs': {
-        'name': string;
-        'type': string;
-    }[];
-    'payable': boolean;
-    'stateMutability': string;
-    'type': string;
+    inputs: never[];
+    stateMutability: string;
+    type: string;
+    anonymous?: undefined;
+    name?: undefined;
+    outputs?: undefined;
 } | {
-    'inputs': never[];
-    'payable': boolean;
-    'stateMutability': string;
-    'type': string;
-} | {
-    'anonymous': boolean;
-    'inputs': {
-        'indexed': boolean;
-        'name': string;
-        'type': string;
+    anonymous: boolean;
+    inputs: {
+        indexed: boolean;
+        internalType: string;
+        name: string;
+        type: string;
     }[];
-    'name': string;
-    'type': string;
+    name: string;
+    type: string;
+    stateMutability?: undefined;
+    outputs?: undefined;
+} | {
+    inputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    outputs: {
+        internalType: string;
+        name: string;
+        type: string;
+    }[];
+    stateMutability: string;
+    type: string;
+    anonymous?: undefined;
 })[];

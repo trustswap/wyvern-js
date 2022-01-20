@@ -6,207 +6,233 @@ export declare const constants: {
     MAX_DIGITS_IN_UNSIGNED_256_INT: number;
     DEFAULT_BLOCK_POLLING_INTERVAL: number;
     DEPLOYED: {
-        'rinkeby': {
-            'TestToken': string;
-            'TestDAO': string;
-            'Migrations': string;
-            'MerkleProof': string;
-            'WyvernToken': string;
-            'WyvernDAO': string;
-            'WyvernRegistry': string;
-            'SaleKindInterface': string;
-            'WyvernExchange': string;
-            'DirectEscrowProvider': string;
-            'WyvernProxyRegistry': string;
-            'TestStatic': string;
-            'WyvernDAOProxy': string;
-            'WyvernAtomicizer': string;
-            'WyvernTokenTransferProxy': string;
+        rinkeby: {
+            TestToken: string;
+            TestDAO: string;
+            Migrations: string;
+            MerkleProof: string;
+            WyvernToken: string;
+            WyvernDAO: string;
+            WyvernRegistry: string;
+            SaleKindInterface: string;
+            WyvernExchange: string;
+            DirectEscrowProvider: string;
+            WyvernProxyRegistry: string;
+            TestStatic: string;
+            WyvernDAOProxy: string;
+            WyvernAtomicizer: string;
+            WyvernTokenTransferProxy: string;
         };
-        'development': {
-            'Migrations': string;
-            'TestToken': string;
-            'TestDAO': string;
-            'MerkleProof': string;
-            'WyvernToken': string;
-            'WyvernDAO': string;
-            'WyvernRegistry': string;
-            'SaleKindInterface': string;
-            'WyvernExchange': string;
-            'DirectEscrowProvider': string;
-            'WyvernProxyRegistry': string;
-            'TestStatic': string;
-            'WyvernDAOProxy': string;
-            'WyvernAtomicizer': string;
-            'WyvernTokenTransferProxy': string;
+        development: {
+            Migrations: string;
+            TestToken: string;
+            TestDAO: string;
+            MerkleProof: string;
+            WyvernToken: string;
+            WyvernDAO: string;
+            WyvernRegistry: string;
+            SaleKindInterface: string;
+            WyvernExchange: string;
+            DirectEscrowProvider: string;
+            WyvernProxyRegistry: string;
+            TestStatic: string;
+            WyvernDAOProxy: string;
+            WyvernAtomicizer: string;
+            WyvernTokenTransferProxy: string;
         };
-        'main': {
-            'Migrations': string;
-            'MerkleProof': string;
-            'WyvernToken': string;
-            'WyvernDAO': string;
-            'TestToken': string;
-            'TestDAO': string;
-            'TestStatic': string;
-            'WyvernProxyRegistry': string;
-            'SaleKindInterface': string;
-            'WyvernExchange': string;
-            'WyvernDAOProxy': string;
-            'WyvernAtomicizer': string;
-            'WyvernTokenTransferProxy': string;
+        main: {
+            Migrations: string;
+            MerkleProof: string;
+            WyvernToken: string;
+            WyvernDAO: string;
+            TestToken: string;
+            TestDAO: string;
+            TestStatic: string;
+            WyvernProxyRegistry: string;
+            SaleKindInterface: string;
+            WyvernExchange: string;
+            WyvernDAOProxy: string;
+            WyvernAtomicizer: string;
+            WyvernTokenTransferProxy: string;
         };
-        'mumbai': {
-            'Migrations': string;
-            'WyvernProxyRegistry': string;
-            'WyvernTokenTransferProxy': string;
-            'WyvernExchange': string;
+        mumbai: {
+            Migrations: string;
+            WyvernProxyRegistry: string;
+            WyvernTokenTransferProxy: string;
+            WyvernExchange: string;
+            WyvernAtomicizer: string;
         };
-        'matic': {
-            'Migrations': string;
-            'WyvernProxyRegistry': string;
-            'WyvernTokenTransferProxy': string;
-            'WyvernExchange': string;
+        matic: {
+            Migrations: string;
+            WyvernProxyRegistry: string;
+            WyvernTokenTransferProxy: string;
+            WyvernExchange: string;
+            WyvernAtomicizer: string;
         };
     };
-    ATOMICIZER_ABI: {
-        'constant': boolean;
-        'inputs': {
-            'name': string;
-            'type': string;
-        }[];
-        'name': string;
-        'outputs': never[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
-    }[];
+    ATOMICIZER_ABI: never[];
     EXCHANGE_ABI: ({
-        'constant': boolean;
-        'inputs': {
-            'name': string;
-            'type': string;
+        anonymous: boolean;
+        inputs: {
+            indexed: boolean;
+            internalType: string;
+            name: string;
+            type: string;
         }[];
-        'name': string;
-        'outputs': {
-            'name': string;
-            'type': string;
-        }[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
+        name: string;
+        type: string;
+        outputs?: undefined;
+        stateMutability?: undefined;
     } | {
-        'inputs': {
-            'name': string;
-            'type': string;
+        inputs: ({
+            internalType: string;
+            name: string;
+            type: string;
+            components?: undefined;
+        } | {
+            components: {
+                internalType: string;
+                name: string;
+                type: string;
+            }[];
+            internalType: string;
+            name: string;
+            type: string;
+        })[];
+        name: string;
+        outputs: {
+            internalType: string;
+            name: string;
+            type: string;
         }[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
-    } | {
-        'anonymous': boolean;
-        'inputs': {
-            'indexed': boolean;
-            'name': string;
-            'type': string;
-        }[];
-        'name': string;
-        'type': string;
+        stateMutability: string;
+        type: string;
+        anonymous?: undefined;
     })[];
     PROXY_REGISTRY_ABI: ({
-        'constant': boolean;
-        'inputs': {
-            'name': string;
-            'type': string;
-        }[];
-        'name': string;
-        'outputs': {
-            'name': string;
-            'type': string;
-        }[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
+        inputs: never[];
+        stateMutability: string;
+        type: string;
+        anonymous?: undefined;
+        name?: undefined;
+        outputs?: undefined;
     } | {
-        'inputs': never[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
-    } | {
-        'anonymous': boolean;
-        'inputs': {
-            'indexed': boolean;
-            'name': string;
-            'type': string;
+        anonymous: boolean;
+        inputs: {
+            indexed: boolean;
+            internalType: string;
+            name: string;
+            type: string;
         }[];
-        'name': string;
-        'type': string;
+        name: string;
+        type: string;
+        stateMutability?: undefined;
+        outputs?: undefined;
+    } | {
+        inputs: {
+            internalType: string;
+            name: string;
+            type: string;
+        }[];
+        name: string;
+        outputs: {
+            internalType: string;
+            name: string;
+            type: string;
+        }[];
+        stateMutability: string;
+        type: string;
+        anonymous?: undefined;
     })[];
     DAO_ABI: ({
-        'constant': boolean;
-        'inputs': {
-            'name': string;
-            'type': string;
+        constant: boolean;
+        inputs: {
+            name: string;
+            type: string;
         }[];
-        'name': string;
-        'outputs': {
-            'name': string;
-            'type': string;
+        name: string;
+        outputs: {
+            name: string;
+            type: string;
         }[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
+        payable: boolean;
+        stateMutability: string;
+        type: string;
+        anonymous?: undefined;
     } | {
-        'inputs': {
-            'name': string;
-            'type': string;
+        inputs: {
+            name: string;
+            type: string;
         }[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
+        payable: boolean;
+        stateMutability: string;
+        type: string;
+        constant?: undefined;
+        name?: undefined;
+        outputs?: undefined;
+        anonymous?: undefined;
     } | {
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
+        payable: boolean;
+        stateMutability: string;
+        type: string;
+        constant?: undefined;
+        inputs?: undefined;
+        name?: undefined;
+        outputs?: undefined;
+        anonymous?: undefined;
     } | {
-        'anonymous': boolean;
-        'inputs': {
-            'indexed': boolean;
-            'name': string;
-            'type': string;
+        anonymous: boolean;
+        inputs: {
+            indexed: boolean;
+            name: string;
+            type: string;
         }[];
-        'name': string;
-        'type': string;
+        name: string;
+        type: string;
+        constant?: undefined;
+        outputs?: undefined;
+        payable?: undefined;
+        stateMutability?: undefined;
     })[];
     TOKEN_ABI: ({
-        'constant': boolean;
-        'inputs': {
-            'name': string;
-            'type': string;
+        constant: boolean;
+        inputs: {
+            name: string;
+            type: string;
         }[];
-        'name': string;
-        'outputs': {
-            'name': string;
-            'type': string;
+        name: string;
+        outputs: {
+            name: string;
+            type: string;
         }[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
+        payable: boolean;
+        stateMutability: string;
+        type: string;
+        anonymous?: undefined;
     } | {
-        'inputs': {
-            'name': string;
-            'type': string;
+        inputs: {
+            name: string;
+            type: string;
         }[];
-        'payable': boolean;
-        'stateMutability': string;
-        'type': string;
+        payable: boolean;
+        stateMutability: string;
+        type: string;
+        constant?: undefined;
+        name?: undefined;
+        outputs?: undefined;
+        anonymous?: undefined;
     } | {
-        'anonymous': boolean;
-        'inputs': {
-            'indexed': boolean;
-            'name': string;
-            'type': string;
+        anonymous: boolean;
+        inputs: {
+            indexed: boolean;
+            name: string;
+            type: string;
         }[];
-        'name': string;
-        'type': string;
+        name: string;
+        type: string;
+        constant?: undefined;
+        outputs?: undefined;
+        payable?: undefined;
+        stateMutability?: undefined;
     })[];
 };
