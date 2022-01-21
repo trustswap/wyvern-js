@@ -118,27 +118,6 @@ export declare const constants: {
         anonymous?: undefined;
         constant?: undefined;
     } | {
-        inputs: {
-            components: {
-                internalType: string;
-                name: string;
-                type: string;
-            }[];
-            internalType: string;
-            name: string;
-            type: string;
-        }[];
-        name: string;
-        outputs: {
-            internalType: string;
-            name: string;
-            type: string;
-        }[];
-        stateMutability: string;
-        type: string;
-        anonymous?: undefined;
-        constant?: undefined;
-    } | {
         constant: boolean;
         inputs: ({
             internalType: string;

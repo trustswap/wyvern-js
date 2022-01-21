@@ -1669,6 +1669,7 @@ export const exchangeABI = [
         'type': 'function'
     },
     {
+        'constant': true,
         'inputs': [
             {
                 'components': [
