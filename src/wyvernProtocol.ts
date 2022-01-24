@@ -20,9 +20,10 @@ import {
   Web3Provider,
   WyvernProtocolConfig,
   WyvernProtocolError,
+  OrderData
 } from './types';
 import { assert } from './utils/assert';
-import { constants } from './utils/constants';
+import { constants, ORDER_DATA_V1_TYPE } from './utils/constants';
 import { decorators } from './utils/decorators';
 import { signatureUtils } from './utils/signature_utils';
 import { utils } from './utils/utils';
@@ -257,6 +258,22 @@ export class WyvernProtocol {
         return '0x' + Buffer.concat(ret).toString('hex');
     }
 
+    public static encodeOrderData(data: OrderData): [string, string] {
+	switch (data.dataType) {
+		case "ORDER_DATA_TYPE_V1": {
+            const V1 = "0x4c234266"; //bytes4(keccak256("V1"));
+			const encoded = ethABI.rawEncode(ORDER_DATA_V1_TYPE, {
+				payouts: data.payouts,
+				originFees: data.originFees,
+			}).toString('hex');
+
+			return [V1, `0x${encoded}`]
+		}
+		default: {
+			throw new Error(`Data type not supported: ${data.dataType}`)
+		}
+	}
+}
     /**
      * Computes the assetHash for a supplied asset.
      */

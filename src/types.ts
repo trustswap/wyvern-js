@@ -184,3 +184,16 @@ export type ReplacementEncoder = (abi: AnnotatedFunctionABI, kind?: FunctionInpu
 export type AtomicizedReplacementEncoder = (abis: AnnotatedFunctionABI[], kind?: FunctionInputKind) => string;
 
 export type Web3Provider = Web3.Provider;
+
+export type Part = {
+    account: string;
+    value: number;
+};
+
+export type OrderData = OrderV1Data;
+
+export type OrderV1Data = {
+    dataType: "ORDER_DATA_TYPE_V1";
+    payouts: Array<Part>;
+    originFees: Array<Part>;
+};

@@ -157,3 +157,13 @@ export interface AnnotatedFunctionABI {
 export declare type ReplacementEncoder = (abi: AnnotatedFunctionABI, kind?: FunctionInputKind, encodeToBytes?: boolean) => string;
 export declare type AtomicizedReplacementEncoder = (abis: AnnotatedFunctionABI[], kind?: FunctionInputKind) => string;
 export declare type Web3Provider = Web3.Provider;
+export declare type Part = {
+    account: string;
+    value: number;
+};
+export declare type OrderData = OrderV1Data;
+export declare type OrderV1Data = {
+    dataType: "ORDER_DATA_TYPE_V1";
+    payouts: Array<Part>;
+    originFees: Array<Part>;
+};

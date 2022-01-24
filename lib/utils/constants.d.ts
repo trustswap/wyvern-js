@@ -290,3 +290,15 @@ export declare const constants: {
         stateMutability?: undefined;
     })[];
 };
+export declare const ORDER_DATA_V1_TYPE: {
+    components: {
+        components: {
+            name: string;
+            type: string;
+        }[];
+        name: string;
+        type: string;
+    }[];
+    name: string;
+    type: string;
+};

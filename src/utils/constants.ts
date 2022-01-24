@@ -19,3 +19,38 @@ export const constants = {
     DAO_ABI: daoABI,
     TOKEN_ABI: tokenABI,
 };
+
+export const ORDER_DATA_V1_TYPE = {
+	components: [
+		{
+			components: [
+				{
+					name: "account",
+					type: "address",
+				},
+				{
+					name: "value",
+					type: "uint96",
+				},
+			],
+			name: "payouts",
+			type: "tuple[]",
+		},
+		{
+			components: [
+				{
+					name: "account",
+					type: "address",
+				},
+				{
+					name: "value",
+					type: "uint96",
+				},
+			],
+			name: "originFees",
+			type: "tuple[]",
+		},
+	],
+	name: "data",
+	type: "tuple",
+};

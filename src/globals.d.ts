@@ -28,7 +28,7 @@ declare module 'ethereumjs-abi' {
     const soliditySHA3: (argTypes: string[], args: any[]) => Buffer;
     const elementaryName: (name: string) => string;
     const encodeSingle: (type: string, arg: any) => Buffer;
-    const rawEncode: (types: any, values: any) => string;
+    const rawEncode: (types: any, values: any) => Buffer;
     const methodID: (name: string, types: any) => Buffer;
     const isDynamic: (type: string) => boolean;
 }

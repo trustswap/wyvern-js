@@ -2,7 +2,7 @@ import { BigNumber } from '@0xproject/utils';
 import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
 import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
 import { WyvernProxyRegistryContract } from './abi_gen/wyvern_proxy_registry';
-import { AtomicizedReplacementEncoder, ECSignature, Network, Order, ReplacementEncoder, SignedOrder, Web3Provider, WyvernProtocolConfig } from './types';
+import { AtomicizedReplacementEncoder, ECSignature, Network, Order, ReplacementEncoder, SignedOrder, Web3Provider, WyvernProtocolConfig, OrderData } from './types';
 export declare class WyvernProtocol {
     static NULL_ADDRESS: string;
     static MAX_UINT_256: BigNumber;
@@ -76,6 +76,7 @@ export declare class WyvernProtocol {
      * @return  The resulting encoded replacementPattern
      */
     static encodeAtomicizedReplacementPattern: AtomicizedReplacementEncoder;
+    static encodeOrderData(data: OrderData): [string, string];
     /**
      * Computes the assetHash for a supplied asset.
      */
