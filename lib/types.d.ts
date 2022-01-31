@@ -108,7 +108,7 @@ export interface Order {
     expirationTime: BigNumber;
     salt: BigNumber;
     dataType: string;
-    data: Array<Part>;
+    data: string;
 }
 export interface SignedOrder extends Order {
     ecSignature: ECSignature;
