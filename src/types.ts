@@ -126,7 +126,7 @@ export interface Order {
     expirationTime: BigNumber;
     salt: BigNumber;
     dataType: string;
-    data: string;
+    data: Array<Part>;
 }
 
 export interface SignedOrder extends Order {
