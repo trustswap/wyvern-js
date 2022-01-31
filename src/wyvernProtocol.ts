@@ -4,6 +4,7 @@ import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import * as ethABI from 'ethereumjs-abi';
 import * as ethUtil from 'ethereumjs-util';
 import * as _ from 'lodash';
+import { AbiCoder } from 'web3-eth-abi';
 
 import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
 import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
@@ -27,6 +28,8 @@ import { constants, ORDER_DATA_V1_TYPE } from './utils/constants';
 import { decorators } from './utils/decorators';
 import { signatureUtils } from './utils/signature_utils';
 import { utils } from './utils/utils';
+
+const abiCoder = new AbiCoder;
 
 export class WyvernProtocol {
 
@@ -262,12 +265,12 @@ export class WyvernProtocol {
 	switch (data.dataType) {
 		case "ORDER_DATA_TYPE_V1": {
             const V1 = "0x4c234266"; //bytes4(keccak256("V1"));
-			const encoded = ethABI.rawEncode(ORDER_DATA_V1_TYPE, {
+			const encoded = abiCoder.encodeParameter(ORDER_DATA_V1_TYPE, {
 				payouts: data.payouts,
 				originFees: data.originFees,
-			}).toString('hex');
+			});
 
-			return [V1, `0x${encoded}`]
+			return [V1, encoded]
 		}
 		default: {
 			throw new Error(`Data type not supported: ${data.dataType}`)

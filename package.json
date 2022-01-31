@@ -51,6 +51,7 @@
     "typescript": "^3.1.8",
     "typescript-eslint-parser": "^16.0.0",
     "web3": "^0.20.4",
+    "web3-eth-abi": "^1.7.0",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
