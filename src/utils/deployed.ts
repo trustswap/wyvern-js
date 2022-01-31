@@ -2,19 +2,19 @@ export const deployed = {
     'rinkeby': {
         'TestToken': '0xf44cf0b9b8328adf6d899667b2427d13759087f0',
         'TestDAO': '0x64a07f5472f87d273846f11e0b1d6d69cd2001fa',
-        'Migrations': '0xa79f60a84b1a35b927ad1234cc2441753294a0ce',
+        'Migrations': '0x73a6de56cfc0d3f98b5714007186b1b7e8d96f3d',
         'MerkleProof': '0xcd8f54ed0dcfda2f44064ad279c8c559ff7ff244',
         'WyvernToken': '0xd1be358dab323802a3c469b0787476fdcb8af5d6',
         'WyvernDAO': '0x1b4c767502d01deee83af491c946b469e0620e30',
         'WyvernRegistry': '0xe59640a71231352aa97d3f1b503ad066c799fad9',
         'SaleKindInterface': '0x726f4782c533c8aa98da9291f586dc37b41b0bb8',
-        'WyvernExchange': '0xc9a5ba3c629f21e896f0b444b18ccf6a844ea606',
+        'WyvernExchange': '0x82352Db1CBFb61133A937fc3dd48a0c912d77b97',
         'DirectEscrowProvider': '0x22f617c80e5f4908b943b938e7dc5ab735e64372',
-        'WyvernProxyRegistry': '0xb902ea28601411c3e6e24daa7a78ae7d3f61f12e',
+        'WyvernProxyRegistry': '0x0aaa9cd910385e850a0fafa58cee2b1106de9b72',
         'TestStatic': '0xc33a203d61c688433e53fcb6f3af7c6aa12192a4',
         'WyvernDAOProxy': '0x65cb6ea254f716ac9ffdf542994214dabf1c8aa2',
         'WyvernAtomicizer': '0x613a12b156ffa304f714cc38d6ae5d3df70d8063',
-        'WyvernTokenTransferProxy': '0x81d252dc033f7d0c5af75ec0d3110ded8e6b5361'
+        'WyvernTokenTransferProxy': '0x2ed4ea35fdebf576a66b3cfcb9d188bd3935a678'
     },
     'development': {
         'Migrations': '0x0545f898c5d9e028f69e969ca3250bf0bcaedbcf',
