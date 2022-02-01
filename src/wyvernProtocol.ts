@@ -4,7 +4,9 @@ import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import * as ethABI from 'ethereumjs-abi';
 import * as ethUtil from 'ethereumjs-util';
 import * as _ from 'lodash';
-import { AbiCoder } from 'web3-eth-abi';
+
+const abiCoder = require("web3-eth-abi");
+
 
 import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
 import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
@@ -28,8 +30,6 @@ import { constants, ORDER_DATA_V1_TYPE } from './utils/constants';
 import { decorators } from './utils/decorators';
 import { signatureUtils } from './utils/signature_utils';
 import { utils } from './utils/utils';
-
-const abiCoder = new AbiCoder;
 
 export class WyvernProtocol {
 
