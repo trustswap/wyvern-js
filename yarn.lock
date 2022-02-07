@@ -152,16 +152,6 @@
     lodash "^4.17.4"
     valid-url "^1.0.9"
 
-"@0xproject/assert@^0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@0xproject/assert/-/assert-0.0.11.tgz#e40ebbb361bf407f8886d63f1b2ecf4965b442d2"
-  integrity sha512-hl4C3w5qX7vbvPses/PtOlZg4tX/elXJ3RPuEOYvHNnBEOFybNSDsGrrPegPxkW56mZWBhwyBaqThTj9OoVmYQ==
-  dependencies:
-    "@0xproject/json-schemas" "^0.7.3"
-    "@0xproject/utils" "^0.2.0"
-    lodash "^4.17.4"
-    valid-url "^1.0.9"
-
 "@0xproject/json-schemas@^0.7.2", "@0xproject/json-schemas@^0.7.3":
   version "0.7.24"
   resolved "https://registry.yarnpkg.com/@0xproject/json-schemas/-/json-schemas-0.7.24.tgz#21a12b43ab0ab4aa302d02c4891668cda36b6c64"
@@ -215,16 +205,6 @@
     bignumber.js "~4.1.0"
     js-sha3 "^0.7.0"
     lodash "^4.17.4"
-
-"@0xproject/utils@^0.2.0":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@0xproject/utils/-/utils-0.2.4.tgz#d84d0737f47730e5724a76797d30e716b587a0cf"
-  integrity sha512-Le2BDLybmEW+gt2VjbTgL0REDa+58CN4QA64VGUGBFueJ3IPqQQv6ctuZm9MkwW13ckXs+kR5nqgcfRnV1cDsg==
-  dependencies:
-    bignumber.js "~4.1.0"
-    js-sha3 "^0.7.0"
-    lodash "^4.17.4"
-    web3 "^0.20.0"
 
 "@0xproject/utils@^0.3.4":
   version "0.3.4"
