@@ -88,7 +88,7 @@ export class WyvernProtocol {
         // Source: https://mikemcl.github.io/bignumber.js/#random
         const randomNumber = BigNumber.random(constants.MAX_DIGITS_IN_UNSIGNED_256_INT);
         const factor = new BigNumber(10).pow(constants.MAX_DIGITS_IN_UNSIGNED_256_INT - 1);
-        const salt = randomNumber.times(factor).dp(0,1);
+        const salt = randomNumber.times(factor).dp(0,7);
         return salt;
     }
 
