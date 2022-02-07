@@ -1,5 +1,5 @@
 import { TransactionReceipt } from '@0xproject/types';
-import { BigNumber } from '@0xproject/utils';
+import { BigNumber } from '@0x/utils';
 import * as Web3 from 'web3';
 export interface WyvernProtocolConfig {
     network: Network;

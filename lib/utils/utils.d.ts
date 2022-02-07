@@ -1,4 +1,4 @@
-import { BigNumber } from '@0xproject/utils';
+import { BigNumber } from '@0x/utils';
 import BN = require('bn.js');
 import { Order, SignedOrder } from '../types';
 export declare const utils: {
@@ -15,6 +15,4 @@ export declare const utils: {
     spawnSwitchErr(name: string, value: any): Error;
     getAssetHashHex(assetHash: string, schema: string): string;
     getOrderHashHex(order: Order | SignedOrder): string;
-    getCurrentUnixTimestampSec(): BigNumber;
-    getCurrentUnixTimestampMs(): BigNumber;
 };

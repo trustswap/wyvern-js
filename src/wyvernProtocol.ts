@@ -1,5 +1,5 @@
 import { SchemaValidator } from '@0xproject/json-schemas';
-import { BigNumber } from '@0xproject/utils';
+import { BigNumber } from '@0x/utils';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import * as ethABI from 'ethereumjs-abi';
 import * as ethUtil from 'ethereumjs-util';
@@ -35,7 +35,7 @@ export class WyvernProtocol {
 
     public static NULL_ADDRESS = constants.NULL_ADDRESS;
 
-    public static MAX_UINT_256 = new BigNumber(2).pow(256).sub(1);
+    public static MAX_UINT_256 = new BigNumber(2).pow(256).minus(1);
 
     public wyvernExchange: WyvernExchangeContract;
 
@@ -88,7 +88,7 @@ export class WyvernProtocol {
         // Source: https://mikemcl.github.io/bignumber.js/#random
         const randomNumber = BigNumber.random(constants.MAX_DIGITS_IN_UNSIGNED_256_INT);
         const factor = new BigNumber(10).pow(constants.MAX_DIGITS_IN_UNSIGNED_256_INT - 1);
-        const salt = randomNumber.times(factor).round();
+        const salt = randomNumber.times(factor).dp(0,1);
         return salt;
     }
 
@@ -317,7 +317,7 @@ export class WyvernProtocol {
     constructor(provider: Web3Provider, config: WyvernProtocolConfig) {
         assert.isWeb3Provider('provider', provider);
         // assert.doesConformToSchema('config', config, wyvernProtocolConfigSchema)
-        this._web3Wrapper = new Web3Wrapper(provider, { gasPrice: config.gasPrice });
+        this._web3Wrapper = new Web3Wrapper(provider, { gasPrice: config.gasPrice as any});
 
         const exchangeContractAddress = config.wyvernExchangeContractAddress || WyvernProtocol.getExchangeContractAddress(config.network);
         this.wyvernExchange = new WyvernExchangeContract(

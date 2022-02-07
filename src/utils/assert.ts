@@ -5,7 +5,7 @@ import { assert as sharedAssert } from '@0xproject/assert';
 // tslint:disable-next-line:no-unused-variable
 import { Schema } from '@0xproject/json-schemas';
 // tslint:disable-next-line:no-unused-variable
-import { BigNumber } from '@0xproject/utils';
+import { BigNumber } from '@0x/utils';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import * as _ from 'lodash';
 

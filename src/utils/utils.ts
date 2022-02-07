@@ -1,6 +1,6 @@
 /* Sourced from 0x.js */
 
-import { BigNumber } from '@0xproject/utils';
+import { BigNumber } from '@0x/utils';
 import BN = require('bn.js');
 import * as ethABI from 'ethereumjs-abi';
 import * as ethUtil from 'ethereumjs-util';
@@ -66,11 +66,5 @@ export const utils = {
         const values = _.map(orderParts, o => o.value);
         const hash = ethABI.soliditySHA3(types, values);
         return ethUtil.bufferToHex(hash);
-    },
-    getCurrentUnixTimestampSec(): BigNumber {
-        return new BigNumber(Date.now() / 1000).round();
-    },
-    getCurrentUnixTimestampMs(): BigNumber {
-        return new BigNumber(Date.now());
     },
 };
