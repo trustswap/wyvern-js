@@ -1,728 +1,515 @@
-/**
- * This file is auto-generated using abi-gen. Don't edit directly.
- * Templates can be found at https://github.com/0xProject/0x.js/tree/development/packages/abi-gen-templates.
- */
-import { TxData } from '@0xproject/types';
-import { BigNumber } from '@0xproject/utils';
-import * as Web3 from 'web3';
-import { BaseContract } from './base_contract';
+import { EncoderOverrides, ContractFunctionObj, ContractTxFunctionObj, BaseContract } from '@0x/base-contract';
+import { BlockRange, ContractAbi, ContractArtifact, DecodedLogArgs, LogWithDecodedArgs, TxData, SupportedProvider } from 'ethereum-types';
+import { BigNumber } from '@0x/utils';
+import { EventCallback, IndexedFilterValues, SimpleContractArtifact } from '@0x/types';
+import { Web3Wrapper } from '@0x/web3-wrapper';
+export declare type WyvernExchangeEventArgs = WyvernExchangeOrderApprovedPartOneEventArgs | WyvernExchangeOrderApprovedPartTwoEventArgs | WyvernExchangeOrderCancelledEventArgs | WyvernExchangeOrdersMatchedEventArgs | WyvernExchangeOwnershipTransferredEventArgs;
+export declare enum WyvernExchangeEvents {
+    OrderApprovedPartOne = "OrderApprovedPartOne",
+    OrderApprovedPartTwo = "OrderApprovedPartTwo",
+    OrderCancelled = "OrderCancelled",
+    OrdersMatched = "OrdersMatched",
+    OwnershipTransferred = "OwnershipTransferred"
+}
+export interface WyvernExchangeOrderApprovedPartOneEventArgs extends DecodedLogArgs {
+    hash: string;
+    exchange: string;
+    maker: string;
+    taker: string;
+    makerRelayerFee: BigNumber;
+    takerRelayerFee: BigNumber;
+    makerProtocolFee: BigNumber;
+    takerProtocolFee: BigNumber;
+    feeRecipient: string;
+    feeMethod: BigNumber;
+    side: BigNumber;
+    saleKind: BigNumber;
+    target: string;
+}
+export interface WyvernExchangeOrderApprovedPartTwoEventArgs extends DecodedLogArgs {
+    hash: string;
+    howToCall: BigNumber;
+    calldatas: string;
+    replacementPattern: string;
+    staticTarget: string;
+    staticExtradata: string;
+    paymentToken: string;
+    basePrice: BigNumber;
+    extra: BigNumber;
+    listingTime: BigNumber;
+    expirationTime: BigNumber;
+    salt: BigNumber;
+    orderbookInclusionDesired: boolean;
+}
+export interface WyvernExchangeOrderCancelledEventArgs extends DecodedLogArgs {
+    hash: string;
+}
+export interface WyvernExchangeOrdersMatchedEventArgs extends DecodedLogArgs {
+    buyHash: string;
+    sellHash: string;
+    maker: string;
+    taker: string;
+    price: BigNumber;
+    metadata: string;
+}
+export interface WyvernExchangeOwnershipTransferredEventArgs extends DecodedLogArgs {
+    previousOwner: string;
+    newOwner: string;
+}
 export declare class WyvernExchangeContract extends BaseContract {
-    INVERSE_BASIS_POINT: {
-        callAsync(txData?: TxData): Promise<BigNumber>;
-    };
-    approveOrder: {
-        sendTransactionAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, orderbookInclusionDesired_1: boolean, txData?: TxData): Promise<string>;
-        estimateGasAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, orderbookInclusionDesired_1: boolean, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, orderbookInclusionDesired_1: boolean): string;
-    };
-    approvedOrders: {
-        callAsync(index_0_0: string, txData?: TxData): Promise<boolean>;
-    };
-    atomicMatch: {
-        sendTransactionAsync(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, buySig_1: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, sell_2: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sellSig_3: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, metadata_4: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, buySig_1: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, sell_2: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sellSig_3: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, metadata_4: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, buySig_1: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, sell_2: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sellSig_3: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, metadata_4: string): string;
-    };
-    calculateCurrentPrice: {
-        callAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<BigNumber>;
-    };
-    calculateFinalPrice: {
-        callAsync(side_0: number | BigNumber, saleKind_1: number | BigNumber, basePrice_2: BigNumber, extra_3: BigNumber, listingTime_4: BigNumber, expirationTime_5: BigNumber, txData?: TxData): Promise<BigNumber>;
-    };
-    calculateMatchPrice: {
-        callAsync(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sell_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<BigNumber>;
-    };
-    cancelOrder: {
-        sendTransactionAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sig_1: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, txData?: TxData): Promise<string>;
-        estimateGasAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sig_1: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sig_1: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }): string;
-    };
-    cancelledOrFinalized: {
-        callAsync(index_0_0: string, txData?: TxData): Promise<boolean>;
-    };
-    changeDevWalletAddress: {
-        sendTransactionAsync(newDevWalletAddress_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(newDevWalletAddress_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(newDevWalletAddress_0: string): string;
-    };
-    changeMinimumMakerProtocolFee: {
-        sendTransactionAsync(newMinimumMakerProtocolFee_0: BigNumber, txData?: TxData): Promise<string>;
-        estimateGasAsync(newMinimumMakerProtocolFee_0: BigNumber, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(newMinimumMakerProtocolFee_0: BigNumber): string;
-    };
-    changeMinimumTakerProtocolFee: {
-        sendTransactionAsync(newMinimumTakerProtocolFee_0: BigNumber, txData?: TxData): Promise<string>;
-        estimateGasAsync(newMinimumTakerProtocolFee_0: BigNumber, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(newMinimumTakerProtocolFee_0: BigNumber): string;
-    };
-    changeProtocolFeeRecipient: {
-        sendTransactionAsync(newProtocolFeeRecipient_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(newProtocolFeeRecipient_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(newProtocolFeeRecipient_0: string): string;
-    };
-    codename: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    devWallet: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    exchangeToken: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    guardedArrayReplace: {
-        callAsync(array_0: string, desired_1: string, mask_2: string, txData?: TxData): Promise<string>;
-    };
-    hashOrder: {
-        callAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<string>;
-    };
-    hashToSign: {
-        callAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<string>;
-    };
-    initialize: {
-        sendTransactionAsync(registryAddress_0: string, tokenTransferProxyAddress_1: string, tokenAddress_2: string, protocolFeeAddress_3: string, devWalletAddress_4: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(registryAddress_0: string, tokenTransferProxyAddress_1: string, tokenAddress_2: string, protocolFeeAddress_3: string, devWalletAddress_4: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(registryAddress_0: string, tokenTransferProxyAddress_1: string, tokenAddress_2: string, protocolFeeAddress_3: string, devWalletAddress_4: string): string;
-    };
-    minimumMakerProtocolFee: {
-        callAsync(txData?: TxData): Promise<BigNumber>;
-    };
-    minimumTakerProtocolFee: {
-        callAsync(txData?: TxData): Promise<BigNumber>;
-    };
-    name: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    orderCalldataCanMatch: {
-        callAsync(buyCalldata_0: string, buyReplacementPattern_1: string, sellCalldata_2: string, sellReplacementPattern_3: string, txData?: TxData): Promise<boolean>;
-    };
-    ordersCanMatch: {
-        callAsync(buy_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sell_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<boolean>;
-    };
-    owner: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    protocolFeeRecipient: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    registry: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    renounceOwnership: {
-        sendTransactionAsync(txData?: TxData): Promise<string>;
-        estimateGasAsync(txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(): string;
-    };
-    staticCall: {
-        callAsync(target_0: string, calldatas_1: string, extradata_2: string, txData?: TxData): Promise<boolean>;
-    };
-    testCopy: {
-        callAsync(arrToCopy_0: string, txData?: TxData): Promise<string>;
-    };
-    testCopyAddress: {
-        callAsync(addr_0: string, txData?: TxData): Promise<string>;
-    };
-    tokenTransferProxy: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    transferOwnership: {
-        sendTransactionAsync(newOwner_0: string, txData?: TxData): Promise<string>;
-        estimateGasAsync(newOwner_0: string, txData?: TxData): Promise<number>;
-        getABIEncodedTransactionData(newOwner_0: string): string;
-    };
-    validateOrder: {
-        callAsync(hash_0: string, order_1: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, sig_2: {
-            v: number | BigNumber;
-            r: string;
-            s: string;
-        }, txData?: TxData): Promise<boolean>;
-    };
-    validateOrderParameters: {
-        callAsync(order_0: {
-            exchange: string;
-            maker: string;
-            taker: string;
-            makerRelayerFee: BigNumber;
-            takerRelayerFee: BigNumber;
-            makerProtocolFee: BigNumber;
-            takerProtocolFee: BigNumber;
-            feeRecipient: string;
-            feeMethod: number | BigNumber;
-            side: number | BigNumber;
-            saleKind: number | BigNumber;
-            target: string;
-            howToCall: number | BigNumber;
-            calldatas: string;
-            replacementPattern: string;
-            staticTarget: string;
-            staticExtradata: string;
-            paymentToken: string;
-            basePrice: BigNumber;
-            extra: BigNumber;
-            listingTime: BigNumber;
-            expirationTime: BigNumber;
-            salt: BigNumber;
-            dataType: string;
-            data: string;
-        }, txData?: TxData): Promise<boolean>;
-    };
-    version: {
-        callAsync(txData?: TxData): Promise<string>;
-    };
-    constructor(web3ContractInstance: Web3.ContractInstance, defaults: Partial<TxData>);
+    /**
+     * @ignore
+     */
+    static deployedBytecode: string | undefined;
+    static contractName: string;
+    private readonly _methodABIIndex;
+    private readonly _subscriptionManager;
+    static deployFrom0xArtifactAsync(artifact: ContractArtifact | SimpleContractArtifact, supportedProvider: SupportedProvider, txDefaults: Partial<TxData>, logDecodeDependencies: {
+        [contractName: string]: (ContractArtifact | SimpleContractArtifact);
+    }): Promise<WyvernExchangeContract>;
+    static deployWithLibrariesFrom0xArtifactAsync(artifact: ContractArtifact, libraryArtifacts: {
+        [libraryName: string]: ContractArtifact;
+    }, supportedProvider: SupportedProvider, txDefaults: Partial<TxData>, logDecodeDependencies: {
+        [contractName: string]: (ContractArtifact | SimpleContractArtifact);
+    }): Promise<WyvernExchangeContract>;
+    static deployAsync(bytecode: string, abi: ContractAbi, supportedProvider: SupportedProvider, txDefaults: Partial<TxData>, logDecodeDependencies: {
+        [contractName: string]: ContractAbi;
+    }): Promise<WyvernExchangeContract>;
+    /**
+     * @returns      The contract ABI
+     */
+    static ABI(): ContractAbi;
+    protected static _deployLibrariesAsync(artifact: ContractArtifact, libraryArtifacts: {
+        [libraryName: string]: ContractArtifact;
+    }, web3Wrapper: Web3Wrapper, txDefaults: Partial<TxData>, libraryAddresses?: {
+        [libraryName: string]: string;
+    }): Promise<{
+        [libraryName: string]: string;
+    }>;
+    getFunctionSignature(methodName: string): string;
+    getABIDecodedTransactionData<T>(methodName: string, callData: string): T;
+    getABIDecodedReturnData<T>(methodName: string, callData: string): T;
+    getSelector(methodName: string): string;
+    INVERSE_BASIS_POINT(): ContractFunctionObj<BigNumber>;
+    approveOrder(order: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }, orderbookInclusionDesired: boolean): ContractTxFunctionObj<void>;
+    approvedOrders(index_0: string): ContractFunctionObj<boolean>;
+    atomicMatch(buy: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }, buySig: {
+        v: number | BigNumber;
+        r: string;
+        s: string;
+    }, sell: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }, sellSig: {
+        v: number | BigNumber;
+        r: string;
+        s: string;
+    }, metadata: string): ContractTxFunctionObj<void>;
+    calculateCurrentPrice(order: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }): ContractFunctionObj<BigNumber>;
+    calculateFinalPrice(side: number | BigNumber, saleKind: number | BigNumber, basePrice: BigNumber, extra: BigNumber, listingTime: BigNumber, expirationTime: BigNumber): ContractFunctionObj<BigNumber>;
+    calculateMatchPrice(buy: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }, sell: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }): ContractFunctionObj<BigNumber>;
+    cancelOrder(order: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }, sig: {
+        v: number | BigNumber;
+        r: string;
+        s: string;
+    }): ContractTxFunctionObj<void>;
+    cancelledOrFinalized(index_0: string): ContractFunctionObj<boolean>;
+    changeDevWalletAddress(newDevWalletAddress: string): ContractTxFunctionObj<void>;
+    changeMinimumMakerProtocolFee(newMinimumMakerProtocolFee: BigNumber): ContractTxFunctionObj<void>;
+    changeMinimumTakerProtocolFee(newMinimumTakerProtocolFee: BigNumber): ContractTxFunctionObj<void>;
+    changeProtocolFeeRecipient(newProtocolFeeRecipient: string): ContractTxFunctionObj<void>;
+    codename(): ContractFunctionObj<string>;
+    devWallet(): ContractFunctionObj<string>;
+    exchangeToken(): ContractFunctionObj<string>;
+    guardedArrayReplace(array: string, desired: string, mask: string): ContractFunctionObj<string>;
+    hashOrder(order: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }): ContractFunctionObj<string>;
+    hashToSign(order: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }): ContractFunctionObj<string>;
+    initialize(registryAddress: string, tokenTransferProxyAddress: string, tokenAddress: string, protocolFeeAddress: string, devWalletAddress: string): ContractTxFunctionObj<void>;
+    minimumMakerProtocolFee(): ContractFunctionObj<BigNumber>;
+    minimumTakerProtocolFee(): ContractFunctionObj<BigNumber>;
+    name(): ContractFunctionObj<string>;
+    orderCalldataCanMatch(buyCalldata: string, buyReplacementPattern: string, sellCalldata: string, sellReplacementPattern: string): ContractFunctionObj<boolean>;
+    ordersCanMatch(buy: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }, sell: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }): ContractFunctionObj<boolean>;
+    owner(): ContractFunctionObj<string>;
+    protocolFeeRecipient(): ContractFunctionObj<string>;
+    registry(): ContractFunctionObj<string>;
+    renounceOwnership(): ContractTxFunctionObj<void>;
+    staticCall(target: string, calldatas: string, extradata: string): ContractFunctionObj<boolean>;
+    testCopy(arrToCopy: string): ContractFunctionObj<string>;
+    testCopyAddress(addr: string): ContractFunctionObj<string>;
+    tokenTransferProxy(): ContractFunctionObj<string>;
+    transferOwnership(newOwner: string): ContractTxFunctionObj<void>;
+    validateOrder(hash: string, order: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }, sig: {
+        v: number | BigNumber;
+        r: string;
+        s: string;
+    }): ContractFunctionObj<boolean>;
+    validateOrderParameters(order: {
+        exchange: string;
+        maker: string;
+        taker: string;
+        makerRelayerFee: BigNumber;
+        takerRelayerFee: BigNumber;
+        makerProtocolFee: BigNumber;
+        takerProtocolFee: BigNumber;
+        feeRecipient: string;
+        feeMethod: number | BigNumber;
+        side: number | BigNumber;
+        saleKind: number | BigNumber;
+        target: string;
+        howToCall: number | BigNumber;
+        calldatas: string;
+        replacementPattern: string;
+        staticTarget: string;
+        staticExtradata: string;
+        paymentToken: string;
+        basePrice: BigNumber;
+        extra: BigNumber;
+        listingTime: BigNumber;
+        expirationTime: BigNumber;
+        salt: BigNumber;
+        dataType: string;
+        data: string;
+    }): ContractFunctionObj<boolean>;
+    version(): ContractFunctionObj<string>;
+    /**
+     * Subscribe to an event type emitted by the WyvernExchange contract.
+     * @param eventName The WyvernExchange contract event you would like to subscribe to.
+     * @param indexFilterValues An object where the keys are indexed args returned by the event and
+     * the value is the value you are interested in. E.g `{maker: aUserAddressHex}`
+     * @param callback Callback that gets called when a log is added/removed
+     * @param isVerbose Enable verbose subscription warnings (e.g recoverable network issues encountered)
+     * @return Subscription token used later to unsubscribe
+     */
+    subscribe<ArgsType extends WyvernExchangeEventArgs>(eventName: WyvernExchangeEvents, indexFilterValues: IndexedFilterValues, callback: EventCallback<ArgsType>, isVerbose?: boolean, blockPollingIntervalMs?: number): string;
+    /**
+     * Cancel a subscription
+     * @param subscriptionToken Subscription token returned by `subscribe()`
+     */
+    unsubscribe(subscriptionToken: string): void;
+    /**
+     * Cancels all existing subscriptions
+     */
+    unsubscribeAll(): void;
+    /**
+     * Gets historical logs without creating a subscription
+     * @param eventName The WyvernExchange contract event you would like to subscribe to.
+     * @param blockRange Block range to get logs from.
+     * @param indexFilterValues An object where the keys are indexed args returned by the event and
+     * the value is the value you are interested in. E.g `{_from: aUserAddressHex}`
+     * @return Array of logs that match the parameters
+     */
+    getLogsAsync<ArgsType extends WyvernExchangeEventArgs>(eventName: WyvernExchangeEvents, blockRange: BlockRange, indexFilterValues: IndexedFilterValues): Promise<Array<LogWithDecodedArgs<ArgsType>>>;
+    constructor(address: string, supportedProvider: SupportedProvider, txDefaults?: Partial<TxData>, logDecodeDependencies?: {
+        [contractName: string]: ContractAbi;
+    }, deployedBytecode?: string | undefined, encoderOverrides?: Partial<EncoderOverrides>);
 }

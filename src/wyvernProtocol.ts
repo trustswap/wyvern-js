@@ -321,20 +321,20 @@ export class WyvernProtocol {
 
         const exchangeContractAddress = config.wyvernExchangeContractAddress || WyvernProtocol.getExchangeContractAddress(config.network);
         this.wyvernExchange = new WyvernExchangeContract(
-            this._web3Wrapper.getContractInstance((constants.EXCHANGE_ABI as any), exchangeContractAddress),
-            {},
+            exchangeContractAddress,
+            provider
         );
 
         const proxyRegistryContractAddress = config.wyvernProxyRegistryContractAddress || WyvernProtocol.getProxyRegistryContractAddress(config.network);
         this.wyvernProxyRegistry = new WyvernProxyRegistryContract(
-            this._web3Wrapper.getContractInstance((constants.PROXY_REGISTRY_ABI as any), proxyRegistryContractAddress),
-            {},
+            proxyRegistryContractAddress,
+            provider
         );
 
         const atomicizerContractAddress = config.wyvernAtomicizerContractAddress || WyvernProtocol.getAtomicizerContractAddress(config.network);
         this.wyvernAtomicizer = new WyvernAtomicizerContract(
-            this._web3Wrapper.getContractInstance((constants.ATOMICIZER_ABI as any), atomicizerContractAddress),
-            {},
+            atomicizerContractAddress,
+            provider
         );
     }
 
