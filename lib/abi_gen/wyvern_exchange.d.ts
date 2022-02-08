@@ -65,12 +65,12 @@ export declare class WyvernExchangeContract extends BaseContract {
     private readonly _methodABIIndex;
     private readonly _subscriptionManager;
     static deployFrom0xArtifactAsync(artifact: ContractArtifact | SimpleContractArtifact, supportedProvider: SupportedProvider, txDefaults: Partial<TxData>, logDecodeDependencies: {
-        [contractName: string]: (ContractArtifact | SimpleContractArtifact);
+        [contractName: string]: ContractArtifact | SimpleContractArtifact;
     }): Promise<WyvernExchangeContract>;
     static deployWithLibrariesFrom0xArtifactAsync(artifact: ContractArtifact, libraryArtifacts: {
         [libraryName: string]: ContractArtifact;
     }, supportedProvider: SupportedProvider, txDefaults: Partial<TxData>, logDecodeDependencies: {
-        [contractName: string]: (ContractArtifact | SimpleContractArtifact);
+        [contractName: string]: ContractArtifact | SimpleContractArtifact;
     }): Promise<WyvernExchangeContract>;
     static deployAsync(bytecode: string, abi: ContractAbi, supportedProvider: SupportedProvider, txDefaults: Partial<TxData>, logDecodeDependencies: {
         [contractName: string]: ContractAbi;
