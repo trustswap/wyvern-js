@@ -37,6 +37,11 @@ export const utils = {
       return ethUtil.bufferToHex(hashBuf);
     },
     getOrderHashHex(order: Order | SignedOrder): string {
+        const orderDataHash = ethUtil.bufferToHex(ethABI.soliditySHA3(
+            ['bytes'], 
+            [new Buffer(order.data.slice(2), 'hex')])
+        );
+
         const orderParts = [
             { value: order.exchange, type: SolidityTypes.Address },
             { value: order.maker, type: SolidityTypes.Address },
@@ -61,8 +66,8 @@ export const utils = {
             { value: utils.bigNumberToBN(order.listingTime), type: SolidityTypes.Uint256 },
             { value: utils.bigNumberToBN(order.expirationTime), type: SolidityTypes.Uint256 },
             { value: utils.bigNumberToBN(order.salt), type: SolidityTypes.Uint256 },
-            { value: new Buffer(order.data.slice(2), 'hex'), type: SolidityTypes.Bytes },
             { value: new Buffer(order.dataType.slice(2), 'hex'), type: 'bytes4' },
+            { value: new Buffer(orderDataHash.slice(2), 'hex'), type: 'bytes32' },
         ];
         const types = _.map(orderParts, o => o.type);
         const values = _.map(orderParts, o => o.value);
