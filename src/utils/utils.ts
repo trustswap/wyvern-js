@@ -61,6 +61,8 @@ export const utils = {
             { value: utils.bigNumberToBN(order.listingTime), type: SolidityTypes.Uint256 },
             { value: utils.bigNumberToBN(order.expirationTime), type: SolidityTypes.Uint256 },
             { value: utils.bigNumberToBN(order.salt), type: SolidityTypes.Uint256 },
+            { value: new Buffer(order.data.slice(2), 'hex'), type: SolidityTypes.Bytes },
+            { value: new Buffer(order.dataType.slice(2), 'hex'), type: 'bytes4' },
         ];
         const types = _.map(orderParts, o => o.type);
         const values = _.map(orderParts, o => o.value);

@@ -112,6 +112,14 @@ export declare const schemas: {
             salt: {
                 $ref: string;
             };
+            data: {
+                type: string;
+                pattern: string;
+            };
+            dataType: {
+                type: string;
+                pattern: string;
+            };
         };
         required: string[];
         type: string;
