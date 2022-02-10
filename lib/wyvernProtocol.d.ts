@@ -77,6 +77,7 @@ export declare class WyvernProtocol {
      */
     static encodeAtomicizedReplacementPattern: AtomicizedReplacementEncoder;
     static encodeOrderData(data: OrderData): [string, string];
+    static decodeOrderData(dataType: string, data: string): any;
     /**
      * Computes the assetHash for a supplied asset.
      */

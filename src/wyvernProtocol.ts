@@ -262,21 +262,34 @@ export class WyvernProtocol {
     }
 
     public static encodeOrderData(data: OrderData): [string, string] {
-	switch (data.dataType) {
-		case "ORDER_DATA_TYPE_V1": {
-            const V1 = "0x4c234266"; //bytes4(keccak256("V1"));
-			const encoded = abiCoder.encodeParameter(ORDER_DATA_V1_TYPE, {
-				payouts: data.payouts,
-				originFees: data.originFees,
-			});
+        switch (data.dataType) {
+            case "ORDER_DATA_TYPE_V1": {
+                const V1 = "0x4c234266"; //bytes4(keccak256("V1"));
+                const encoded = abiCoder.encodeParameter(ORDER_DATA_V1_TYPE, {
+                    payouts: data.payouts,
+                    originFees: data.originFees,
+                });
 
-			return [V1, encoded]
-		}
-		default: {
-			throw new Error(`Data type not supported: ${data.dataType}`)
-		}
-	}
-}
+                return [V1, encoded]
+            }
+            default: {
+                throw new Error(`Data type not supported: ${data.dataType}`)
+            }
+        }
+    }
+
+    public static decodeOrderData(dataType: string, data: string): any {
+        switch (dataType) {
+            case "ORDER_DATA_TYPE_V1": {
+                const decodedData = abiCoder.decodeParameter(ORDER_DATA_V1_TYPE, data.slice(2));
+                return decodedData
+            }
+            default: {
+                throw new Error(`Data type not supported: ${dataType}`)
+            }
+        }
+    }
+
     /**
      * Computes the assetHash for a supplied asset.
      */
