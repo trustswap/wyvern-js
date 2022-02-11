@@ -9,7 +9,8 @@
       "WyvernDAO": "0x1b4c767502d01deee83af491c946b469e0620e30",
       "WyvernRegistry": "0xe59640a71231352aa97d3f1b503ad066c799fad9",
       "SaleKindInterface": "0x726f4782c533c8aa98da9291f586dc37b41b0bb8",
-      "WyvernExchange": "0x82352Db1CBFb61133A937fc3dd48a0c912d77b97",
+      "WyvernExchange": "0xc9a5ba3c629f21e896f0b444b18ccf6a844ea606",
+      "WyvernExchangeV1": "0x82352Db1CBFb61133A937fc3dd48a0c912d77b97",
       "DirectEscrowProvider": "0x22f617c80e5f4908b943b938e7dc5ab735e64372",
       "WyvernProxyRegistry": "0x0aaa9cd910385e850a0fafa58cee2b1106de9b72",
       "TestStatic": "0xc33a203d61c688433e53fcb6f3af7c6aa12192a4",
@@ -27,6 +28,7 @@
       "WyvernRegistry": "0xf3d3f091fdc77054f8ef0fcc45edfe9012656da5",
       "SaleKindInterface": "0x9ba0fd02d538435dae6f6e5e741cd8b981416a51",
       "WyvernExchange": "0xaba2b00d06a286897c0e769226bf52b2eadad479",
+      "WyvernExchangeV1": "",
       "DirectEscrowProvider": "0x46ffabd33987eef48d59cd315c5450b8eab116be",
       "WyvernProxyRegistry": "0x63d07b80aa7c31c2b8964da4d93a9c01e430dd93",
       "TestStatic": "0x29dd72597101f211fbfe4ea79b431987a0a005f1",
@@ -45,6 +47,7 @@
       "WyvernProxyRegistry": "0x405ef38d44acff35b293410fef9d8de1369bece4",
       "SaleKindInterface": "0x77a1dada690ab5172d80ae3b7ccaf88ee3c2e607",
       "WyvernExchange": "0x097ffeea86b38fa9ebad4bc2af902e3ba4fffee4",
+      "WyvernExchangeV1": "",
       "WyvernDAOProxy": "0xa839d4b5a36265795eba6894651a8af3d0ae2e68",
       "WyvernAtomicizer": "0xc99f70bfd82fb7c8f8191fdfbfb735606b15e5c5",
       "WyvernTokenTransferProxy": "0xa09a3b96302c720cabe330e174e82f4352128cdf"
@@ -54,6 +57,7 @@
       "WyvernProxyRegistry": "0xb97d7118209eb9e34ae355bdeda8f53ed118f199",
       "WyvernTokenTransferProxy": "0x2a02a607c399204680537f59ad9a8701b640315d",
       "WyvernExchange": "0x31b49e94b0f5337d16b1f758991006838767294b",
+      "WyvernExchangeV1": "",
       "WyvernAtomicizer": "0xc99f70bfd82fb7c8f8191fdfbfb735606b15e5c5"
     },
     "matic": {
@@ -61,6 +65,7 @@
       "WyvernProxyRegistry": "0x405ef38d44acff35b293410fef9d8de1369bece4",
       "WyvernTokenTransferProxy": "0xa09a3b96302c720cabe330e174e82f4352128cdf",
       "WyvernExchange": "0x097ffeea86b38fa9ebad4bc2af902e3ba4fffee4",
+      "WyvernExchangeV1": "",
       "WyvernAtomicizer": "0xc99f70bfd82fb7c8f8191fdfbfb735606b15e5c5"
     }
   }

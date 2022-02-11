@@ -8,7 +8,6 @@ import {
     ContractTxFunctionObj,
     SendTransactionOpts,
     BaseContract,
-    {{#if events~}}SubscriptionManager,{{/if~}}
     PromiseWithTransactionHash,
     methodAbiToFunctionSignature,
     linkLibrariesInBytecode,
@@ -21,8 +20,7 @@ import {
     CallData,
     ContractAbi,
     ContractArtifact,
-    DecodedLogArgs,{{#if events}}
-    LogWithDecodedArgs,{{/if}}
+    DecodedLogArgs,
     MethodAbi,
     TransactionReceiptWithDecodedLogs,
     TxData,
@@ -36,25 +34,6 @@ import { Web3Wrapper } from '@0x/web3-wrapper';
 import { assert } from '@0x/assert';
 import * as ethers from 'ethers';
 // tslint:enable:no-unused-variable
-
-
-{{#if events}}
-export type {{contractName}}EventArgs =
-{{#each events}}
-    | {{@root.contractName}}{{name}}EventArgs{{#if @last}};{{/if}}
-{{/each}}
-
-export enum {{contractName}}Events {
-    {{#each events}}
-    {{name}} = '{{name}}',
-    {{/each}}
-}
-
-{{#each events}}
-{{> event}}
-
-{{/each}}
-{{/if}}
 
 /* istanbul ignore next */
 // tslint:disable:array-type
@@ -71,102 +50,6 @@ export class {{contractName}}Contract extends BaseContract {
     {{/ifEquals~}}
     public static contractName = '{{contractName}}';
     private readonly _methodABIIndex: { [name: string]: number } = {};
-    {{#if events~}}
-    private readonly _subscriptionManager: SubscriptionManager<{{contractName}}EventArgs, {{contractName}}Events>;
-    {{/if~}}
-
-    public static async deployFrom0xArtifactAsync(
-        artifact: ContractArtifact | SimpleContractArtifact,
-        supportedProvider: SupportedProvider,
-        txDefaults: Partial<TxData>,
-        logDecodeDependencies: { [contractName: string]: (ContractArtifact | SimpleContractArtifact) },
-        {{> typed_params inputs=ctor.inputs}}
-    ): Promise<{{contractName}}Contract> {
-        assert.doesConformToSchema('txDefaults', txDefaults, schemas.txDataSchema);
-        if (artifact.compilerOutput === undefined) {
-            throw new Error('Compiler output not found in the artifact file');
-        }
-        const provider = providerUtils.standardizeOrThrow(supportedProvider);
-        const bytecode = artifact.compilerOutput.evm.bytecode.object;
-        const abi = artifact.compilerOutput.abi;
-        const logDecodeDependenciesAbiOnly: { [contractName: string]: ContractAbi } = {};
-        if (Object.keys(logDecodeDependencies) !== undefined) {
-            for (const key of Object.keys(logDecodeDependencies)) {
-                logDecodeDependenciesAbiOnly[key] = logDecodeDependencies[key].compilerOutput.abi;
-            }
-        }
-        return {{contractName}}Contract.deployAsync(bytecode, abi, provider, txDefaults, logDecodeDependenciesAbiOnly, {{> params inputs=ctor.inputs}});
-    }
-
-    public static async deployWithLibrariesFrom0xArtifactAsync(
-        artifact: ContractArtifact,
-        libraryArtifacts: { [libraryName: string]: ContractArtifact },
-        supportedProvider: SupportedProvider,
-        txDefaults: Partial<TxData>,
-        logDecodeDependencies: { [contractName: string]: (ContractArtifact | SimpleContractArtifact) },
-        {{> typed_params inputs=ctor.inputs}}
-    ): Promise<{{contractName}}Contract> {
-        assert.doesConformToSchema('txDefaults', txDefaults, schemas.txDataSchema);
-        if (artifact.compilerOutput === undefined) {
-            throw new Error('Compiler output not found in the artifact file');
-        }
-        const provider = providerUtils.standardizeOrThrow(supportedProvider);
-        const abi = artifact.compilerOutput.abi;
-        const logDecodeDependenciesAbiOnly: { [contractName: string]: ContractAbi } = {};
-        if (Object.keys(logDecodeDependencies) !== undefined) {
-            for (const key of Object.keys(logDecodeDependencies)) {
-                logDecodeDependenciesAbiOnly[key] = logDecodeDependencies[key].compilerOutput.abi;
-            }
-        }
-        const libraryAddresses = await {{contractName}}Contract._deployLibrariesAsync(
-            artifact,
-            libraryArtifacts,
-            new Web3Wrapper(provider),
-            txDefaults
-        );
-        const bytecode = linkLibrariesInBytecode(
-            artifact,
-            libraryAddresses,
-        );
-        return {{contractName}}Contract.deployAsync(bytecode, abi, provider, txDefaults, logDecodeDependenciesAbiOnly, {{> params inputs=ctor.inputs}});
-    }
-
-    public static async deployAsync(
-        bytecode: string,
-        abi: ContractAbi,
-        supportedProvider: SupportedProvider,
-        txDefaults: Partial<TxData>,
-        logDecodeDependencies: { [contractName: string]: ContractAbi },
-        {{> typed_params inputs=ctor.inputs}}
-    ): Promise<{{contractName}}Contract> {
-        assert.isHexString('bytecode', bytecode);
-        assert.doesConformToSchema('txDefaults', txDefaults, schemas.txDataSchema);
-        const provider = providerUtils.standardizeOrThrow(supportedProvider);
-        const constructorAbi = BaseContract._lookupConstructorAbi(abi);
-        [{{> params inputs=ctor.inputs}}] = BaseContract._formatABIDataItemList(
-            constructorAbi.inputs,
-            [{{> params inputs=ctor.inputs}}],
-            BaseContract._bigNumberToString,
-        );
-        const iface = new ethers.utils.Interface(abi);
-        const deployInfo = iface.deployFunction;
-        const txData = deployInfo.encode(bytecode, [{{> params inputs=ctor.inputs}}]);
-        const web3Wrapper = new Web3Wrapper(provider);
-        const txDataWithDefaults = await BaseContract._applyDefaultsToContractTxDataAsync(
-            {
-                data: txData,
-                ...txDefaults,
-            },
-            web3Wrapper.estimateGasAsync.bind(web3Wrapper),
-        );
-        const txHash = await web3Wrapper.sendTransactionAsync(txDataWithDefaults);
-        logUtils.log(`transactionHash: ${txHash}`);
-        const txReceipt = await web3Wrapper.awaitTransactionSuccessAsync(txHash);
-        logUtils.log(`{{contractName}} successfully deployed at ${txReceipt.contractAddress}`);
-        const contractInstance = new {{contractName}}Contract(txReceipt.contractAddress as string, provider, txDefaults, logDecodeDependencies);
-        contractInstance.constructorArgs = [{{> params inputs=ctor.inputs}}];
-        return contractInstance;
-    }
 
     /**
      * @returns      The contract ABI
@@ -195,54 +78,6 @@ export class {{contractName}}Contract extends BaseContract {
             {{/each}}
         ] as ContractAbi;
         return abi;
-    }
-
-    protected static async _deployLibrariesAsync(
-        artifact: ContractArtifact,
-        libraryArtifacts: { [libraryName: string]: ContractArtifact },
-        web3Wrapper: Web3Wrapper,
-        txDefaults: Partial<TxData>,
-        libraryAddresses: { [libraryName: string]: string } = {},
-    ): Promise<{ [libraryName: string]: string }> {
-        const links = artifact.compilerOutput.evm.bytecode.linkReferences;
-        // Go through all linked libraries, recursively deploying them if necessary.
-        for (const link of Object.values(links)) {
-            for (const libraryName of Object.keys(link)) {
-                if (!libraryAddresses[libraryName]) {
-                    // Library not yet deployed.
-                    const libraryArtifact = libraryArtifacts[libraryName];
-                    if (!libraryArtifact) {
-                        throw new Error(`Missing artifact for linked library "${libraryName}"`);
-                    }
-                    // Deploy any dependent libraries used by this library.
-                    await {{contractName}}Contract._deployLibrariesAsync(
-                        libraryArtifact,
-                        libraryArtifacts,
-                        web3Wrapper,
-                        txDefaults,
-                        libraryAddresses,
-                    );
-                    // Deploy this library.
-                    const linkedLibraryBytecode = linkLibrariesInBytecode(
-                        libraryArtifact,
-                        libraryAddresses,
-                    );
-                    const txDataWithDefaults = await BaseContract._applyDefaultsToContractTxDataAsync(
-                        {
-                            data: linkedLibraryBytecode,
-                            ...txDefaults,
-                        },
-                        web3Wrapper.estimateGasAsync.bind(web3Wrapper),
-                    );
-                    const txHash = await web3Wrapper.sendTransactionAsync(txDataWithDefaults);
-                    logUtils.log(`transactionHash: ${txHash}`);
-                    const { contractAddress } = await web3Wrapper.awaitTransactionSuccessAsync(txHash);
-                    logUtils.log(`${libraryArtifact.contractName} successfully deployed at ${contractAddress}`);
-                    libraryAddresses[libraryArtifact.contractName] = contractAddress as string;
-                }
-            }
-        }
-        return libraryAddresses;
     }
 
     public getFunctionSignature(methodName: string): string {
@@ -307,79 +142,6 @@ export class {{contractName}}Contract extends BaseContract {
     };
     {{/each}}
 
-    {{#if events}}
-    /**
-     * Subscribe to an event type emitted by the {{contractName}} contract.
-     * @param eventName The {{contractName}} contract event you would like to subscribe to.
-     * @param indexFilterValues An object where the keys are indexed args returned by the event and
-     * the value is the value you are interested in. E.g `{maker: aUserAddressHex}`
-     * @param callback Callback that gets called when a log is added/removed
-     * @param isVerbose Enable verbose subscription warnings (e.g recoverable network issues encountered)
-     * @return Subscription token used later to unsubscribe
-     */
-    public subscribe<ArgsType extends {{contractName}}EventArgs>(
-        eventName: {{contractName}}Events,
-        indexFilterValues: IndexedFilterValues,
-        callback: EventCallback<ArgsType>,
-        isVerbose: boolean = false,
-        blockPollingIntervalMs?: number,
-    ): string {
-        assert.doesBelongToStringEnum('eventName', eventName, {{contractName}}Events);
-        assert.doesConformToSchema('indexFilterValues', indexFilterValues, schemas.indexFilterValuesSchema);
-        assert.isFunction('callback', callback);
-        const subscriptionToken = this._subscriptionManager.subscribe<ArgsType>(
-            this.address,
-            eventName,
-            indexFilterValues,
-            {{contractName}}Contract.ABI(),
-            callback,
-            isVerbose,
-            blockPollingIntervalMs,
-        );
-        return subscriptionToken;
-    }
-
-    /**
-     * Cancel a subscription
-     * @param subscriptionToken Subscription token returned by `subscribe()`
-     */
-    public unsubscribe(subscriptionToken: string): void {
-        this._subscriptionManager.unsubscribe(subscriptionToken);
-    }
-
-    /**
-     * Cancels all existing subscriptions
-     */
-    public unsubscribeAll(): void {
-        this._subscriptionManager.unsubscribeAll();
-    }
-
-    /**
-     * Gets historical logs without creating a subscription
-     * @param eventName The {{contractName}} contract event you would like to subscribe to.
-     * @param blockRange Block range to get logs from.
-     * @param indexFilterValues An object where the keys are indexed args returned by the event and
-     * the value is the value you are interested in. E.g `{_from: aUserAddressHex}`
-     * @return Array of logs that match the parameters
-     */
-    public async getLogsAsync<ArgsType extends {{contractName}}EventArgs>(
-        eventName: {{contractName}}Events,
-        blockRange: BlockRange,
-        indexFilterValues: IndexedFilterValues,
-    ): Promise<Array<LogWithDecodedArgs<ArgsType>>> {
-        assert.doesBelongToStringEnum('eventName', eventName, {{contractName}}Events);
-        assert.doesConformToSchema('blockRange', blockRange, schemas.blockRangeSchema);
-        assert.doesConformToSchema('indexFilterValues', indexFilterValues, schemas.indexFilterValuesSchema);
-        const logs = await this._subscriptionManager.getLogsAsync<ArgsType>(
-            this.address,
-            eventName,
-            blockRange,
-            indexFilterValues,
-            {{contractName}}Contract.ABI(),
-        );
-        return logs;
-    }{{/if}}
-
     constructor(
         address: string,
         supportedProvider: SupportedProvider,
@@ -390,12 +152,6 @@ export class {{contractName}}Contract extends BaseContract {
     ) {
         super('{{contractName}}', {{contractName}}Contract.ABI(), address, supportedProvider, txDefaults, logDecodeDependencies, deployedBytecode, encoderOverrides);
         classUtils.bindAll(this, ['_abiEncoderByFunctionSignature', 'address', '_web3Wrapper']);
-        {{#if events~}}
-        this._subscriptionManager = new SubscriptionManager<{{contractName}}EventArgs, {{contractName}}Events>(
-            {{contractName}}Contract.ABI(),
-            this._web3Wrapper,
-        );
-        {{/if~}}
 
         {{contractName}}Contract.ABI().forEach((item, index) => {
             if (item.type === 'function') {

@@ -6,6 +6,7 @@ export interface WyvernProtocolConfig {
     network: Network;
     gasPrice?: BigNumber;
     wyvernExchangeContractAddress?: string;
+    wyvernExchangeV1ContractAddress?: string;
     wyvernProxyRegistryContractAddress?: string;
     wyvernDAOContractAddress?: string;
     wyvernTokenContractAddress?: string;

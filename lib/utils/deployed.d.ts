@@ -9,6 +9,7 @@ export declare const deployed: {
         WyvernRegistry: string;
         SaleKindInterface: string;
         WyvernExchange: string;
+        WyvernExchangeV1: string;
         DirectEscrowProvider: string;
         WyvernProxyRegistry: string;
         TestStatic: string;
@@ -26,6 +27,7 @@ export declare const deployed: {
         WyvernRegistry: string;
         SaleKindInterface: string;
         WyvernExchange: string;
+        WyvernExchangeV1: string;
         DirectEscrowProvider: string;
         WyvernProxyRegistry: string;
         TestStatic: string;
@@ -44,6 +46,7 @@ export declare const deployed: {
         WyvernProxyRegistry: string;
         SaleKindInterface: string;
         WyvernExchange: string;
+        WyvernExchangeV1: string;
         WyvernDAOProxy: string;
         WyvernAtomicizer: string;
         WyvernTokenTransferProxy: string;
@@ -53,6 +56,7 @@ export declare const deployed: {
         WyvernProxyRegistry: string;
         WyvernTokenTransferProxy: string;
         WyvernExchange: string;
+        WyvernExchangeV1: string;
         WyvernAtomicizer: string;
     };
     matic: {
@@ -60,6 +64,7 @@ export declare const deployed: {
         WyvernProxyRegistry: string;
         WyvernTokenTransferProxy: string;
         WyvernExchange: string;
+        WyvernExchangeV1: string;
         WyvernAtomicizer: string;
     };
 };

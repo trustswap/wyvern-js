@@ -10,6 +10,7 @@ const abiCoder = require("web3-eth-abi");
 
 import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
 import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
+import { WyvernExchangeV1Contract } from './abi_gen/wyvern_exchange_v1';
 import { WyvernProxyRegistryContract } from './abi_gen/wyvern_proxy_registry';
 import { schemas } from './schemas';
 import {
@@ -39,6 +40,8 @@ export class WyvernProtocol {
 
     public wyvernExchange: WyvernExchangeContract;
 
+    public wyvernExchangeV1: WyvernExchangeV1Contract;
+
     public wyvernProxyRegistry: WyvernProxyRegistryContract;
 
     public wyvernAtomicizer: WyvernAtomicizerContract;
@@ -47,6 +50,10 @@ export class WyvernProtocol {
 
     public static getExchangeContractAddress(network: Network): string {
         return constants.DEPLOYED[network].WyvernExchange;
+    }
+
+    public static getExchangeV1ContractAddress(network: Network): string {
+        return constants.DEPLOYED[network].WyvernExchangeV1;
     }
 
     public static getProxyRegistryContractAddress(network: Network): string {
@@ -335,6 +342,12 @@ export class WyvernProtocol {
         const exchangeContractAddress = config.wyvernExchangeContractAddress || WyvernProtocol.getExchangeContractAddress(config.network);
         this.wyvernExchange = new WyvernExchangeContract(
             exchangeContractAddress,
+            provider
+        );
+
+        const exchangeV1ContractAddress = config.wyvernExchangeV1ContractAddress || WyvernProtocol.getExchangeV1ContractAddress(config.network);
+        this.wyvernExchangeV1 = new WyvernExchangeV1Contract(
+            exchangeV1ContractAddress,
             provider
         );
 
