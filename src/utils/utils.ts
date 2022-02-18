@@ -7,6 +7,7 @@ import * as ethUtil from 'ethereumjs-util';
 import * as _ from 'lodash';
 
 import { Order, SignedOrder, SolidityTypes } from '../types';
+import { constants } from '../utils/constants';
 
 export const utils = {
     /**
@@ -37,12 +38,8 @@ export const utils = {
       return ethUtil.bufferToHex(hashBuf);
     },
     getOrderHashHex(order: Order | SignedOrder): string {
-        const orderDataHash = ethUtil.bufferToHex(ethABI.soliditySHA3(
-            ['bytes'], 
-            [new Buffer(order.data.slice(2), 'hex')])
-        );
-
-        const orderParts = [
+    
+        let orderParts = [
             { value: order.exchange, type: SolidityTypes.Address },
             { value: order.maker, type: SolidityTypes.Address },
             { value: order.taker, type: SolidityTypes.Address },
@@ -66,9 +63,28 @@ export const utils = {
             { value: utils.bigNumberToBN(order.listingTime), type: SolidityTypes.Uint256 },
             { value: utils.bigNumberToBN(order.expirationTime), type: SolidityTypes.Uint256 },
             { value: utils.bigNumberToBN(order.salt), type: SolidityTypes.Uint256 },
-            { value: new Buffer(order.dataType.slice(2), 'hex'), type: 'bytes4' },
-            { value: new Buffer(orderDataHash.slice(2), 'hex'), type: 'bytes32' },
         ];
+
+        const arrWyvernExchangeV1 = [
+            constants.DEPLOYED.rinkeby.WyvernExchangeV1,
+            constants.DEPLOYED.mumbai.WyvernExchangeV1,
+            constants.DEPLOYED.main.WyvernExchangeV1,
+            constants.DEPLOYED.matic.WyvernExchangeV1,
+        ]
+
+        if( arrWyvernExchangeV1.includes(order.exchange)) {
+            const orderDataHash = ethUtil.bufferToHex(ethABI.soliditySHA3(
+                ['bytes'], 
+                [new Buffer(order.data.slice(2), 'hex')])
+            );
+
+            orderParts = [
+                ...orderParts,
+                { value: new Buffer(order.dataType.slice(2), 'hex'), type: SolidityTypes.Bytes4 },
+                { value: new Buffer(orderDataHash.slice(2), 'hex'), type: SolidityTypes.Bytes32 },
+            ]
+        }
+
         const types = _.map(orderParts, o => o.type);
         const values = _.map(orderParts, o => o.value);
         const hash = ethABI.soliditySHA3(types, values);

@@ -84,6 +84,8 @@ export enum SolidityTypes {
     Uint = 'uint',
     Bytes = 'bytes',
     String = 'string',
+    Bytes4 = 'bytes4',
+    Bytes32 = 'bytes32',
 }
 
 export type RawLog = Web3.LogEntry;

@@ -69,7 +69,9 @@ export declare enum SolidityTypes {
     Uint8 = "uint8",
     Uint = "uint",
     Bytes = "bytes",
-    String = "string"
+    String = "string",
+    Bytes4 = "bytes4",
+    Bytes32 = "bytes32"
 }
 export declare type RawLog = Web3.LogEntry;
 export interface ContractEvent {
