@@ -66,13 +66,13 @@ export const utils = {
         ];
 
         const arrWyvernExchangeV1 = [
-            constants.DEPLOYED.rinkeby.WyvernExchangeV1,
-            constants.DEPLOYED.mumbai.WyvernExchangeV1,
-            constants.DEPLOYED.main.WyvernExchangeV1,
-            constants.DEPLOYED.matic.WyvernExchangeV1,
+            constants.DEPLOYED.rinkeby.WyvernExchangeV1.toLowerCase(),
+            constants.DEPLOYED.mumbai.WyvernExchangeV1.toLowerCase(),
+            constants.DEPLOYED.main.WyvernExchangeV1.toLowerCase(),
+            constants.DEPLOYED.matic.WyvernExchangeV1.toLowerCase(),
         ]
 
-        if( arrWyvernExchangeV1.includes(order.exchange)) {
+        if( arrWyvernExchangeV1.includes(order.exchange.toLowerCase())) {
             const orderDataHash = ethUtil.bufferToHex(ethABI.soliditySHA3(
                 ['bytes'], 
                 [new Buffer(order.data.slice(2), 'hex')])
