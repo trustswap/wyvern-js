@@ -1,24 +1,18 @@
 import { BigNumber } from '@0xproject/utils';
 import { AtomicizedReplacementEncoder, ECSignature, Network, Order, ReplacementEncoder, SignedOrder, TransactionReceiptWithDecodedLogs, Web3Provider, WyvernProtocolConfig } from './types';
 import { WyvernAtomicizerContract } from './abi_gen/wyvern_atomicizer';
-import { WyvernDAOContract } from './abi_gen/wyvern_d_a_o';
 import { WyvernExchangeContract } from './abi_gen/wyvern_exchange';
 import { WyvernProxyRegistryContract } from './abi_gen/wyvern_proxy_registry';
-import { WyvernTokenContract } from './abi_gen/wyvern_token';
 export declare class WyvernProtocol {
     static NULL_ADDRESS: string;
     static MAX_UINT_256: BigNumber;
     wyvernExchange: WyvernExchangeContract;
     wyvernProxyRegistry: WyvernProxyRegistryContract;
-    wyvernDAO: WyvernDAOContract;
-    wyvernToken: WyvernTokenContract;
     wyvernAtomicizer: WyvernAtomicizerContract;
     private _web3Wrapper;
     private _abiDecoder;
     static getExchangeContractAddress(network: Network): string;
     static getProxyRegistryContractAddress(network: Network): string;
-    static getTokenContractAddress(network: Network): string;
-    static getDAOContractAddress(network: Network): string;
     static getAtomicizerContractAddress(network: Network): string;
     static getTokenTransferProxyAddress(network: Network): string;
     /**

@@ -53,11 +53,13 @@ export declare const deployed: {
         'WyvernProxyRegistry': string;
         'WyvernTokenTransferProxy': string;
         'WyvernExchange': string;
+        'WyvernAtomicizer': string;
     };
     'matic': {
         'Migrations': string;
         'WyvernProxyRegistry': string;
         'WyvernTokenTransferProxy': string;
         'WyvernExchange': string;
+        'WyvernAtomicizer': string;
     };
 };

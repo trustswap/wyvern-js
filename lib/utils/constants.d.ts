@@ -60,12 +60,14 @@ export declare const constants: {
             'WyvernProxyRegistry': string;
             'WyvernTokenTransferProxy': string;
             'WyvernExchange': string;
+            'WyvernAtomicizer': string;
         };
         'matic': {
             'Migrations': string;
             'WyvernProxyRegistry': string;
             'WyvernTokenTransferProxy': string;
             'WyvernExchange': string;
+            'WyvernAtomicizer': string;
         };
     };
     ATOMICIZER_ABI: {
