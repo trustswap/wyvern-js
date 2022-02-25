@@ -8,14 +8,14 @@ export const deployed = {
         'WyvernDAO': '0x1b4c767502d01deee83af491c946b469e0620e30',
         'WyvernRegistry': '0xe59640a71231352aa97d3f1b503ad066c799fad9',
         'SaleKindInterface': '0x726f4782c533c8aa98da9291f586dc37b41b0bb8',
-        'WyvernExchange': '0xc9a5ba3c629f21e896f0b444b18ccf6a844ea606',
+        'WyvernExchange': '0x72ae015842b540ef3a0e5b492aa732d27fd20578',
         'WyvernExchangeV1': '0x82352Db1CBFb61133A937fc3dd48a0c912d77b97',
         'DirectEscrowProvider': '0x22f617c80e5f4908b943b938e7dc5ab735e64372',
-        'WyvernProxyRegistry': '0x0aaa9cd910385e850a0fafa58cee2b1106de9b72',
+        'WyvernProxyRegistry': '0x667e23f60677e0ebd5732a03495a053d823521c3',
         'TestStatic': '0xc33a203d61c688433e53fcb6f3af7c6aa12192a4',
         'WyvernDAOProxy': '0x65cb6ea254f716ac9ffdf542994214dabf1c8aa2',
         'WyvernAtomicizer': '0x613a12b156ffa304f714cc38d6ae5d3df70d8063',
-        'WyvernTokenTransferProxy': '0x2ed4ea35fdebf576a66b3cfcb9d188bd3935a678'
+        'WyvernTokenTransferProxy': '0x2b90c69b492f16ee9acaa4d5fce979e9935cb6c5'
     },
     'development': {
         'Migrations': '0x0545f898c5d9e028f69e969ca3250bf0bcaedbcf',
