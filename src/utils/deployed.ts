@@ -52,11 +52,11 @@ export const deployed = {
         'WyvernTokenTransferProxy': '0xa09a3b96302c720cabe330e174e82f4352128cdf'
     },
     'mumbai': {
-        'Migrations': '0x3944dfa8996ed63127760aed0fad69fb1f536450',
-        'WyvernProxyRegistry': '0xb97d7118209eb9e34ae355bdeda8f53ed118f199',
-        'WyvernTokenTransferProxy': '0x2a02a607c399204680537f59ad9a8701b640315d',
-        'WyvernExchange': '0x31b49e94b0f5337d16b1f758991006838767294b',
-        'WyvernExchangeV1': '',
+        'Migrations': '0x16de10bd01d6f9cda7c9214f88a5bd344f43fa82',
+        'WyvernProxyRegistry': '0xf7b6ae1dc85171e9965a5d41cb4c283f723517b3',
+        'WyvernTokenTransferProxy': '0x71439f6bd7bbd08f8c119dc67c2b5a3618fd1544',
+        'WyvernExchange': '0xa033caf3f9048152a09ad8af55942fd6ce089e9d',
+        'WyvernExchangeV1': '0x337481d324747ce3b24c9f1d951a830f8710e1ea',
         'WyvernAtomicizer': '0xc99f70bfd82fb7c8f8191fdfbfb735606b15e5c5'
     },
     'matic': {
