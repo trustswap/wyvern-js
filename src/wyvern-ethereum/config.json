@@ -47,7 +47,7 @@
       "WyvernProxyRegistry": "0x405ef38d44acff35b293410fef9d8de1369bece4",
       "SaleKindInterface": "0x77a1dada690ab5172d80ae3b7ccaf88ee3c2e607",
       "WyvernExchange": "0x097ffeea86b38fa9ebad4bc2af902e3ba4fffee4",
-      "WyvernExchangeV1": "",
+      "WyvernExchangeV1": "0xd67ecc7c6b01dfb827e31a72caee338866ed793f",
       "WyvernDAOProxy": "0xa839d4b5a36265795eba6894651a8af3d0ae2e68",
       "WyvernAtomicizer": "0xc99f70bfd82fb7c8f8191fdfbfb735606b15e5c5",
       "WyvernTokenTransferProxy": "0xa09a3b96302c720cabe330e174e82f4352128cdf"
@@ -65,7 +65,7 @@
       "WyvernProxyRegistry": "0x405ef38d44acff35b293410fef9d8de1369bece4",
       "WyvernTokenTransferProxy": "0xa09a3b96302c720cabe330e174e82f4352128cdf",
       "WyvernExchange": "0x097ffeea86b38fa9ebad4bc2af902e3ba4fffee4",
-      "WyvernExchangeV1": "",
+      "WyvernExchangeV1": "0xd67ecc7c6b01dfb827e31a72caee338866ed793f",
       "WyvernAtomicizer": "0xc99f70bfd82fb7c8f8191fdfbfb735606b15e5c5"
     }
   }
