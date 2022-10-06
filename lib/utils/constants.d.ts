@@ -6,41 +6,12 @@ export declare const constants: {
     MAX_DIGITS_IN_UNSIGNED_256_INT: number;
     DEFAULT_BLOCK_POLLING_INTERVAL: number;
     DEPLOYED: {
-        rinkeby: {
-            TestToken: string;
-            TestDAO: string;
-            Migrations: string;
-            MerkleProof: string;
-            WyvernToken: string;
-            WyvernDAO: string;
-            WyvernRegistry: string;
-            SaleKindInterface: string;
+        goerli: {
+            WyvernProxyRegistry: string;
+            WyvernTokenTransferProxy: string;
             WyvernExchange: string;
             WyvernExchangeV1: string;
-            DirectEscrowProvider: string;
-            WyvernProxyRegistry: string;
-            TestStatic: string;
-            WyvernDAOProxy: string;
             WyvernAtomicizer: string;
-            WyvernTokenTransferProxy: string;
-        };
-        development: {
-            Migrations: string;
-            TestToken: string;
-            TestDAO: string;
-            MerkleProof: string;
-            WyvernToken: string;
-            WyvernDAO: string;
-            WyvernRegistry: string;
-            SaleKindInterface: string;
-            WyvernExchange: string;
-            WyvernExchangeV1: string;
-            DirectEscrowProvider: string;
-            WyvernProxyRegistry: string;
-            TestStatic: string;
-            WyvernDAOProxy: string;
-            WyvernAtomicizer: string;
-            WyvernTokenTransferProxy: string;
         };
         main: {
             Migrations: string;
@@ -68,13 +39,6 @@ export declare const constants: {
         };
         matic: {
             Migrations: string;
-            WyvernProxyRegistry: string;
-            WyvernTokenTransferProxy: string;
-            WyvernExchange: string;
-            WyvernExchangeV1: string;
-            WyvernAtomicizer: string;
-        };
-        goerli: {
             WyvernProxyRegistry: string;
             WyvernTokenTransferProxy: string;
             WyvernExchange: string;

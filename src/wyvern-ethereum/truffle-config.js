@@ -19,14 +19,6 @@ module.exports = {
       port: 8545,
       network_id: "*"
     },
-    rinkeby: {
-      provider: () => new HDWalletProvider(process.env.PK, "https://rinkeby.infura.io/v3/" + process.env.INFURA_API_KEY),
-      port: 8545,
-      network_id: "4",
-      //gas: 7000000,
-      //gasPrice: 40000000000,
-      skipDryRun: true
-    },
     goerli: {
       provider: () => new HDWalletProvider(process.env.PK, "https://goerli.infura.io/v3/" + process.env.INFURA_API_KEY),
       port: 8545,

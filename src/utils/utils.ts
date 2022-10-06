@@ -66,7 +66,7 @@ export const utils = {
         ];
 
         const arrWyvernExchangeV1 = [
-            constants.DEPLOYED.rinkeby.WyvernExchangeV1.toLowerCase(),
+            constants.DEPLOYED.goerli.WyvernExchangeV1.toLowerCase(),
             constants.DEPLOYED.mumbai.WyvernExchangeV1.toLowerCase(),
             constants.DEPLOYED.main.WyvernExchangeV1.toLowerCase(),
             constants.DEPLOYED.matic.WyvernExchangeV1.toLowerCase(),
