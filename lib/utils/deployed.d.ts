@@ -67,4 +67,11 @@ export declare const deployed: {
         WyvernExchangeV1: string;
         WyvernAtomicizer: string;
     };
+    goerli: {
+        WyvernProxyRegistry: string;
+        WyvernTokenTransferProxy: string;
+        WyvernExchange: string;
+        WyvernExchangeV1: string;
+        WyvernAtomicizer: string;
+    };
 };
