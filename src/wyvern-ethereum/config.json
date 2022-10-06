@@ -67,6 +67,13 @@
       "WyvernExchange": "0x097ffeea86b38fa9ebad4bc2af902e3ba4fffee4",
       "WyvernExchangeV1": "0xd67ecc7c6b01dfb827e31a72caee338866ed793f",
       "WyvernAtomicizer": "0xc99f70bfd82fb7c8f8191fdfbfb735606b15e5c5"
+    },
+    "goerli": {
+      "WyvernProxyRegistry": "0x1e7bf166bb58909e7cd636593e71d33955049c8a",
+      "WyvernTokenTransferProxy": "0x364abd43f62d2d565448059804c33033b552299d",
+      "WyvernExchange": "0xa50bd5ef3b95bfe6429cb6815801d535d55d0d25",
+      "WyvernExchangeV1": "0xdc1958c0b2165cc05aa73d093ea40ee566538731",
+      "WyvernAtomicizer": ""
     }
   }
 }

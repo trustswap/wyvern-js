@@ -10,7 +10,7 @@ const protocolFeeAddress = "0x5869D1eE6D0917B786188547788566B25283Ff6B"
 const devWalletAddress = "0x934fe588c9b6956162d7bccaea37c4924c85752f"
 
 module.exports = (deployer, network) => {
-  if (network === 'development' || network === 'rinkeby' || network === 'coverage' || network === 'main') {
+  if (network === 'goerli' || network === 'main') {
     return deployer.deploy(WyvernProxyRegistry)
       .then(() => {
         setConfig('deployed.' + network + '.WyvernProxyRegistry', WyvernProxyRegistry.address.toLowerCase())
@@ -19,16 +19,16 @@ module.exports = (deployer, network) => {
             return deployer.deploy(WyvernExchange, 
                                     WyvernProxyRegistry.address, 
                                     WyvernTokenTransferProxy.address, 
-                                    (network === 'development' || network === 'rinkeby' || network === 'coverage') ? '0xF77EC971b04cb13Ba20fCdE023Be3E7617A3eB8E' : '0xCC4304A31d09258b0029eA7FE63d032f52e44EFe', 
+                                    (network === 'goerli') ? '0xeE06CE113bee9436db2d1e369e310c8DBC167946' : '0xCC4304A31d09258b0029eA7FE63d032f52e44EFe', 
                                     protocolFeeAddress,
                                     devWalletAddress
                                   )
               .then(() => {
                 setConfig('deployed.' + network + '.WyvernExchange', WyvernExchange.address.toLowerCase())
                 return WyvernProxyRegistry.deployed().then(proxyRegistry => {
-                  return WyvernExchange.deployed().then(exchange => {
-                    return proxyRegistry.grantInitialAuthentication(exchange.address)
-                  })
+                  // return WyvernExchange.deployed().then(exchange => {
+                  //   return proxyRegistry.grantInitialAuthentication(exchange.address)
+                  // })
                 })
               })
           })
