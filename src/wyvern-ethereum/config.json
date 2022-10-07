@@ -1,11 +1,11 @@
 {
   "deployed": {
     "goerli": {
-      "WyvernProxyRegistry": "0x1e7bf166bb58909e7cd636593e71d33955049c8a",
-      "WyvernTokenTransferProxy": "0x364abd43f62d2d565448059804c33033b552299d",
-      "WyvernExchange": "0xa50bd5ef3b95bfe6429cb6815801d535d55d0d25",
-      "WyvernExchangeV1": "0xdc1958c0b2165cc05aa73d093ea40ee566538731",
-      "WyvernAtomicizer": "0x202bFb5c41Ee57a2A2Ecdc5eAd7536dBf26df1d3"
+      "WyvernProxyRegistry": "0x2396bf053e6bc7f19aa8ca9cb9aed8206f15b7d6",
+      "WyvernTokenTransferProxy": "0xad249f266f7afb57b04ffb12178ea91278bb9d4e",
+      "WyvernExchange": "0x76fa8e78bdfb7f6a94a7b22a78c61bf01576ea8f",
+      "WyvernExchangeV1": "0x516f6da86b70eed97db10ffaf5ea8a47a6fe0317",
+      "WyvernAtomicizer": "0x202bfb5c41ee57a2a2ecdc5ead7536dbf26df1d3"
     },
     "main": {
       "Migrations": "0xce088fbfb8babe2da7d34484b99c486fdb6280e3",
